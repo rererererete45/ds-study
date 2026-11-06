@@ -121,15 +121,15 @@
 
 **RMSE** (Root Mean Squared Error, 평균 제곱근 오차)
 
-$$
+```math
 \text{RMSE} = \sqrt{\frac{1}{m}\sum_{i=1}^{m}\left(\hat{y}^{(i)} - y^{(i)}\right)^2}
-$$
+```
 
 **MAE** (Mean Absolute Error, 평균 절대 오차)
 
-$$
+```math
 \text{MAE} = \frac{1}{m}\sum_{i=1}^{m}\left|\hat{y}^{(i)} - y^{(i)}\right|
-$$
+```
 
 - $m$: 샘플 수, $y^{(i)}$: 실제값, $\hat{y}^{(i)}$: 예측값
 
@@ -140,7 +140,7 @@ $$
 | 이상치 | 민감 | 덜 민감 |
 | 사용 | 오차가 정규분포에 가까울 때 (기본값) | 이상치가 많을 때 |
 
-일반화: ℓk 노름 $\|\mathbf{v}\|_k = \left(\sum |v_i|^k\right)^{1/k}$. $k$가 클수록 큰 값에 집중하고 작은 값을 무시한다.
+일반화: ℓk 노름 $`\lVert \mathbf{v} \rVert_k = \left(\sum |v_i|^k\right)^{1/k}`$. $k$가 클수록 큰 값에 집중하고 작은 값을 무시한다.
 
 **정리**
 - 회귀의 기본 지표는 RMSE, 단위는 타깃과 같다 (달러)
@@ -374,9 +374,9 @@ train_set, test_set = split_data_with_id_hash(housing_with_id, 0.2, "id")
 
 예: 여성 비율 $p = 0.516$인 모집단에서 $n = 1000$명 추출. 표본의 여성 수 $X \sim \text{Binomial}(1000, 0.516)$.
 
-$$
+```math
 P(X < 490) + P(X > 540) = F(489) + \left(1 - F(540)\right) \approx 0.107
-$$
+```
 
 ($F$: 누적분포함수)
 
@@ -528,9 +528,9 @@ housing.plot(kind="scatter", x="longitude", y="latitude", grid=True,            
 
 **피어슨 상관계수**
 
-$$
+```math
 r_{XY} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}, \quad -1 \le r \le 1
-$$
+```
 
 | 값 | 해석 |
 |---|---|
@@ -817,17 +817,17 @@ cat_encoder.get_feature_names_out()    # ['ocean_proximity_<1H OCEAN', ..., 'oce
 **개념·원리**
 대부분의 알고리즘(선형 모델, 거리 기반, 경사 하강법 등)은 값 범위가 큰 특성에 지배된다. (예: 방 수 6~39,320 vs 소득 0~15) 트리 기반 모델은 영향이 적다.
 
-**min-max 스케일링**
+**min-max 스케일링** (`feature_range=(a, b)`로 출력 범위를 [a, b]로 지정 가능)
 
-$$
-x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}} \;\;(\to [0, 1]), \quad \text{feature\_range로 } [a, b] \text{ 지정 가능}
-$$
+```math
+x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}} \in [0, 1]
+```
 
 **표준화**
 
-$$
+```math
 z = \frac{x - \mu}{\sigma}
-$$
+```
 
 | 구분 | MinMaxScaler | StandardScaler |
 |---|---|---|
@@ -868,9 +868,9 @@ housing_num_std_scaled = std_scaler.fit_transform(housing_num)
 
 **RBF(가우스 방사 기저 함수) 유사도**
 
-$$
-\text{RBF}(x, c) = \exp\left(-\gamma \|x - c\|^2\right)
-$$
+```math
+\text{RBF}(x, c) = \exp\left(-\gamma \lVert x - c \rVert^2\right)
+```
 
 - $x = c$이면 1, $c$에서 멀어질수록 0에 수렴
 - $\gamma$가 클수록 감소가 빠름 (좁은 종 모양)
