@@ -33,8 +33,10 @@
 8장 비지도 학습 ─ k-평균 · DBSCAN · 가우스 혼합
    ↓ 사이킷런 모델에서 신경망으로
 9장 인공 신경망 소개 ─ 퍼셉트론 · MLP와 역전파 · 사이킷런 MLP · 튜닝 가이드라인
+   ↓ fit() 한 줄을 직접 쓰는 훈련 루프로
+10장 파이토치로 신경망 구축하기 ─ 텐서 · autograd · nn.Module · DataLoader · Optuna · 저장과 컴파일
    ↓
-10장~ 파이토치 (정리 예정)
+11장~ 심층 신경망 훈련 (정리 예정)
 ```
 
 ### 장별 노트
@@ -50,6 +52,7 @@
 | [7장](ml/07_dimensionality_reduction.md) | 차원 축소 | 차원의 저주, 투영·매니폴드 학습, PCA(SVD), 설명된 분산 비율, 압축, 랜덤·점진적 PCA, 랜덤 투영(존슨–린덴슈트라우스), LLE, MDS·Isomap·t-SNE, 커널 PCA |
 | [8장](ml/08_unsupervised_learning.md) | 비지도 학습 | k-평균, 이너셔, k-평균++, 미니배치 k-평균, 엘보·실루엣, 이미지 분할, 준지도 학습(레이블 전파), DBSCAN, 가우스 혼합(EM), covariance_type, 이상치 탐지, BIC·AIC, 베이즈 가우스 혼합 |
 | [9장](ml/09_artificial_neural_networks.md) | 인공 신경망 소개 | 인공 뉴런·논리 연산, TLU, 퍼셉트론 학습 규칙, XOR 문제, 다층 퍼셉트론(MLP), 역전파, 활성화 함수(시그모이드·tanh·ReLU), MLPRegressor, MLPClassifier, 패션 MNIST, 조기 종료, 과잉 확신, 은닉 층 수·뉴런 수·학습률·배치 크기 |
+| [10장](ml/10_neural_nets_with_pytorch.md) | 파이토치로 신경망 구축하기 | 텐서, 하드웨어 가속(GPU), autograd, 훈련 루프, nn.Linear·nn.Sequential, 옵티마이저(SGD), DataLoader, 미니배치 경사 하강법, torchmetrics, 학습 곡선, nn.Module(와이드 & 딥·다중 입력·다중 출력), 토치비전, CrossEntropyLoss(로짓), Optuna(TPE·가지치기), state_dict, TorchScript, torch.compile |
 
 ### 노트 읽는 법
 

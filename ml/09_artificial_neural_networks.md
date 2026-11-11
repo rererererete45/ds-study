@@ -1,6 +1,6 @@
 # 9장. 인공 신경망 소개
 
-[← 8장. 비지도 학습](08_unsupervised_learning.md) · [📚 전체 목차](../README.md) · 10장. 파이토치로 신경망 구축하기 (정리 예정) →
+[← 8장. 비지도 학습](08_unsupervised_learning.md) · [📚 전체 목차](../README.md) · [10장. 파이토치로 신경망 구축하기 →](10_neural_nets_with_pytorch.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 9장 · 노트북 `09_artificial_neural_networks.ipynb`
 >
@@ -1347,7 +1347,7 @@ make_pipeline(MinMaxScaler(), MLPClassifier(hidden_layer_sizes, early_stopping=T
 
 ---
 
-> ➡️ **다음 장 — 10장. 파이토치로 신경망 구축하기 (정리 예정)**  
+> ➡️ **다음 장 — [10장. 파이토치로 신경망 구축하기](10_neural_nets_with_pytorch.md)**  
 > 사이킷런의 MLP는 출력 층 활성화 함수도, 손실 함수도, 층의 구조도 바꿀 수 없고 GPU도 쓰지 못한다. 10장에서 **파이토치**로 같은 신경망을 직접 만들고 훈련 루프를 작성한다.
 
-[← 8장. 비지도 학습](08_unsupervised_learning.md) · [📚 전체 목차](../README.md) · 10장. 파이토치로 신경망 구축하기 (정리 예정) →
+[← 8장. 비지도 학습](08_unsupervised_learning.md) · [📚 전체 목차](../README.md) · [10장. 파이토치로 신경망 구축하기 →](10_neural_nets_with_pytorch.md)
