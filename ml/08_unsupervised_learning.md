@@ -1,6 +1,6 @@
 # 8장. 비지도 학습
 
-[← 7장. 차원 축소](07_dimensionality_reduction.md) · [📚 전체 목차](../README.md) · 9장. 인공 신경망 (정리 예정) →
+[← 7장. 차원 축소](07_dimensionality_reduction.md) · [📚 전체 목차](../README.md) · [9장. 인공 신경망 소개 →](09_artificial_neural_networks.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 8장 · 노트북 `08_unsupervised_learning.ipynb`
 >
@@ -1674,7 +1674,7 @@ GaussianMixture(n_components, n_init)   ← EM 알고리즘, 타원형 군집
 
 ---
 
-> ➡️ **다음 장 — 9장. 인공 신경망 (정리 예정)**  
+> ➡️ **다음 장 — [9장. 인공 신경망 소개](09_artificial_neural_networks.md)**  
 > 사이킷런 파트를 마치고 **인공 신경망과 파이토치**로 넘어간다. 4장의 경사 하강법이 신경망 학습의 출발점이 된다.
 
-[← 7장. 차원 축소](07_dimensionality_reduction.md) · [📚 전체 목차](../README.md) · 9장. 인공 신경망 (정리 예정) →
+[← 7장. 차원 축소](07_dimensionality_reduction.md) · [📚 전체 목차](../README.md) · [9장. 인공 신경망 소개 →](09_artificial_neural_networks.md)
