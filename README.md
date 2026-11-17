@@ -37,8 +37,10 @@
 10장 파이토치로 신경망 구축하기 ─ 텐서 · autograd · nn.Module · DataLoader · Optuna · 저장과 컴파일
    ↓ 얕은 MLP에서 깊은 신경망으로
 11장 심층 신경망 훈련 ─ 초기화 · 활성화 함수 · 배치 정규화 · 전이 학습 · 옵티마이저 · 학습률 스케줄 · 규제
+   ↓ 완전 연결 층 대신 이미지 구조를 쓰는 층으로
+12장 합성곱 신경망을 사용한 심층 컴퓨터 비전 ─ 합성곱 · 풀링 · ResNet · 전이 학습 · 객체 탐지 · 분할
    ↓
-12장~ 합성곱 신경망을 사용한 컴퓨터 비전 (정리 예정)
+13장~ RNN과 CNN을 사용한 시퀀스 처리 (정리 예정)
 ```
 
 ### 장별 노트
@@ -56,6 +58,7 @@
 | [9장](ml/09_artificial_neural_networks.md) | 인공 신경망 소개 | 인공 뉴런·논리 연산, TLU, 퍼셉트론 학습 규칙, XOR 문제, 다층 퍼셉트론(MLP), 역전파, 활성화 함수(시그모이드·tanh·ReLU), MLPRegressor, MLPClassifier, 패션 MNIST, 조기 종료, 과잉 확신, 은닉 층 수·뉴런 수·학습률·배치 크기 |
 | [10장](ml/10_neural_nets_with_pytorch.md) | 파이토치로 신경망 구축하기 | 텐서, 하드웨어 가속(GPU), autograd, 훈련 루프, nn.Linear·nn.Sequential, 옵티마이저(SGD), DataLoader, 미니배치 경사 하강법, torchmetrics, 학습 곡선, nn.Module(와이드 & 딥·다중 입력·다중 출력), 토치비전, CrossEntropyLoss(로짓), Optuna(TPE·가지치기), state_dict, TorchScript, torch.compile |
 | [11장](ml/11_training_deep_neural_networks.md) | 심층 신경망 훈련 | 그레이디언트 소실·폭주, 글로럿·He·르쿤 초기화, LeakyReLU·ELU·SELU·GELU·Swish·Mish, 배치 정규화·층 정규화, 그레이디언트 클리핑, 전이 학습(동결·미세 튜닝), 모멘텀·네스테로프·AdaGrad·RMSProp·Adam·AdamW, 학습률 스케줄링(지수·성능 기반·웜업·코사인·1사이클), ℓ1·ℓ2 규제·가중치 감쇠, 드롭아웃, MC 드롭아웃, 맥스-노름, 조기 종료, CIFAR10 |
+| [12장](ml/12_deep_computer_vision_with_cnns.md) | 합성곱 신경망을 사용한 심층 컴퓨터 비전 | 국부 수용장, nn.Conv2d(필터·특성 맵·패딩·스트라이드), 메모리 요구량, 최대·평균 풀링, 깊이 방향 풀링, 전역 평균 풀링, LeNet-5·AlexNet·GoogLeNet(인셉션·1×1 병목)·VGGNet·ResNet(스킵 연결)·Xception(분리 합성곱)·SENet·EfficientNet·ConvNeXt, ResNet-34 구현, LazyLinear, 토치비전 사전 훈련 모델, 전이 학습(Flowers102), 데이터 증강, 위치 추정(BoundingBoxes·IoU), NMS, 완전 합성곱 신경망, YOLO, mAP, 객체 추적, 시맨틱 분할(FCN·전치 합성곱) |
 
 ### 노트 읽는 법
 
