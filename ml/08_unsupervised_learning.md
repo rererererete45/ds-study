@@ -22,6 +22,7 @@
 | 4. 밀도 기반 군집 | 8.1 | 모양이 제각각인 군집은 | `DBSCAN` |
 | 5. 가우스 혼합 | 8.2 | 데이터를 만든 분포를 추정할 수 있는가 | `GaussianMixture`(EM), `covariance_type` |
 | 6. 이상치·모델 선택 | 8.2 | 밀도로 이상치를 찾고 군집 수를 고르려면 | 밀도 임곗값, BIC·AIC, 베이즈 가우스 혼합 |
+| 7. 연습문제 | 8.3 | 실제 이미지(얼굴)에 군집·혼합 모델을 쓰면 | 얼굴 군집, 군집 특성 분류, 얼굴 생성, 이상치 탐지(밀도·재구성 오차) |
 
 ## 데이터
 
@@ -33,6 +34,7 @@
 | `ladybug.png` | `(533, 800, 3)` | 8.1 | 이미지 색상 분할 |
 | `load_digits()` | `(1797, 64)` — 8×8 손글씨 | 8.1 | 준지도 학습 |
 | `make_moons()` | `(1000, 2)` | 8.1, 8.2 | DBSCAN, 베이즈 가우스 혼합 |
+| `fetch_olivetti_faces()` | `(400, 4096)` — 64×64 얼굴, 40명 × 10장 | 8.3 | 연습문제 10~13 |
 
 ## 목차
 
@@ -56,13 +58,19 @@
    - [2-4. 가우스 혼합으로 이상치 탐지](#2-4-가우스-혼합으로-이상치-탐지)
    - [2-5. 군집 수 선택: BIC · AIC](#2-5-군집-수-선택-bic--aic)
    - [2-6. 베이즈 가우스 혼합](#2-6-베이즈-가우스-혼합)
-- [3. 정리](#3-정리)
-   - [3-1. 전체 흐름](#3-1-전체-흐름)
-   - [3-2. 개념과 코드 대응](#3-2-개념과-코드-대응)
-   - [3-3. 알고리즘 비교](#3-3-알고리즘-비교)
-   - [3-4. 주요 결과](#3-4-주요-결과)
-   - [3-5. 자주 쓴 코드 패턴](#3-5-자주-쓴-코드-패턴)
-   - [3-6. 핵심 원칙](#3-6-핵심-원칙)
+- [3. 연습문제 (8.3)](#3-연습문제-83)
+   - [3-1. 개념 문제 (1~9번)](#3-1-개념-문제-19번)
+   - [3-2. 10번 — 올리베티 얼굴 군집](#3-2-10번--올리베티-얼굴-군집)
+   - [3-3. 11번 — 군집을 분류 전처리로](#3-3-11번--군집을-분류-전처리로)
+   - [3-4. 12번 — 가우스 혼합으로 얼굴 생성과 이상치 탐지](#3-4-12번--가우스-혼합으로-얼굴-생성과-이상치-탐지)
+   - [3-5. 13번 — PCA 재구성 오차로 이상치 탐지](#3-5-13번--pca-재구성-오차로-이상치-탐지)
+- [4. 정리](#4-정리)
+   - [4-1. 전체 흐름](#4-1-전체-흐름)
+   - [4-2. 개념과 코드 대응](#4-2-개념과-코드-대응)
+   - [4-3. 알고리즘 비교](#4-3-알고리즘-비교)
+   - [4-4. 주요 결과](#4-4-주요-결과)
+   - [4-5. 자주 쓴 코드 패턴](#4-5-자주-쓴-코드-패턴)
+   - [4-6. 핵심 원칙](#4-6-핵심-원칙)
 
 ---
 
@@ -130,6 +138,8 @@ plt.tick_params(labelleft=False)
 plt.show()
 ```
 
+![분류와 군집](images/08/nb_iris_classification_vs_clustering.png)
+
 | 코드 | 의미 |
 |---|---|
 | `X[y==0, 2]` | 불리언 마스크로 setosa 행만 고르고, 2번 열(꽃잎 길이)만 꺼냄 |
@@ -158,6 +168,12 @@ y_pred = np.array([mapping[cluster_id] for cluster_id in y_pred])
 (y_pred==y).sum() / len(y_pred)
 # np.float64(0.9666666666666667)
 ```
+
+![가우스 혼합으로 묶은 붓꽃](images/08/nb_iris_gmm_clusters.png)
+
+(노트북의 추가 그림. 특성 4개로 군집한 뒤, 매핑한 군집 번호를 꽃잎 길이·너비 평면에 색으로 칠했다.)
+
+- 바로 위 왼쪽 그림(실제 품종)과 거의 같다. 경계 근처 몇 개만 다르다 → 96.7%
 
 | 코드 | 의미 |
 |---|---|
@@ -209,6 +225,10 @@ plt.figure(figsize=(8, 4))
 plot_clusters(X)       # y를 안 넘기면 한 색으로 그림 → 레이블 없는 데이터
 plt.show()
 ```
+
+![레이블 없는 덩어리 5개](images/08/nb_blobs.png)
+
+- 왼쪽에 작고 빽빽한 덩어리 3개, 오른쪽에 크고 퍼진 덩어리 2개. 사람 눈엔 5개가 분명하다
 
 - `c=y` : 점 색을 배열 값으로 지정. `None`이면 기본색
 - `"$x_1$"` : 달러 기호로 감싸면 수식(아래첨자)으로 표시
@@ -287,6 +307,13 @@ plot_decision_boundaries(kmeans, X)
 plt.show()
 ```
 
+![k-평균 결정 경계](images/08/nb_kmeans_voronoi.png)
+
+(× = 군집 중심, 배경색 = 각 중심의 담당 영역. 이렇게 "가장 가까운 중심"으로 평면을 나눈 그림이 보로노이 다이어그램.)
+
+- 경계는 이웃한 두 중심의 **수직이등분선**. 그래서 경계가 모두 직선
+- 왼쪽 가운데 덩어리 위쪽 일부가 위 덩어리 영역으로 넘어갔다 → k-평균은 거리만 보므로 **크기가 다른 덩어리**의 경계를 잘 못 맞춘다
+
 `plot_decision_boundaries()`는 이 장 내내 재사용하는 핵심 그림 함수다.
 
 | 단계 | 코드 | 의미 |
@@ -360,6 +387,14 @@ kmeans_iter3.fit(X)
 # → 3행 2열 그림: 왼쪽 = 중심 갱신, 오른쪽 = 레이블 갱신
 ```
 
+![k-평균 알고리즘 3회 반복](images/08/nb_kmeans_steps.png)
+
+(위에서부터 반복 1·2·3. 왼쪽 = 중심 갱신, 오른쪽 = 그 중심으로 레이블 갱신. 첫 그림의 빨간 원 = 무작위로 고른 초기 중심.)
+
+- 1회: 중심이 엉뚱한 곳(오른쪽 큰 덩어리에 2개)에 있어 경계가 엉망
+- 2회: 중심이 각자 맡은 점들의 평균으로 이동 → 경계가 덩어리에 맞춰지기 시작
+- 3회: 거의 최종 형태. 몇 번만 더 반복하면 중심이 더 움직이지 않는다 = 수렴
+
 | 하이퍼파라미터 | 의미 |
 |---|---|
 | `init="random"` | 원래 k-평균처럼 중심을 무작위로 초기화 (기본값은 k-평균++) |
@@ -385,6 +420,11 @@ kmeans_rnd_init2 = KMeans(n_clusters=5, init="random", n_init=1, random_state=8)
 plot_clusterer_comparison(kmeans_rnd_init1, kmeans_rnd_init2, X,
                           "Solution 1", "Solution 2 (with a different random init)")
 ```
+
+![초기화에 따라 달라지는 해](images/08/nb_kmeans_bad_init.png)
+
+- 왼쪽: 왼쪽 아래 작은 덩어리 둘을 한 군집(분홍)이 합치고, 가장 오른쪽 큰 덩어리를 두 군집(회색·노랑)이 나눠 가졌다
+- 오른쪽: 왼쪽 위 작은 덩어리와 가운데 덩어리를 한 군집(분홍)이 합치고, 맨 아래 작은 덩어리에 중심이 두 개 들어갔다 → 둘 다 **지역 최적해**
 
 - 수렴은 보장되지만 **최적해(전역 최소)로의 수렴은 보장되지 않는다**
 - 초기 중심 위치에 따라 덩어리 하나를 둘로 쪼개고, 두 덩어리를 하나로 합친 **지역 최적해**에 빠질 수 있다
@@ -451,6 +491,10 @@ kmeans_rnd_10_inits.fit(X)
 kmeans_rnd_10_inits.inertia_
 # 211.59853725816828
 ```
+
+![10번 초기화 중 최선의 해](images/08/nb_kmeans_10_inits.png)
+
+- 덩어리 5개에 중심이 하나씩 → 위 두 그림보다 확연히 좋다
 
 - `n_init=10` : 알고리즘 전체를 10번 실행하고 최선을 선택
 - 결과가 처음에 좋은 초기값을 직접 줬을 때와 **똑같은 211.60** → k=5일 때의 최적해로 보인다
@@ -539,6 +583,8 @@ kmeans_k3.inertia_   # 653.2167190021554
 kmeans_k8.inertia_   # 127.13141880461835
 ```
 
+![k=3과 k=8](images/08/nb_k3_vs_k8.png)
+
 - k=3: 덩어리 여러 개가 합쳐짐 / k=8: 덩어리가 쪼개짐. 둘 다 나쁘다
 - 그런데 이너셔는 k=8이 훨씬 작다 → **이너셔를 최소화하는 k를 고르면 안 된다**
 - k가 커질수록 각 샘플이 중심에 가까워지니 이너셔는 계속 줄어든다 (극단적으로 k = 샘플 수이면 0)
@@ -560,6 +606,11 @@ plt.axis([1, 8.5, 0, 1300])
 plt.show()
 ```
 
+![k에 따른 이너셔](images/08/nb_inertia_elbow.png)
+
+- k = 1→4에서 급격히 떨어지다가 4 이후로 완만해진다 → **팔꿈치(엘보)** 가 k=4
+- 정답은 5인데 4가 나왔다 → 엘보는 대략적인 방법. 왼쪽 아래 두 덩어리가 가까워서 합쳐도 이너셔가 크게 안 늘기 때문
+
 | 코드 | 의미 |
 |---|---|
 | 리스트 컴프리헨션 + `.fit(X)` | k=1~9 모델 9개를 한 줄로 훈련. `fit()`이 모델을 반환하므로 리스트에 바로 들어감 |
@@ -573,6 +624,10 @@ plt.show()
 ```python
 plot_decision_boundaries(kmeans_per_k[4 - 1], X)   # k=4 결과 확인
 ```
+
+![k=4 결과](images/08/nb_k4_result.png)
+
+- 예상대로 왼쪽 아래 두 덩어리가 한 군집으로 합쳐졌다
 
 #### 방법 ② 실루엣 점수
 
@@ -601,6 +656,10 @@ silhouette_scores = [silhouette_score(X, model.labels_)
                      for model in kmeans_per_k[1:]]       # k=1은 제외
 plt.plot(range(2, 10), silhouette_scores, "bo-")
 ```
+
+![k에 따른 실루엣 점수](images/08/nb_silhouette_score.png)
+
+- k=4가 가장 높고(약 0.69) **k=5도 높다**(0.656). k=3·6 이후는 크게 낮다 → 엘보보다 정보가 많다
 
 - `kmeans_per_k[1:]` : 군집이 1개면 b를 정의할 수 없어 실루엣 계산 불가 → k=2부터
 - 그래프: **k=4가 가장 높고(약 0.69) k=5도 0.66으로** 높다. 엘보 방법보다 정보가 많다
@@ -644,6 +703,10 @@ for k in (3, 4, 5, 6):
 plt.show()
 ```
 
+![실루엣 다이어그램](images/08/nb_silhouette_diagram.png)
+
+(군집마다 샘플의 실루엣 계수를 큰 순서로 가로 막대로 쌓은 "칼" 모양. 빨간 점선 = 평균 = 실루엣 점수.)
+
 | 코드 | 의미 |
 |---|---|
 | `silhouette_samples()` | 평균 내기 전, **샘플별** 실루엣 계수 |
@@ -676,6 +739,10 @@ kmeans_bad = KMeans(n_clusters=3, n_init=10, random_state=42)
 kmeans_good.fit(X)
 kmeans_bad.fit(X)
 ```
+
+![k-평균의 한계](images/08/nb_kmeans_limits.png)
+
+(왼쪽 = 좋은 초기 중심을 직접 준 결과, 오른쪽 = 일반 실행 결과. 둘 다 `k=3`.)
 
 | 코드 | 의미 |
 |---|---|
@@ -762,6 +829,10 @@ for idx, n_clusters in enumerate(n_colors):
     plt.title(f"{n_clusters} colors")
 ```
 
+![색 수에 따른 이미지 분할](images/08/nb_image_segmentation.png)
+
+(픽셀 하나 = RGB 3차원 점 하나. k-평균으로 색을 k개로 묶고, 각 픽셀을 자기 군집 중심의 색으로 바꿨다.)
+
 - 색이 적을수록 단순해진다
 - **군집 6개 미만**이 되면 무당벌레의 빨간색이 사라진다 → 빨간 픽셀은 이미지에서 차지하는 비율이 작아서 독립 군집을 얻지 못하고 주변 색과 합쳐짐
 - k-평균은 **비슷한 크기의 군집**을 선호한다는 특성이 여기서도 드러난다
@@ -840,6 +911,10 @@ y_representative_digits = np.array([
 ])
 ```
 
+![대표 이미지 50개](images/08/nb_representative_digits.png)
+
+(k=50 군집마다 중심에 가장 가까운 이미지 하나. 위 배열은 이 그림을 왼쪽 위부터 읽은 값.)
+
 > ⚠️ 이 레이블 배열은 **그림을 보고 손으로 입력한 값**이다. 사이킷런 버전이나 `random_state`가 달라 군집 순서가 바뀌면 이 배열도 다시 봐야 한다.
 
 ```python
@@ -916,6 +991,10 @@ log_reg.score(X_test, y_test)
 - 전파된 레이블의 정확도가 **98.9%** — 사람이 단 레이블 50개만으로 이 정도
 - 전체 1,400개 정답 레이블(90.9%)에 꽤 근접
 
+![준지도 학습 단계별 정확도](images/08/extra_semisupervised_accuracy.png)
+
+(보충 그림. 아래 표의 수치를 막대로 그렸다.)
+
 | 단계 | 사람이 단 레이블 | 테스트 정확도 |
 |---|---|---|
 | 무작위 50개 | 50 | 75.8% |
@@ -938,6 +1017,13 @@ log_reg.score(X_test, y_test)
 2. ε-이웃에 (자기 자신 포함) **min_samples**개 이상이 있으면 **핵심 샘플** — 밀집 지역 안에 있다는 뜻
 3. 핵심 샘플의 이웃은 모두 같은 군집. 이웃 중 핵심 샘플이 있으면 그 이웃도 같은 군집 → **연쇄적으로 확장**
 4. 핵심 샘플도 아니고 핵심 샘플의 이웃도 아닌 샘플은 **이상치** (레이블 −1)
+
+![DBSCAN의 핵심·경계·이상치 샘플](images/08/extra_dbscan_concept.png)
+
+(보충 그림. 파란 원 = 핵심 샘플, 연한 원 = 핵심 샘플의 ε-이웃 반경, 주황 사각형 = 경계 샘플, 빨간 × = 이상치. 실제 `DBSCAN(eps=0.55, min_samples=4)`의 `core_sample_indices_`, `labels_`로 분류했다.)
+
+- 경계 샘플은 자기 ε-원 안에 점이 4개 미만이라 핵심이 아니지만, **어떤 핵심 샘플의 ε-원 안**에 있어서 군집에 들어간다
+- 이상치는 어느 핵심 샘플의 원에도 닿지 않는다
 
 ```python
 from sklearn.cluster import DBSCAN
@@ -1003,6 +1089,13 @@ plt.subplot(121); plot_dbscan(dbscan, X, size=100)
 plt.subplot(122); plot_dbscan(dbscan2, X, size=600, show_ylabels=False)
 ```
 
+![eps에 따른 DBSCAN 결과](images/08/nb_dbscan_eps.png)
+
+(큰 원 = 핵심 샘플, 작은 점 = 경계 샘플, 빨간 × = 이상치. 색 = 군집.)
+
+- 왼쪽(eps=0.05): 반경이 너무 작아 초승달이 여러 조각(7개)으로 쪼개지고 이상치가 많다
+- 오른쪽(eps=0.20): 초승달 두 개를 정확히 찾고 이상치도 없다
+
 | 코드 | 의미 |
 |---|---|
 | `np.zeros_like(a, dtype=bool)` | `a`와 같은 모양의 False 배열 |
@@ -1059,6 +1152,13 @@ y_pred.ravel()
 # array([-1,  0,  1, -1])
 ```
 
+![DBSCAN 군집으로 학습한 KNN의 결정 경계](images/08/nb_dbscan_knn.png)
+
+(+ = 새 샘플 4개, 배경색 = KNN이 나눈 영역.)
+
+- KNN의 경계는 두 초승달 사이를 따라 휘어진다
+- 오른쪽 위·왼쪽 끝 + 두 개는 영역 안에 있긴 하지만 가장 가까운 핵심 샘플이 `0.2`보다 멀어서 −1(이상치)로 판정됐다
+
 | 코드 | 의미 |
 |---|---|
 | `knn.kneighbors(X_new, n_neighbors=1)` | 가장 가까운 훈련 샘플 1개의 **거리**와 **인덱스** — 각 `(4, 1)` |
@@ -1096,6 +1196,13 @@ sc1.affinity_matrix_.round(2)
 sc2 = SpectralClustering(n_clusters=2, gamma=1, random_state=42)
 sc2.fit(X)
 ```
+
+![스펙트럴 군집](images/08/nb_spectral_clustering.png)
+
+(왼쪽 = `gamma=100`, 오른쪽 = `gamma=1`. 회색 음영 = 유사도.)
+
+- `gamma=100`: 아주 가까운 이웃끼리만 유사 → 초승달 두 개를 정확히 분리
+- `gamma=1`: 멀리 떨어진 점도 유사하다고 봐서 초승달을 가로질러 나눈다
 
 - 샘플 간 **유사도 행렬**(`affinity_matrix_`, 1000×1000)을 만들고 → 저차원 임베딩으로 차원을 줄인 뒤 → 그 공간에서 k-평균 같은 군집 알고리즘 적용
 - 유사도 = RBF 커널 exp(−γ‖xᵢ − xⱼ‖²). 대각선은 자기 자신이라 1
@@ -1344,6 +1451,13 @@ plot_gaussian_mixture(gm, X)
 plt.show()
 ```
 
+![가우스 혼합의 밀도와 결정 경계](images/08/nb_gmm_density.png)
+
+(등고선 = 밀도(로그 스케일, 진할수록 높음), 빨간 점선 = 군집 경계, ⊗ = 각 가우스 분포의 평균.)
+
+- 기울어진 길쭉한 두 군집과 오른쪽 둥근 군집을 **모양 그대로** 잡았다 → k-평균의 한계(1-7)를 해결
+- 경계(빨간 점선)가 직선이 아니라 곡선 → 각 분포의 공분산이 달라서
+
 | 코드 | 의미 |
 |---|---|
 | `-score_samples()` | 음의 로그 밀도. 밀도가 높을수록 값이 작음 |
@@ -1383,6 +1497,10 @@ compare_gaussian_mixtures(gm_tied, gm_spherical, X)   # 교재 그림
 compare_gaussian_mixtures(gm_full, gm_diag, X)        # 보너스
 ```
 
+| `tied` vs `spherical` | `full` vs `diag` |
+|---|---|
+| ![tied와 spherical](images/08/nb_gmm_tied_spherical.png) | ![full과 diag](images/08/nb_gmm_full_diag.png) |
+
 - `tied` : 원형이던 군집 1도 다른 두 군집처럼 기울어진 타원으로 표현됨 → 이 데이터엔 약간 안 맞음
 - `spherical` : 기울어진 타원을 원으로밖에 표현 못 함 → 경계가 어긋남
 - 이 데이터는 `full`이 가장 정확
@@ -1417,6 +1535,10 @@ plot_gaussian_mixture(gm, X)
 plt.scatter(anomalies[:, 0], anomalies[:, 1], color='r', marker='*')   # 빨간 별 = 이상치
 plt.ylim(top=5.1)
 ```
+
+![가우스 혼합으로 찾은 이상치](images/08/nb_gmm_anomalies.png)
+
+- 빨간 별(밀도 하위 2%)은 모두 군집 바깥쪽 가장자리에 있다
 
 - 예: 불량률이 약 2%로 알려진 공장이라면 임곗값을 하위 2%로
 - 임곗값 조정 = **정밀도/재현율 트레이드오프** (3장)
@@ -1475,6 +1597,13 @@ plt.ylim(top=5.1)
 
 노트북 그림 8-18은 f(x; θ)를 등고선으로 그리고, θ 고정(가로선 → PDF)과 x 고정(세로선 → 가능도 함수)으로 단면을 잘라 이 차이를 보여 준다. 그림 생성 코드는 길어서 생략.
 
+![모델의 PDF와 가능도 함수](images/08/nb_likelihood.png)
+
+(그림 8-18. 왼쪽 위: $f(x; \theta)$ 전체(가로 = $x$, 세로 = $\theta$). 왼쪽 아래: $\theta$ = 1.3으로 고정한 단면 = PDF. 오른쪽 위: $x$ = 2.5로 고정한 단면 = 가능도 함수 $\mathcal{L}(\theta \mid x=2.5)$. 오른쪽 아래: 그 로그.)
+
+- 왼쪽 아래 PDF는 $x$에 대해 넓이가 1. 오른쪽 위 가능도 함수는 그런 제약이 없다
+- 가능도와 로그 가능도의 **최댓값 위치 $\hat\theta$가 같다** → 계산이 쉬운 로그 쪽을 최대화
+
 #### 계산
 
 ```python
@@ -1529,6 +1658,8 @@ plt.legend(); plt.grid()
 plt.show()
 ```
 
+![k에 따른 BIC와 AIC](images/08/nb_bic_aic.png)
+
 - BIC와 AIC 모두 **k=3에서 최소** → 정답
 - `covariance_type`도 함께 바꿔 가며 BIC를 비교하면 최적의 공분산 형태까지 고를 수 있다
 
@@ -1559,6 +1690,10 @@ plt.figure(figsize=(8, 5))
 plot_gaussian_mixture(bgm, X)     # 가중치 작은 7개 중심은 plot_centroids가 생략
 ```
 
+![베이즈 가우스 혼합](images/08/nb_bayesian_gmm.png)
+
+- 군집을 10개로 설정했지만 그림에는 ⊗가 3개뿐 → 나머지 7개는 가중치 0으로 꺼졌다. 결과는 `n_components=3`인 위 그림과 사실상 같다
+
 > 💡 원리: 군집 가중치 등 파라미터를 고정값이 아니라 **확률 변수**로 보고 사전 분포를 둔다. `weight_concentration_prior`가 작으면 적은 수의 군집을, 크면 많은 군집을 선호하도록 사전 믿음을 조절할 수 있다.
 
 #### 한계: 타원이 아닌 군집
@@ -1573,6 +1708,8 @@ plt.subplot(121); plot_data(X_moons)                          # 원본
 plt.subplot(122); plot_gaussian_mixture(bgm, X_moons, show_ylabels=False)
 ```
 
+![초승달 데이터의 베이즈 가우스 혼합](images/08/nb_bayesian_gmm_moons.png)
+
 - 초승달 2개를 찾지 못하고 **타원 8개**로 덮어 버림
 - 가우스 혼합은 군집이 타원형이라고 가정하기 때문 → 모양이 다르면 실패
 - 다만 **밀도 추정**은 꽤 그럴듯해서 이상치 탐지 용도로는 쓸 만하다
@@ -1581,9 +1718,312 @@ plt.subplot(122); plot_gaussian_mixture(bgm, X_moons, show_ylabels=False)
 
 ---
 
-## 3. 정리
+## 3. 연습문제 (8.3)
 
-### 3-1. 전체 흐름
+> 1~9번은 개념 문제(교재 부록), 10~13번은 노트북 풀이. 10~13번은 모두 **올리베티 얼굴 데이터셋**을 이어서 쓴다.
+
+### 3-1. 개념 문제 (1~9번)
+
+| 번호 | 질문 | 답 요약 |
+|---|---|---|
+| 1 | 군집이란? 대표 알고리즘은? | 비슷한 샘플을 묶는 비지도 작업. "비슷함"의 기준은 문제마다 다름(가까운 점 / 같은 밀집 영역). k-평균, DBSCAN, 병합 군집, BIRCH, 평균-이동, 유사도 전파, 스펙트럴 군집 |
+| 2 | 군집의 주요 활용 | 데이터 분석, 고객 세분화, 추천 시스템, 검색 엔진, 이미지 분할, 준지도 학습, 차원 축소, 이상치·새로움 탐지 |
+| 3 | k-평균의 군집 수를 고르는 방법 2가지 | **엘보**: k별 이너셔 그래프에서 감소가 꺾이는 지점. **실루엣 점수**: k별 평균 실루엣 계수가 최대인 곳. 더 자세히는 실루엣 다이어그램 (1-6) |
+| 4 | 레이블 전파란? 왜, 어떻게? | 레이블 단 샘플의 레이블을 비슷한 레이블 없는 샘플로 복사 → 레이블 수를 크게 늘림(준지도 학습). 예: k-평균 후 군집마다 대표 샘플 레이블을 같은 군집에 전파 (1-9) |
+| 5 | 대규모 데이터에 확장 가능한 군집 알고리즘 / 밀도가 높은 영역을 찾는 알고리즘 | 확장: **k-평균, BIRCH**. 밀도: **DBSCAN, 평균-이동** |
+| 6 | 능동 학습은 언제 유용하고 어떻게 구현하나? | 레이블 없는 샘플은 많은데 레이블 비용이 클 때. 무작위가 아니라 **모델이 요청한 샘플**에 사람이 레이블. 대표적으로 불확실성 샘플링 (1-9 끝의 💡) |
+| 7 | 이상치 탐지 vs 새로움 탐지 | 이상치 탐지: 이상치가 **섞여 있을 수 있는** 데이터로 훈련, 훈련 세트와 새 샘플 모두에서 이상치를 찾음 (예: 아이솔레이션 포레스트). 새로움 탐지: **깨끗하다고 가정한** 데이터로 훈련, 새 샘플에서만 찾음 (예: 원-클래스 SVM) |
+| 8 | 가우스 혼합이란? 어디에 쓰나? | 샘플이 파라미터를 모르는 여러 가우스 분포의 혼합에서 생성됐다고 가정하는 확률 모델. 군집이 타원형(모양·크기·방향·밀도는 제각각). **밀도 추정, 군집, 이상치 탐지** |
+| 9 | 가우스 혼합의 군집 수를 찾는 방법 2가지 | k별 **BIC·AIC**가 최소인 k (2-5). 또는 **베이즈 가우스 혼합**으로 자동 선택 (2-6) |
+
+### 3-2. 10번 — 올리베티 얼굴 군집
+
+> 🎯 **목적** — 64×64 흑백 얼굴 400장(40명 × 10장)을 k-평균으로 묶고, 같은 사람끼리 모이는지 본다.
+
+**코드: 로드와 계층 분할**
+
+```python
+from sklearn.datasets import fetch_olivetti_faces
+from sklearn.model_selection import StratifiedShuffleSplit
+
+olivetti = fetch_olivetti_faces()       # data (400, 4096), 0~1로 이미 스케일됨 / target 0~39
+
+strat_split = StratifiedShuffleSplit(n_splits=1, test_size=40, random_state=42)
+train_valid_idx, test_idx = next(strat_split.split(olivetti.data, olivetti.target))
+X_train_valid = olivetti.data[train_valid_idx]
+y_train_valid = olivetti.target[train_valid_idx]
+X_test = olivetti.data[test_idx]
+y_test = olivetti.target[test_idx]
+
+strat_split = StratifiedShuffleSplit(n_splits=1, test_size=80, random_state=43)
+train_idx, valid_idx = next(strat_split.split(X_train_valid, y_train_valid))
+X_train, y_train = X_train_valid[train_idx], y_train_valid[train_idx]
+X_valid, y_valid = X_train_valid[valid_idx], y_train_valid[valid_idx]
+# 훈련 (280, 4096) / 검증 (80, 4096) / 테스트 (40, 4096)
+```
+
+| 코드 | 의미 |
+|---|---|
+| `StratifiedShuffleSplit(n_splits=1, test_size=40)` | 계층 분할 1회. 사람당 10장뿐이라 무작위로 나누면 어떤 사람은 훈련 세트에 거의 없을 수 있음 → 사람(`target`) 비율 유지 (2장 2-6) |
+| `next(strat_split.split(...))` | `split()`은 제너레이터 → 첫 분할 (훈련 인덱스, 테스트 인덱스) 하나만 꺼냄 |
+| `test_size=40`, `test_size=80` | 정수면 **샘플 개수**. 테스트 40장(사람당 1장), 검증 80장(사람당 2장) |
+
+**코드: PCA로 차원 축소 후 k별 k-평균**
+
+```python
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+
+pca = PCA(0.99)                              # 분산 99% 보존
+X_train_pca = pca.fit_transform(X_train)
+X_valid_pca = pca.transform(X_valid)
+X_test_pca = pca.transform(X_test)
+pca.n_components_                            # 199 (4,096 → 199)
+
+k_range = range(5, 150, 5)
+kmeans_per_k = [KMeans(n_clusters=k, random_state=42).fit(X_train_pca)
+                for k in k_range]
+
+silhouette_scores = [silhouette_score(X_train_pca, model.labels_)
+                     for model in kmeans_per_k]
+best_index = np.argmax(silhouette_scores)
+best_k = k_range[best_index]                 # 75
+best_model = kmeans_per_k[best_index]
+```
+
+| 실루엣 점수 | 이너셔 |
+|---|---|
+| ![k별 실루엣 점수](images/08/nb_ex10_silhouette.png) | ![k별 이너셔](images/08/nb_ex10_inertia.png) |
+
+(빨간 사각형 = 실루엣 점수가 최대인 k = 75.)
+
+- 실루엣 점수는 k=75에서 최대(약 0.21)지만 70~140 구간이 거의 평평하다 → 뚜렷한 정답이 없다
+- 이너셔는 k가 커질수록 꾸준히 내려갈 뿐 **엘보가 없다**
+- 사람이 40명인데 최적 k가 75 → 같은 사람도 안경 유무, 얼굴 방향·위치에 따라 서로 다른 군집으로 갈린다
+
+> ⚠️ 노트북 설명 문단은 "120"이라고 쓰여 있지만 실제 출력(`best_k`)은 **75**다. 이전 버전 결과가 문장에 남은 것.
+
+**코드: 군집별 얼굴 보기**
+
+```python
+def plot_faces(faces, labels, n_cols=5):
+    faces = faces.reshape(-1, 64, 64)                 # 4096 → 64×64
+    n_rows = (len(faces) - 1) // n_cols + 1           # 올림 나눗셈
+    plt.figure(figsize=(n_cols, n_rows * 1.1))
+    for index, (face, label) in enumerate(zip(faces, labels)):
+        plt.subplot(n_rows, n_cols, index + 1)
+        plt.imshow(face, cmap="gray")
+        plt.axis("off")
+        plt.title(label)                              # 제목 = 실제 사람 번호
+    plt.show()
+
+for cluster_id in np.unique(best_model.labels_):
+    in_cluster = best_model.labels_ == cluster_id
+    plot_faces(X_train[in_cluster], y_train[in_cluster])
+```
+
+| 군집 0 (10장) | 군집 1 (4장) |
+|---|---|
+| ![군집 0](images/08/nb_ex10_cluster0.png) | ![군집 1](images/08/nb_ex10_cluster1.png) |
+
+(사진 위 숫자 = 실제 사람 번호. 노트북은 75개 군집을 모두 출력하는데, 여기서는 처음 두 개만 옮겼다.)
+
+- 군집 0: 38번 7장 + 28번 3장 → **침입자**가 섞인 군집
+- 군집 1: 20번 4장 → 같은 사람만 모인 깨끗한 군집
+- 노트북 평가: 군집 3개 중 약 2개는 "같은 사람 2장 이상"인 쓸 만한 군집. 나머지는 침입자가 있거나 1장뿐
+
+> 💡 이 정도 정확도로는 분류기 학습에 바로 쓰기 어렵지만, **새 데이터에 레이블을 달 때** 군집 단위로 보여 주면 작업이 훨씬 빨라진다 (1-9의 대표 샘플 아이디어).
+
+### 3-3. 11번 — 군집을 분류 전처리로
+
+> 🎯 **목적** — "각 군집 중심까지의 거리"를 특성으로 쓰면 얼굴 인식(사람 40명 분류)이 좋아지는지 확인한다.
+
+**코드**
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import make_pipeline
+
+# (a) 기준: PCA 특성 199개
+clf = RandomForestClassifier(n_estimators=150, random_state=42)
+clf.fit(X_train_pca, y_train)
+clf.score(X_valid_pca, y_valid)                       # 0.9375
+
+# (b) PCA 대신 k-평균 거리 특성 75개
+X_train_reduced = best_model.transform(X_train_pca)   # (280, 75): 각 중심까지 거리
+X_valid_reduced = best_model.transform(X_valid_pca)
+X_test_reduced = best_model.transform(X_test_pca)
+clf = RandomForestClassifier(n_estimators=150, random_state=42)
+clf.fit(X_train_reduced, y_train)
+clf.score(X_valid_reduced, y_valid)                   # 0.7375
+
+# (c) k를 바꿔 가며 (b)를 반복 — 검증 세트가 있으므로 GridSearchCV 없이 반복문으로
+for n_clusters in k_range:
+    pipeline = make_pipeline(
+        KMeans(n_clusters=n_clusters, random_state=42),
+        RandomForestClassifier(n_estimators=150, random_state=42))
+    pipeline.fit(X_train_pca, y_train)
+    print(n_clusters, pipeline.score(X_valid_pca, y_valid))
+
+# (d) PCA 특성 + 거리 특성을 옆으로 붙이기
+X_train_extended = np.c_[X_train_pca, X_train_reduced]   # (280, 199 + 75)
+X_valid_extended = np.c_[X_valid_pca, X_valid_reduced]
+X_test_extended = np.c_[X_test_pca, X_test_reduced]
+clf = RandomForestClassifier(n_estimators=150, random_state=42)
+clf.fit(X_train_extended, y_train)
+clf.score(X_valid_extended, y_valid)                  # 0.85
+```
+
+| 코드 | 의미 |
+|---|---|
+| `best_model.transform(X)` | `KMeans.transform` = 각 샘플에서 **모든 중심까지의 거리** `(샘플 수, k)` (1-2의 소프트 군집) |
+| `make_pipeline(KMeans, RandomForest)` | 파이프라인 안에서 `KMeans`는 변환기 역할 → `transform` 결과가 분류기 입력이 된다 |
+| `np.c_[A, B]` | 열 방향으로 붙이기 (`np.hstack`과 같음) |
+
+**결과 해석**
+
+| 입력 특성 | 검증 정확도 |
+|---|---|
+| (a) PCA 199개 | **0.9375** |
+| (b) 거리 75개 (k=75) | 0.7375 |
+| (c) 거리 k개, k = 5~145 탐색 | 최고 0.80 (k=140). k=5에서 0.40, k=50에서 0.69 |
+| (d) PCA 199개 + 거리 75개 | 0.85 |
+
+- 군집 거리 특성은 어떤 k로도 원래 특성을 이기지 못했다 → 중심까지의 거리가 원래 이미지보다 정보가 적다
+- 붙여서 쓰는 (d)도 기준보다 낮다 → 이 문제에서는 군집 특성이 **잡음**으로 작용
+- 군집 특성이 항상 도움이 되는 건 아니다. 2장의 `ClusterSimilarity`처럼 **특성과 타깃 사이에 지리적·구조적 관계가 있을 때** 효과가 있다
+
+### 3-4. 12번 — 가우스 혼합으로 얼굴 생성과 이상치 탐지
+
+> 🎯 **목적** — 가우스 혼합을 **생성 모델**(새 얼굴 만들기)과 **이상치 탐지기**(이상한 사진 찾기)로 써 본다.
+
+**코드: 학습과 새 얼굴 생성**
+
+```python
+from sklearn.mixture import GaussianMixture
+
+gm = GaussianMixture(n_components=40, random_state=42)
+y_pred = gm.fit_predict(X_train_pca)                 # PCA 199차원에서 학습 (4,096차원은 너무 느림)
+
+n_gen_faces = 20
+gen_faces_reduced, y_gen_faces = gm.sample(n_samples=n_gen_faces)   # 199차원 샘플 + 뽑힌 군집 번호
+gen_faces = pca.inverse_transform(gen_faces_reduced)               # 4,096차원 이미지로 복원
+plot_faces(gen_faces, y_gen_faces)
+```
+
+![가우스 혼합이 생성한 얼굴](images/08/nb_ex12_generated_faces.png)
+
+(사진 위 숫자 = 샘플을 뽑은 **가우스 성분 번호**. 사람 번호가 아니다.)
+
+- 훈련 사진을 그대로 꺼낸 게 아니라 각 성분의 분포에서 **새로 뽑은 점**을 이미지로 되돌린 것
+- 같은 성분 번호(예: 33, 33, 33)끼리 같은 사람처럼 보인다 → 성분 하나가 대략 한 사람의 얼굴 분포를 맡았다
+- 다만 일부는 흐릿하거나 두 얼굴이 겹친 듯 보인다 → 280장으로 199차원 분포 40개를 추정하기엔 데이터가 적다
+
+**코드: 이상한 사진 만들기**
+
+```python
+n_rotated = 4
+rotated = np.transpose(X_train[:n_rotated].reshape(-1, 64, 64), axes=[0, 2, 1])  # 행↔열 교환 = 90° 회전 + 뒤집기
+rotated = rotated.reshape(-1, 64*64)
+y_rotated = y_train[:n_rotated]
+
+n_flipped = 3
+flipped = X_train[:n_flipped].reshape(-1, 64, 64)[:, ::-1]    # 행 순서 반전 = 상하 뒤집기
+flipped = flipped.reshape(-1, 64*64)
+y_flipped = y_train[:n_flipped]
+
+n_darkened = 3
+darkened = X_train[:n_darkened].copy()
+darkened[:, 1:-1] *= 0.3                                       # 첫·끝 픽셀 빼고 밝기 30%
+y_darkened = y_train[:n_darkened]
+
+X_bad_faces = np.r_[rotated, flipped, darkened]
+y_bad = np.concatenate([y_rotated, y_flipped, y_darkened])
+plot_faces(X_bad_faces, y_bad)
+```
+
+![회전·뒤집기·어둡게 한 얼굴](images/08/nb_ex12_bad_faces.png)
+
+(10장 순서: 회전 4장(첫 줄 1~4번째) → 상하 뒤집기 3장(첫 줄 5번째 ~ 둘째 줄 2번째) → 어둡게 3장(둘째 줄 3~5번째). 숫자 = 사람 번호.)
+
+| 코드 | 의미 |
+|---|---|
+| `np.transpose(a, axes=[0, 2, 1])` | 0번 축(이미지 번호)은 그대로, 1·2번 축(행·열)을 맞바꿈 → 전치 = 대각선 기준 뒤집기 |
+| `[:, ::-1]` | 두 번째 축(행)을 역순으로 → 위아래 뒤집기 |
+| `darkened[:, 1:-1] *= 0.3` | 4,096개 픽셀 중 양 끝 하나씩만 빼고 모두 어둡게. `.copy()`가 없으면 원본 `X_train`이 바뀐다 |
+
+**코드: 밀도 비교**
+
+```python
+X_bad_faces_pca = pca.transform(X_bad_faces)
+gm.score_samples(X_bad_faces_pca)       # 이상한 사진 10장의 로그 밀도
+# [-1.86e+07, -1.73e+07, -4.15e+07, -4.81e+07, -3.20e+07,
+#  -1.35e+07, -2.92e+07, -9.25e+07, -1.03e+08, -5.42e+07]
+
+gm.score_samples(X_train_pca[:10])      # 정상 훈련 사진 10장
+# [1163.0, 1112.2, 1156.3, 1170.7, 1073.7, 1139.9, 1113.8, 1073.7, 1048.2, 1048.2]
+```
+
+**결과 해석**
+
+| 사진 | 로그 밀도 `score_samples` |
+|---|---|
+| 정상 훈련 사진 | 약 +1,050 ~ +1,170 |
+| 이상한 사진 | 약 −1,350만 ~ −1억 |
+
+- 차이가 수천만 배(로그 스케일로!) → 밀도 임곗값 하나로 완벽히 구분 (2-4의 방법)
+- 로그 밀도가 **양수**인 것은 이상하지 않다. 확률 밀도는 1보다 클 수 있고(199차원 좁은 영역에 몰려 있음), 확률(0~1)과 달리 로그가 양수가 될 수 있다
+
+### 3-5. 13번 — PCA 재구성 오차로 이상치 탐지
+
+> 🎯 **목적** — 차원 축소 모델의 **재구성 오차**를 이상치 점수로 쓴다 (7장 3-6의 압축·복원을 응용).
+
+**코드**
+
+```python
+def reconstruction_errors(pca, X):
+    X_pca = pca.transform(X)                          # 4,096 → 199
+    X_reconstructed = pca.inverse_transform(X_pca)    # 199 → 4,096
+    mse = np.square(X_reconstructed - X).mean(axis=-1)   # 이미지별 픽셀 평균 제곱 오차
+    return mse
+
+reconstruction_errors(pca, X_train).mean()        # 0.00019205351
+reconstruction_errors(pca, X_bad_faces).mean()    # 0.004707354
+
+X_bad_faces_reconstructed = pca.inverse_transform(X_bad_faces_pca)
+plot_faces(X_bad_faces_reconstructed, y_bad)
+```
+
+![이상한 얼굴의 PCA 재구성](images/08/nb_ex13_reconstructed.png)
+
+(위 "이상한 사진" 10장을 PCA 199차원으로 줄였다가 되돌린 결과.)
+
+**결과 해석**
+
+| 데이터 | 평균 재구성 오차 (MSE) |
+|---|---|
+| 정상 훈련 사진 | 0.00019 |
+| 이상한 사진 | **0.0047** (약 25배) |
+
+- PCA 199개 축은 **정상 얼굴**의 분산을 99% 설명하도록 학습됐다 → 정상 얼굴은 거의 완벽히 복원
+- 회전·뒤집힌 얼굴은 그 축들로 표현할 수 없어서, 복원 결과가 **정상 얼굴처럼 보이려는 흐릿한 유령 이미지**가 된다 → 오차가 크다
+- 재구성 오차 = 학습 없이 쓸 수 있는 간단한 이상치 점수. 18장의 오토인코더가 같은 아이디어를 신경망으로 확장한다
+
+> 📌 **정리**
+>
+> | 연습문제 | 핵심 교훈 |
+> |---|---|
+> | 10 | 실루엣 최적 k(75)가 실제 사람 수(40)와 다를 수 있다. 군집은 레이블링 보조 도구로 유용 |
+> | 11 | 군집 거리 특성이 항상 도움이 되진 않는다 (0.9375 → 0.85) |
+> | 12 | 가우스 혼합 = 생성 모델 + 밀도 기반 이상치 탐지기 |
+> | 13 | 재구성 오차도 이상치 점수가 된다 |
+
+---
+
+## 4. 정리
+
+### 4-1. 전체 흐름
 
 ```
 [8.1 군집]
@@ -1604,9 +2044,15 @@ GaussianMixture(n_components, n_init)   ← EM 알고리즘, 타원형 군집
   ├ 이상치 탐지: score_samples < 하위 N% 임곗값
   ├ k 선택: bic() / aic() 최소
   └ BayesianGaussianMixture             ← 불필요한 군집 가중치 → 0
+
+[8.3 연습문제 — 올리베티 얼굴]
+PCA(0.99) → KMeans(k=75)                ← 실루엣 최적 k ≠ 사람 수 40
+  ├ 군집 거리 특성으로 분류              ← 0.9375 → 0.85 (도움 안 됨)
+  ├ GaussianMixture.sample()            ← 새 얼굴 생성
+  └ 이상치: score_samples / PCA 재구성 오차
 ```
 
-### 3-2. 개념과 코드 대응
+### 4-2. 개념과 코드 대응
 
 | 단계 | 핵심 코드 | 핵심 원칙 |
 |---|---|---|
@@ -1620,7 +2066,7 @@ GaussianMixture(n_components, n_init)   ← EM 알고리즘, 타원형 군집
 | 이상치 탐지 | `score_samples` + `np.percentile` | 밀도가 낮은 샘플 = 이상치 |
 | 군집 수 선택 | `bic()`, `aic()`, `BayesianGaussianMixture` | 정보 기준 최소 / 불필요한 군집 가중치 → 0 |
 
-### 3-3. 알고리즘 비교
+### 4-3. 알고리즘 비교
 
 | 알고리즘 | 군집 수 지정 | 군집 모양 | 이상치 처리 | 새 샘플 예측 | 대규모 데이터 |
 |---|---|---|---|---|---|
@@ -1629,7 +2075,15 @@ GaussianMixture(n_components, n_init)   ← EM 알고리즘, 타원형 군집
 | 가우스 혼합 | 필요 (BIC/AIC) | 타원형 | ○ (밀도 임곗값) | `predict()`, `predict_proba()` | △ (full은 특성 수에 민감) |
 | 베이즈 가우스 혼합 | 상한만 | 타원형 | ○ | `predict()` | △ |
 
-### 3-4. 주요 결과
+![k-평균, 가우스 혼합, DBSCAN 비교](images/08/extra_algorithm_comparison.png)
+
+(보충 그림. 이 장의 두 데이터(1-7의 길쭉한 덩어리 3개, 1-10의 초승달)에 세 알고리즘을 그대로 적용했다. 검은 × = DBSCAN의 이상치.)
+
+- 길쭉한 덩어리: **가우스 혼합이** 세 타원을 가장 정확히 맞힌다. k-평균도 얼핏 비슷하지만 경계가 직선(수직이등분선)이라 가운데 덩어리의 오른쪽 끝을 오른쪽 군집에 넘겨준다(1-7과 같은 문제). DBSCAN은 가운데 덩어리와 오른쪽 덩어리가 이어진 것으로 보고 하나로 합치며, 밀도가 낮은 가장자리를 이상치로 버린다
+- 초승달: **DBSCAN만** 정확하다. k-평균·가우스 혼합은 둘 다 볼록한 덩어리를 가정해서 초승달을 가로질러 자른다
+- → 위 표의 "군집 모양" 열이 그대로 드러난다. 데이터 모양을 먼저 보고 알고리즘을 고른다
+
+### 4-4. 주요 결과
 
 | 실험 | 지표 | 값 |
 |---|---|---|
@@ -1646,8 +2100,11 @@ GaussianMixture(n_components, n_init)   ← EM 알고리즘, 타원형 군집
 | 숫자, 정답 1,400개 (참고) | 테스트 정확도 | 0.909 |
 | 가우스 혼합 k=3 | BIC / AIC / 파라미터 수 | 8189.7 / 8102.5 / 17 |
 | 베이즈 가우스 혼합 (10개 설정) | 남은 군집 | 3개 (0.40 / 0.21 / 0.39) |
+| 올리베티, PCA + k-평균 | 실루엣 최적 k | 75 |
+| 올리베티, 랜덤 포레스트 | 검증 정확도: PCA / 거리 특성 / 둘 다 | **0.9375** / 0.7375 / 0.85 |
+| 올리베티, 재구성 오차 | 정상 / 이상한 사진 | 0.00019 / 0.0047 |
 
-### 3-5. 자주 쓴 코드 패턴
+### 4-5. 자주 쓴 코드 패턴
 
 | 패턴 | 용도 | 위치 |
 |---|---|---|
@@ -1663,7 +2120,7 @@ GaussianMixture(n_components, n_init)   ← EM 알고리즘, 타원형 군집
 | `knn.kneighbors(X, n_neighbors=1)` + 거리 임곗값 | 거리 기반 이상치 판정 | 1-10 |
 | `np.exp(score_samples())` | 로그 밀도 → 밀도 | 2-2 |
 
-### 3-6. 핵심 원칙
+### 4-6. 핵심 원칙
 
 1. 비지도 학습은 레이블 없이 `X`만으로 구조(군집·밀도)를 찾는다.
 2. k-평균은 빠르고 단순하지만 원형·비슷한 크기의 군집을 가정한다. 특성 스케일링이 필수다.

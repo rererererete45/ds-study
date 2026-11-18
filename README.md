@@ -62,7 +62,7 @@
 | [5장](ml/05_decision_trees.md) | 결정 트리 | export_graphviz, 지니 불순도, predict_proba, CART 비용 함수, 계산 복잡도, 엔트로피, 규제(max_depth·min_samples_leaf), DecisionTreeRegressor, 축 방향 민감성·PCA, 분산 문제, tree_ 구조, 다수결 숲 |
 | [6장](ml/06_ensemble_learning_and_random_forests.md) | 앙상블 학습과 랜덤 포레스트 | 큰 수의 법칙, 직접·간접 투표, 배깅·페이스팅, OOB 평가, 랜덤 패치·서브스페이스, 랜덤 포레스트, 엑스트라 트리, 특성 중요도, AdaBoost, 그레이디언트 부스팅(축소·조기 종료), HistGradientBoosting, 스태킹 |
 | [7장](ml/07_dimensionality_reduction.md) | 차원 축소 | 차원의 저주, 투영·매니폴드 학습, PCA(SVD), 설명된 분산 비율, 압축, 랜덤·점진적 PCA, 랜덤 투영(존슨–린덴슈트라우스), LLE, MDS·Isomap·t-SNE, 커널 PCA |
-| [8장](ml/08_unsupervised_learning.md) | 비지도 학습 | k-평균, 이너셔, k-평균++, 미니배치 k-평균, 엘보·실루엣, 이미지 분할, 준지도 학습(레이블 전파), DBSCAN, 가우스 혼합(EM), covariance_type, 이상치 탐지, BIC·AIC, 베이즈 가우스 혼합 |
+| [8장](ml/08_unsupervised_learning.md) | 비지도 학습 | k-평균, 이너셔, k-평균++, 미니배치 k-평균, 엘보·실루엣, 이미지 분할, 준지도 학습(레이블 전파), DBSCAN, 가우스 혼합(EM), covariance_type, 이상치 탐지, BIC·AIC, 베이즈 가우스 혼합, 올리베티 얼굴(군집 특성·얼굴 생성·재구성 오차) |
 | [9장](ml/09_artificial_neural_networks.md) | 인공 신경망 소개 | 인공 뉴런·논리 연산, TLU, 퍼셉트론 학습 규칙, XOR 문제, 다층 퍼셉트론(MLP), 역전파, 활성화 함수(시그모이드·tanh·ReLU), MLPRegressor, MLPClassifier, 패션 MNIST, 조기 종료, 과잉 확신, 은닉 층 수·뉴런 수·학습률·배치 크기 |
 | [10장](ml/10_neural_nets_with_pytorch.md) | 파이토치로 신경망 구축하기 | 텐서, 하드웨어 가속(GPU), autograd, 훈련 루프, nn.Linear·nn.Sequential, 옵티마이저(SGD), DataLoader, 미니배치 경사 하강법, torchmetrics, 학습 곡선, nn.Module(와이드 & 딥·다중 입력·다중 출력), 토치비전, CrossEntropyLoss(로짓), Optuna(TPE·가지치기), state_dict, TorchScript, torch.compile |
 | [11장](ml/11_training_deep_neural_networks.md) | 심층 신경망 훈련 | 그레이디언트 소실·폭주, 글로럿·He·르쿤 초기화, LeakyReLU·ELU·SELU·GELU·Swish·Mish, 배치 정규화·층 정규화, 그레이디언트 클리핑, 전이 학습(동결·미세 튜닝), 모멘텀·네스테로프·AdaGrad·RMSProp·Adam·AdamW, 학습률 스케줄링(지수·성능 기반·웜업·코사인·1사이클), ℓ1·ℓ2 규제·가중치 감쇠, 드롭아웃, MC 드롭아웃, 맥스-노름, 조기 종료, CIFAR10 |
@@ -98,4 +98,6 @@
 | > 💡 | 이해를 돕는 통찰·연결 |
 | > ⚠️ | 주의할 점, 버전 차이 |
 | > ✅ | 실험 결과 확인 |
+| 그림 `nb_…` / `fig…` | 노트북 출력 그림. 그림 아래 괄호 = 축·색·기호 읽는 법 |
+| 그림 `extra_…` | 노트북에 없지만 개념 이해를 위해 직접 만든 보충 그림 |
 | 보충 코드 | 노트북에 없지만 개념 확인용으로 직접 만든 코드 |

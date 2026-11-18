@@ -238,6 +238,16 @@ housing_full.hist(bins=50, figsize=(12, 8))       # 수치형 열 히스토그�
 plt.show()
 ```
 
+![수치형 특성 히스토그램](images/02/nb_histograms.png)
+
+(가로축 = 특성 값, 세로축 = 그 구간에 속한 구역 수. 9개 수치형 열을 한 번에 그린다.)
+
+그림에서 읽을 것:
+
+- **`housing_median_age`, `median_house_value`의 오른쪽 끝 막대가 솟아 있다** → 52년, $500,001에서 값이 잘린(상한 처리된) 흔적
+- **`total_rooms`, `population`, `households` 등은 왼쪽에 몰리고 꼬리가 오른쪽으로 길다** → 평균·표준편차가 꼬리에 끌려간다. 4-5에서 로그 변환
+- **`longitude`, `latitude`는 봉우리가 두 개** → 베이 에어리어(위도 ≈ 37.5~38)와 LA(위도 ≈ 34) 두 대도시권
+
 **결과 해석**
 
 `info()`:
@@ -402,6 +412,11 @@ cat_counts = housing_full["income_cat"].value_counts().sort_index()
 cat_counts.plot.bar(rot=0, grid=True)
 ```
 
+![소득 카테고리 히스토그램](images/02/nb_income_cat.png)
+
+- 계층 2·3에 대부분이 몰려 있고, 계층 1(소득 1.5 이하)은 약 800개뿐이다
+- 무작위 분할에서 가장 흔들리기 쉬운 것이 바로 이 **작은 계층** → 아래 효과 검증 표에서 계층 1의 무작위 오차가 6.45%로 가장 크다
+
 | 구간 | (0, 1.5] | (1.5, 3] | (3, 4.5] | (4.5, 6] | (6, ∞) |
 |---|---|---|---|---|---|
 | 계층 | 1 | 2 | 3 | 4 | 5 |
@@ -502,6 +517,23 @@ housing.plot(kind="scatter", x="longitude", y="latitude", grid=True,            
 | (b) | 위치 + 투명도 0.2 | 샘플 밀집 지역 |
 | (c) | 위치 + 크기(`s`=인구/100) + 색(`c`=집값, `cmap="jet"`) | 집값의 공간 분포 |
 
+| (a) 점만 찍기 | (b) `alpha=0.2` |
+|---|---|
+| ![위경도 산점도](images/02/nb_geo_scatter.png) | ![투명도를 준 산점도](images/02/nb_geo_scatter_alpha.png) |
+
+- (a)는 점이 겹쳐 어디가 붐비는지 알 수 없다. (b)처럼 투명도를 주면 **겹친 곳일수록 진해져** 밀도가 드러난다 — 베이 에어리어, LA·샌디에이고, 센트럴 밸리(새크라멘토~프레즈노를 잇는 띠)
+
+(c) 원 크기 = 인구, 색 = 집값
+
+![집값과 인구](images/02/nb_geo_price_population.png)
+
+노트북의 추가 코드는 같은 그림을 캘리포니아 지도 이미지 위에 겹친다 (`plt.imshow(california_img, extent=axis)` — 이미지를 위경도 범위에 맞춰 배경으로 깔기).
+
+![캘리포니아 지도 위 집값](images/02/nb_geo_california_map.png)
+
+- 빨간 점(비싼 구역)은 **바닷가**에 붙어 있고, 내륙으로 갈수록 파랗다 → `ocean_proximity`가 유용할 것
+- 다만 북부 해안은 바닷가여도 파랗다 → "바다와의 거리"만으로는 부족하고 **대도시와의 거리**가 함께 작용
+
 **결과 해석**
 - 해안 및 대도시(베이 에어리어, LA, 샌디에이고) 주변에서 집값이 높다
 - 가설: "인구 밀집 중심까지의 거리"가 유용한 특성이다 → 4-7의 `ClusterSimilarity`로 구현
@@ -540,6 +572,18 @@ scatter_matrix(housing[attributes], figsize=(12, 8))   # 4×4 산점도 행렬 (
 housing.plot(kind="scatter", x="median_income", y="median_house_value",
              alpha=0.1, grid=True)
 ```
+
+![산점도 행렬](images/02/nb_scatter_matrix.png)
+
+(행 = 세로축 특성, 열 = 가로축 특성. 대각선은 자기 자신과의 산점도 대신 히스토그램.)
+
+- 첫 행(집값)에서 **`median_income` 칸만 오른쪽 위로 뚜렷하게 올라가는** 모양 → 상관계수 0.688과 일치
+- `total_rooms`, `housing_median_age` 칸은 구름처럼 퍼져 있다 → 선형 관계가 약하다
+
+![중간 소득 대 중간 주택 가격](images/02/nb_income_vs_value.png)
+
+- 위로 갈수록 점이 퍼지지만 전체적으로 상승 추세가 분명하다
+- **$500,000의 수평선**: 상한 처리된 값. 그 아래 $450,000, $350,000, $280,000 근처에도 희미한 수평선이 보인다
 
 **결과 해석**
 
@@ -822,6 +866,14 @@ housing_num_std_scaled = std_scaler.fit_transform(housing_num)
 > - 기본은 `StandardScaler`
 > - 스케일러도 훈련 세트로만 `fit`
 
+![스케일러와 분포 모양](images/02/extra_scalers_heavy_tail.png)
+
+(보충 그림. 로그정규 분포에서 뽑은 가상 데이터 2,000개 + 큰 이상치 5개.)
+
+- **MinMaxScaler**: 최댓값이 이상치(35,000)로 정해지므로 나머지 값이 전부 −1 근처로 눌린다
+- **StandardScaler**: 평균·표준편차로 나눌 뿐이라 **꼬리 모양은 그대로**
+- **로그 → StandardScaler**: 모양 자체를 바꾼 뒤 표준화 → 종 모양. 다음 4-5의 내용
+
 ### 4-5. 분포 변환
 
 > 🎯 **목적** — 스케일링 전에 분포의 **모양**을 다듬는다. 스케일러는 위치·크기만 바꾸고 모양은 바꾸지 못한다.
@@ -851,6 +903,11 @@ housing["population"].hist(ax=axs[0], bins=50)
 housing["population"].apply(np.log).hist(ax=axs[1], bins=50)
 ```
 
+![인구의 로그 변환](images/02/nb_log_population.png)
+
+- 왼쪽(원본): 대부분 0~5,000에 몰리고 35,000까지 꼬리가 길다
+- 오른쪽(로그): 종 모양에 가까워진다 → 이 상태에서 표준화해야 의미 있는 스케일이 된다
+
 **코드: 백분위 버킷화**
 
 ```python
@@ -860,12 +917,23 @@ flattened_median_income = pd.cut(housing["median_income"],
                                  labels=range(1, 100 + 1))   # 100개 구간, 각 1% → 균등
 ```
 
+![소득 백분위 버킷](images/02/nb_income_percentile.png)
+
+- 버킷 번호(1~100)의 히스토그램은 높이가 모두 약 330(16,512 / 100)으로 **평평**하다 → 원래 분포 모양과 상관없이 균등 분포가 된다
+
 **코드: RBF 유사도**
 
 ```python
 from sklearn.metrics.pairwise import rbf_kernel
 age_simil_35 = rbf_kernel(housing[["housing_median_age"]], [[35]], gamma=0.1)
 ```
+
+![주택 연식과 RBF 유사도](images/02/nb_age_rbf.png)
+
+(막대 = 주택 연식 히스토그램(왼쪽 축), 곡선 = 35년과의 RBF 유사도(오른쪽 축).)
+
+- 실선($\gamma$ = 0.10)은 35년에서 1, 30년·40년 근처면 이미 0.1 아래로 떨어진다
+- 점선($\gamma$ = 0.03)은 더 넓게 퍼진다 → $\gamma$는 "얼마나 가까워야 비슷하다고 볼지"의 폭
 
 `housing_median_age`의 봉우리(35년) 근접도를 새 특성으로 만든다. 단순 모델도 "특정 연식대의 효과"를 표현할 수 있게 된다.
 
@@ -1020,6 +1088,13 @@ similarities[:3].round(2)
 
 **결과 해석**: 첫 샘플은 7번 군집 중심에 거의 위치(0.99), 9번과도 가까움(0.6).
 
+![군집 중심과 RBF 유사도](images/02/nb_cluster_similarity.png)
+
+(× = k-평균으로 찾은 군집 중심 10개, 색 = 가장 가까운 중심과의 유사도. 빨강일수록 중심 가까이.)
+
+- 군집 중심이 베이 에어리어, LA, 샌디에이고 같은 **구역 밀집 지역**에 자리 잡는다 — k-평균은 모든 구역과 가장 가까운 중심 사이의 거리를 줄이므로, 구역이 많은 곳에 중심이 몰린다 (노트북은 `sample_weight` 없이 학습. 집값을 가중치로 주면 비싼 지역 쪽으로 더 끌린다)
+- 3-1에서 세운 가설 "인구 중심까지의 거리"를 숫자 특성 10개로 바꾼 것
+
 | 하이퍼파라미터 | 의미 | 튜닝 대상 |
 |---|---|---|
 | `n_clusters` | 군집 중심 수 = 생성 특성 수 | O (6장 그리드 서치) |
@@ -1167,6 +1242,10 @@ preprocessing.get_feature_names_out()
 | remainder | housing_median_age | 1 | `remainder__housing_median_age` |
 | **합계** | | **24** | |
 
+![전처리 파이프라인 구조](images/02/extra_preprocessing_pipeline.png)
+
+(보충 그림. 위 `ColumnTransformer`의 7개 단계를 그림으로 옮겼다. 같은 원본 열(예: `total_rooms`)이 여러 단계에 동시에 들어갈 수 있다.)
+
 > 📌 **정리**
 > - 원본 DataFrame → `preprocessing` → 24차원 특성 행렬
 > - 이름 규칙 `단계__원래이름`으로 모든 특성 추적 가능
@@ -1302,6 +1381,10 @@ forest_rmse = root_mean_squared_error(housing_labels, housing_predictions)
 | 결정 트리 | 0 | 66,574 | 매우 큼 | 심한 과대적합 |
 | 랜덤 포레스트 | 17,551 | 47,038 | 큼 | 과대적합 (가장 우수) |
 
+![k-폴드 교차 검증과 모델 진단](images/02/extra_kfold_and_diagnosis.png)
+
+(보충 그림. 왼쪽: 5-폴드 교차 검증 개념도. 오른쪽: 위 표의 수치를 막대로 다시 그림. 검증 RMSE의 오차 막대는 10-폴드 표준편차.)
+
 > 📌 **정리**
 > - 모델 비교는 교차 검증 점수로
 > - 이 단계 목표: 하이퍼파라미터를 깊게 조정하지 않고 유망 모델 2~5개 선정
@@ -1399,6 +1482,17 @@ cv_res[score_cols] = -cv_res[score_cols].round().astype(np.int64)
 | `expon(scale)` | 실수, 위와 동일 |
 | `loguniform(a, b)` | 스케일 자체를 모를 때 (각 자릿수 구간을 동일 확률로 탐색) |
 
+![하이퍼파라미터 분포](images/02/nb_random_search_dists.png)
+
+(위: 균등 분포 — 이산 `randint`, 연속 `uniform`. 아래: 작은 값에 더 많은 확률 — 이산 `geom`, 연속 `expon`.)
+
+![expon과 loguniform 비교](images/02/nb_loguniform.png)
+
+(위: `expon(scale=1)`과, 그 값의 로그를 취한 분포. 아래: `loguniform(0.001, 1000)`과 그 로그 분포.)
+
+- `loguniform`은 원래 축에서 보면 0 근처에 몰려 있지만, **로그 축에서는 평평하다** → 0.001~0.01, 0.01~0.1, …, 100~1000 각 자릿수 구간을 같은 확률로 뽑는다
+- `expon`은 로그 축에서 한쪽에 봉우리가 있다 → "대략 이 스케일"을 알 때 적합
+
 **코드**
 
 ```python
@@ -1459,6 +1553,10 @@ sorted(zip(feature_importances,
 
 - 특성 공학으로 만든 특성이 상위권 → 탐색 단계 가설이 유효했음
 - `ocean_proximity` 중 INLAND만 중요 → 나머지 범주 제거 검토 가능
+
+![특성 중요도 상위 6개](images/02/extra_feature_importance.png)
+
+(보충 그림. 위 표의 상위 6개를 막대로 그렸다. 색 = 특성의 출처.)
 
 ### 6-4. 테스트 세트 평가
 
