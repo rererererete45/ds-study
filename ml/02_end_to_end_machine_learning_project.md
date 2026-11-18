@@ -1683,6 +1683,8 @@ predictions = final_model_reloaded.predict(new_data)
 
 > 🎯 **목적** — 다른 계열 모델(서포트 벡터 회귀)의 성능을 확인한다.
 
+> 📎 **SVM을 처음 본다면** — 서포트 벡터 머신(마진, `C`, 커널, `gamma`)은 [부록 C](C_support_vector_machines.md)에 정리했다.
+
 ```python
 from sklearn.svm import SVR
 

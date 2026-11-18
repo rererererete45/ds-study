@@ -1579,7 +1579,7 @@ history_rmsprop, acc_rmsprop = test_optimizer(model, optimizer)
 \mathbf{m} &\leftarrow \beta_1\,\mathbf{m} - (1 - \beta_1)\,\nabla_{\boldsymbol{\theta}}J(\boldsymbol{\theta})
 &\qquad&\text{(1) 1차 모멘트 — 평균}\\
 \mathbf{s} &\leftarrow \beta_2\,\mathbf{s} + (1 - \beta_2)\,\nabla_{\boldsymbol{\theta}}J(\boldsymbol{\theta}) \otimes \nabla_{\boldsymbol{\theta}}J(\boldsymbol{\theta})
-&\qquad&\text{(2) 2차 모멘트 — 분산}\\
+&\qquad&\text{(2) 2차 모멘트 — 제곱의 평균}\\
 \hat{\mathbf{m}} &\leftarrow \frac{\mathbf{m}}{1 - \beta_1^{\,t}}
 \qquad
 \hat{\mathbf{s}} \leftarrow \frac{\mathbf{s}}{1 - \beta_2^{\,t}}
@@ -1588,6 +1588,8 @@ history_rmsprop, acc_rmsprop = test_optimizer(model, optimizer)
 &\qquad&\text{(5) 갱신}
 \end{aligned}
 ```
+
+> ⚠️ 표기 메모 — (1)은 교재 관례대로 그레이디언트에 **음의 부호**를 붙여 누적하므로 (5)에서 **더한다**(결과는 "그레이디언트 반대 방향"으로 같다). (2)의 $\mathbf{s}$는 평균을 빼지 않은 **제곱의 평균**(중심화되지 않은 2차 모멘트)이라 엄밀히는 분산이 아니다. 원 논문과 파이토치는 $\varepsilon$을 제곱근 **밖**에 둔다($\hat{\mathbf{m}} \oslash (\sqrt{\hat{\mathbf{s}}} + \varepsilon)$). $\varepsilon$이 아주 작아서 실제 차이는 거의 없다.
 
 | 기호 | 의미 | 기본값 |
 |---|---|---|

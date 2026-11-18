@@ -326,6 +326,68 @@ assert np.allclose(X_centered, U @ Σ @ Vt)   # 원래대로 복원되는지 검
 
 > 💡 주성분의 **부호**는 실행할 때마다 뒤집힐 수 있다(c₁ 대신 −c₁). 방향만 같으면 같은 축. 결과를 비교할 때 주의.
 
+**왜 SVD의 $V$가 "분산이 가장 큰 방향"인가** (보충 유도)
+
+1. 중앙 정렬한 데이터 $\mathbf{X}$(행 = 샘플)를 단위 벡터 $\mathbf{w}$($\lVert\mathbf{w}\rVert = 1$) 위로 투영하면 좌표는 $\mathbf{X}\mathbf{w}$. 그 분산은
+
+```math
+\operatorname{Var}(\mathbf{X}\mathbf{w}) = \frac{1}{m-1}\lVert\mathbf{X}\mathbf{w}\rVert^2 = \mathbf{w}^\top \mathbf{C}\,\mathbf{w}, \qquad \mathbf{C} = \frac{1}{m-1}\mathbf{X}^\top\mathbf{X}\ \ (\text{공분산 행렬})
+```
+
+2. $\mathbf{w}^\top\mathbf{w} = 1$ 조건에서 이를 최대화한다. 라그랑주 함수 $\mathbf{w}^\top\mathbf{C}\mathbf{w} - \lambda(\mathbf{w}^\top\mathbf{w} - 1)$을 $\mathbf{w}$로 미분해 0으로 두면
+
+```math
+\mathbf{C}\,\mathbf{w} = \lambda\,\mathbf{w} \quad\Longrightarrow\quad \operatorname{Var}(\mathbf{X}\mathbf{w}) = \mathbf{w}^\top\mathbf{C}\mathbf{w} = \lambda
+```
+
+   → 해는 공분산 행렬의 **고유벡터**이고, 그 방향의 분산이 **고윳값**이다. 분산이 가장 큰 방향 = 고윳값이 가장 큰 고유벡터 = 첫 번째 주성분. 두 번째 주성분은 첫 번째와 직교한다는 조건을 더해 같은 과정을 반복하면 두 번째로 큰 고윳값의 고유벡터가 나온다
+
+3. SVD $\mathbf{X} = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^\top$를 대입하면 ($\mathbf{U}^\top\mathbf{U} = \mathbf{I}$)
+
+```math
+\mathbf{X}^\top\mathbf{X} = \mathbf{V}\boldsymbol{\Sigma}^2\mathbf{V}^\top \quad\Longrightarrow\quad \mathbf{C}\,\mathbf{V} = \mathbf{V}\,\frac{\boldsymbol{\Sigma}^2}{m-1}
+```
+
+   → $\mathbf{V}$의 열(= `Vt`의 행)이 $\mathbf{C}$의 고유벡터이고, 고윳값은 $s_i^2 / (m-1)$. 그래서 SVD만 하면 주성분과 각 방향의 분산을 한 번에 얻는다
+
+4. 설명된 분산 비율(3-4절)은 $s_i^2 / \sum_j s_j^2$
+
+**보충 코드** — 2-1절의 3D 데이터로 세 가지가 모두 같은 값을 주는지 확인
+
+```python
+# (2-1절의 데이터 생성 코드 실행 후)
+X_centered = X - X.mean(axis=0)
+C = X_centered.T @ X_centered / (m - 1)        # 공분산 행렬 (3, 3)
+eigvals, eigvecs = np.linalg.eigh(C)           # 고윳값 오름차순
+eigvals, eigvecs = eigvals[::-1], eigvecs[:, ::-1]
+
+U, s, Vt = np.linalg.svd(X_centered)
+print(eigvals.round(4))                        # 고윳값 = 각 주성분 방향의 분산
+print((s ** 2 / (m - 1)).round(4))             # 특잇값² / (m − 1)
+print(np.abs(eigvecs[:, 0] @ Vt[0]).round(6))  # 두 방법의 첫 주성분 방향이 같은가 (|cos| = 1)
+c1 = Vt[0]
+print(np.var(X_centered @ c1, ddof=1).round(4))  # c1 위로 투영한 좌표의 분산
+print((s ** 2 / (s ** 2).sum()).round(4))      # 설명된 분산 비율
+print(PCA(n_components=3).fit(X).explained_variance_ratio_.round(4))
+```
+
+```
+[0.771  0.1014 0.0647]       ← 공분산 행렬의 고윳값
+[0.771  0.1014 0.0647]       ← SVD 특잇값² / (m − 1): 같다
+1.0                          ← 고유벡터와 Vt[0]이 같은 방향
+0.771                        ← 실제로 c1 위 좌표의 분산 = 첫 번째 고윳값
+[0.8228 0.1082 0.069 ]       ← s² / Σs²
+[0.8228 0.1082 0.069 ]       ← 사이킷런 explained_variance_ratio_ (3-4절과 같은 값)
+```
+
+| 코드 | 의미 |
+|---|---|
+| `np.linalg.eigh(C)` | 대칭 행렬 전용 고윳값 분해. 고윳값을 **오름차순**으로 주므로 `[::-1]`로 뒤집었다 |
+| `np.var(..., ddof=1)` | 분모를 $m-1$로 하는 표본 분산 (공분산 행렬과 같은 기준) |
+| `np.abs(a @ b)` | 두 단위 벡터의 내적 = 사잇각의 코사인. 부호가 반대여도 같은 축이므로 절댓값 |
+
+> 💡 사이킷런 `PCA`도 내부적으로 SVD를 쓴다. 공분산 행렬을 직접 만들지 않아 수치적으로 더 안정적이다.
+
 ### 3-2. d차원으로 투영
 
 > 🎯 **목적** — 찾은 주성분 d개로 데이터를 투영하는 계산을 이해한다.

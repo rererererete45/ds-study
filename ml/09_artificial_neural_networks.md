@@ -482,6 +482,84 @@ mlp.predict(X_xor), mlp.score(X_xor, y_xor)
 - 훈련 세트 전체를 한 번 다 쓰는 것 = **에포크(epoch)**. 1~5단계를 미니배치마다 반복하고, 이를 여러 에포크 되풀이한다
 - 4단계에서 2단계에 저장해 둔 중간 결과를 재사용한다 → 가중치가 수백만 개여도 한 번의 왕복으로 끝난다
 
+**보충: 역전파를 식으로 — 은닉 층 1개짜리 MLP**
+
+위 표의 2·4단계를 실제 식으로 쓰면 다음과 같다. 회귀용 MLP(은닉 층 ReLU, 출력 층 활성화 없음, 손실 MSE)이고, $m$개 샘플을 행렬로 한 번에 계산한다. ($\otimes$ = 원소별 곱(교재 표기), $\phi$ = 활성화 함수)
+
+| 정방향 (저장할 값) | 모양 |
+|---|---|
+| $\mathbf{Z}_1 = \mathbf{X}\mathbf{W}_1 + \mathbf{b}_1$ | $(m, h)$ |
+| $\mathbf{H} = \phi(\mathbf{Z}_1)$ | $(m, h)$ |
+| $\hat{\mathbf{Y}} = \mathbf{H}\mathbf{W}_2 + \mathbf{b}_2$ | $(m, 1)$ |
+| $L = \frac{1}{m}\sum_i \left(\hat{y}^{(i)} - y^{(i)}\right)^2$ | 스칼라 |
+
+| 역방향 (출력 쪽부터) | 연쇄 법칙으로 읽기 | 모양 |
+|---|---|---|
+| $\dfrac{\partial L}{\partial \hat{\mathbf{Y}}} = \dfrac{2}{m}(\hat{\mathbf{Y}} - \mathbf{Y})$ | MSE를 예측으로 미분 (4장 2-2와 같은 식) | $(m, 1)$ |
+| $\dfrac{\partial L}{\partial \mathbf{W}_2} = \mathbf{H}^\top \dfrac{\partial L}{\partial \hat{\mathbf{Y}}}$, $\ \dfrac{\partial L}{\partial \mathbf{b}_2} = $ 샘플 방향 합 (`axis=0`) | $\hat{\mathbf{Y}}$가 $\mathbf{W}_2$에 대해 선형 → 입력 $\mathbf{H}$가 곱해진다 | $(h, 1)$ |
+| $\dfrac{\partial L}{\partial \mathbf{H}} = \dfrac{\partial L}{\partial \hat{\mathbf{Y}}}\mathbf{W}_2^\top$ | 오차를 가중치를 따라 **뒤로** 보낸다 | $(m, h)$ |
+| $\dfrac{\partial L}{\partial \mathbf{Z}_1} = \dfrac{\partial L}{\partial \mathbf{H}} \otimes \phi'(\mathbf{Z}_1)$ | 활성화 함수의 기울기를 곱한다 (ReLU면 0 또는 1) | $(m, h)$ |
+| $\dfrac{\partial L}{\partial \mathbf{W}_1} = \mathbf{X}^\top \dfrac{\partial L}{\partial \mathbf{Z}_1}$, $\ \dfrac{\partial L}{\partial \mathbf{b}_1} = $ 샘플 방향 합 | 2행과 같은 모양의 식이 한 층 아래에서 반복 | $(n, h)$ |
+
+- 층이 몇 개든 **"입력ᵀ × (뒤에서 온 오차)"로 가중치 그레이디언트, "(뒤에서 온 오차) × 가중치ᵀ ⊗ φ′"로 한 층 더 뒤로"** 두 식만 반복한다
+- 역방향 계산에 $\mathbf{H}$, $\mathbf{Z}_1$이 필요하다 → 정방향에서 중간 결과를 **저장**하는 이유. 메모리 사용량이 층 수·배치 크기에 비례하는 이유이기도 하다
+- 한 층 내려갈 때마다 $\phi'$와 $\mathbf{W}^\top$이 곱해진다. 시그모이드처럼 $\phi'$가 최대 0.25인 함수를 깊게 쌓으면 이 곱이 0으로 줄어든다 → **그레이디언트 소실** ([11장 1-1](11_training_deep_neural_networks.md#1-1-불안정한-그레이디언트))
+
+**보충 코드** — 위 식을 넘파이로 그대로 옮기고, 가중치 하나를 아주 조금 바꿨을 때의 손실 변화(수치 미분)와 비교해 맞는지 확인한다
+
+```python
+import numpy as np
+rng = np.random.default_rng(42)
+m, n, h = 4, 3, 5                      # 샘플 4개, 특성 3개, 은닉 뉴런 5개
+X = rng.standard_normal((m, n))
+Y = rng.standard_normal((m, 1))
+W1, b1 = rng.standard_normal((n, h)), np.zeros(h)
+W2, b2 = rng.standard_normal((h, 1)), np.zeros(1)
+
+def forward(W1, b1, W2, b2):
+    Z1 = X @ W1 + b1                   # (m, h)
+    H = np.maximum(0, Z1)              # ReLU
+    Y_hat = H @ W2 + b2                # (m, 1)
+    loss = ((Y_hat - Y) ** 2).mean()   # MSE
+    return Z1, H, Y_hat, loss
+
+# 정방향 (중간 결과 저장)
+Z1, H, Y_hat, loss = forward(W1, b1, W2, b2)
+# 역방향 (출력 쪽부터 연쇄 법칙)
+dY_hat = 2 / m * (Y_hat - Y)           # ∂L/∂Ŷ          (m, 1)
+dW2 = H.T @ dY_hat                     # ∂L/∂W2         (h, 1)
+db2 = dY_hat.sum(axis=0)               # ∂L/∂b2         (1,)
+dH = dY_hat @ W2.T                     # ∂L/∂H          (m, h)
+dZ1 = dH * (Z1 > 0)                    # ReLU'(Z1) = 1 또는 0을 원소별로 곱함
+dW1 = X.T @ dZ1                        # ∂L/∂W1         (n, h)
+db1 = dZ1.sum(axis=0)                  # ∂L/∂b1         (h,)
+
+# 검증: W1[0, 0]을 아주 조금 바꿨을 때 손실 변화(수치 미분)와 비교
+eps = 1e-6
+W1p = W1.copy(); W1p[0, 0] += eps
+W1m = W1.copy(); W1m[0, 0] -= eps
+numeric = (forward(W1p, b1, W2, b2)[3] - forward(W1m, b1, W2, b2)[3]) / (2 * eps)
+print(f"역전파: {dW1[0, 0]:.6f}   수치 미분: {numeric:.6f}")
+W2p = W2.copy(); W2p[2, 0] += eps
+W2m = W2.copy(); W2m[2, 0] -= eps
+numeric2 = (forward(W1, b1, W2p, b2)[3] - forward(W1, b1, W2m, b2)[3]) / (2 * eps)
+print(f"역전파: {dW2[2, 0]:.6f}   수치 미분: {numeric2:.6f}")
+```
+
+```
+역전파: 0.280584   수치 미분: 0.280584
+역전파: -0.053226   수치 미분: -0.053226
+```
+
+| 줄 | 의미 |
+|---|---|
+| `dY_hat @ W2.T` | 출력 층 오차를 은닉 층으로 되돌림 (표의 3행) |
+| `dH * (Z1 > 0)` | ReLU의 도함수: 양수였던 곳만 1, 나머지 0 |
+| `X.T @ dZ1` | 가중치 그레이디언트 = 입력ᵀ × 그 층의 오차 |
+| `(f(w + ε) − f(w − ε)) / 2ε` | 수치 미분(중앙 차분). 느리지만 정확해서 역전파 구현을 검증할 때 쓴다 |
+
+- 두 값이 소수점 여섯째 자리까지 같다 → 표의 식이 맞다. 파이토치의 `loss.backward()`(10장)가 자동으로 하는 일이 정확히 이 계산이다
+
 > ⚠️ **가중치는 반드시 무작위로 초기화해야 한다.** 모든 가중치·편향을 0(또는 같은 값)으로 두면 한 층의 뉴런이 전부 똑같은 값을 내고, 역전파도 전부 똑같이 갱신한다 → 뉴런이 몇 개든 뉴런 하나처럼 움직인다. 무작위 초기화가 이 **대칭성을 깨서** 뉴런마다 다른 역할을 배우게 한다.
 
 > 💡 4장과의 연결: 경사 하강법 자체는 4장과 같다. 달라진 건 "그레이디언트를 식으로 직접 유도"하던 것을 "역전파가 자동으로 계산"한다는 점뿐이다. 10장의 파이토치가 이 자동 미분을 제공한다.

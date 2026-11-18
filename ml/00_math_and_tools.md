@@ -243,6 +243,7 @@ y = f(g(x)) \;\Rightarrow\; \frac{dy}{dx} = \frac{dy}{dg} \cdot \frac{dg}{dx}
 | $\lVert \cdot \rVert_1$, $\lVert \cdot \rVert_2$ | ℓ1, ℓ2 노름 | 4장 |
 | $\arg\max_k$ | 값이 가장 큰 $k$ (값 자체가 아니라 위치) | 4장 |
 | $\log$ | 자연로그 (밑 $e$) | 4장 |
+| $\otimes$, $\oslash$ | 원소별 곱, 원소별 나눗셈 (넘파이 `*`, `/`) | 9장, 11장, 13장 |
 | $\mathcal{L}$ | 가능도(8장) 또는 손실(9장~) | 8장 |
 | $d_k$, $d_\text{model}$ | 어텐션 키 차원, 트랜스포머 임베딩 차원 | 15장 |
 

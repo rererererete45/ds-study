@@ -38,6 +38,7 @@
 3장 분류 ─ 정확도 너머의 성능 측정 (정밀도·재현율·ROC)
    ↓ 블랙박스였던 fit()의 내부로
 4장 모델 훈련 ─ 경사 하강법 · 규제 · 로지스틱 회귀
+   ⋯ 부록 C 서포트 벡터 머신 ─ 2·3·6장에서 쓰는 SVC·SVR의 원리 (여기서 읽으면 좋다)
    ↓ 선형 모델과 다른 비선형 모델
 5장 결정 트리 ─ 해석 쉬움, 그러나 분산이 큼
    ↓ 분산 문제를 여러 모델로 해결
@@ -71,7 +72,7 @@
 | 장 | 주제 | 키워드 |
 |---|---|---|
 | [0장](ml/00_math_and_tools.md) | 시작하기 전에 — 수학과 파이썬 도구 (부록) | 넘파이 shape·axis·브로드캐스팅, 판다스, 그림 읽는 법, 내적·행렬 곱, 도함수·그레이디언트·연쇄 법칙, 정규분포·로그·소프트맥스, 기호 정리 |
-| [📖 용어집](ml/glossary.md) | 핵심 용어 194개 | 주제별 한 줄 뜻 + 처음 설명하는 곳 링크 |
+| [📖 용어집](ml/glossary.md) | 핵심 용어 202개 | 주제별 한 줄 뜻 + 처음 설명하는 곳 링크 |
 | [1장](ml/01_the_machine_learning_landscape.md) | 한눈에 보는 머신러닝 | 머신러닝 정의, 지도·비지도·준지도·자기 지도·강화 학습, 배치·온라인 학습, 사례 기반(KNN)·모델 기반(선형 회귀), fit·predict, 대표성 없는 데이터, 과대적합·과소적합, 규제(Ridge), 하이퍼파라미터, 훈련·검증·테스트 세트, 교차 검증, 데이터 불일치, 공짜 점심 없음 |
 | [2장](ml/02_end_to_end_machine_learning_project.md) | 머신러닝 프로젝트 처음부터 끝까지 | 계층 샘플링, 상관관계, SimpleImputer, OneHotEncoder, 스케일링, 사용자 정의 변환기, Pipeline·ColumnTransformer, 교차 검증, 그리드·랜덤 서치, 부트스트랩, joblib |
 | [3장](ml/03_classification.md) | 분류 | MNIST, SGDClassifier, StratifiedKFold, 오차 행렬, 정밀도·재현율·F1, 임곗값, PR·ROC 곡선, AUC, OvR·OvO, 오류 분석, 다중 레이블(ClassifierChain), 다중 출력, 데이터 증강, 타이타닉, 스팸 분류기 |
@@ -80,6 +81,7 @@
 | [6장](ml/06_ensemble_learning_and_random_forests.md) | 앙상블 학습과 랜덤 포레스트 | 큰 수의 법칙, 직접·간접 투표, 배깅·페이스팅, OOB 평가, 랜덤 패치·서브스페이스, 랜덤 포레스트, 엑스트라 트리, 특성 중요도, AdaBoost, 그레이디언트 부스팅(축소·조기 종료), HistGradientBoosting, 스태킹 |
 | [7장](ml/07_dimensionality_reduction.md) | 차원 축소 | 차원의 저주, 투영·매니폴드 학습, PCA(SVD), 설명된 분산 비율, 압축, 랜덤·점진적 PCA, 랜덤 투영(존슨–린덴슈트라우스), LLE, MDS·Isomap·t-SNE, 커널 PCA |
 | [8장](ml/08_unsupervised_learning.md) | 비지도 학습 | k-평균, 이너셔, k-평균++, 미니배치 k-평균, 엘보·실루엣, 이미지 분할, 준지도 학습(레이블 전파), DBSCAN, 가우스 혼합(EM), covariance_type, 이상치 탐지, BIC·AIC, 베이즈 가우스 혼합, 올리베티 얼굴(군집 특성·얼굴 생성·재구성 오차) |
+| [부록 C](ml/C_support_vector_machines.md) | 서포트 벡터 머신 (4장 다음에 읽기) | 라지 마진, 서포트 벡터, 소프트 마진(`C`), 힌지 손실, 커널 트릭(다항·RBF, `gamma`), SVM 회귀(ε), 목적 함수와 쌍대 문제, LinearSVC·SVC·SGD 선택 |
 | [9장](ml/09_artificial_neural_networks.md) | 인공 신경망 소개 | 인공 뉴런·논리 연산, TLU, 퍼셉트론 학습 규칙, XOR 문제, 다층 퍼셉트론(MLP), 역전파, 활성화 함수(시그모이드·tanh·ReLU), MLPRegressor, MLPClassifier, 패션 MNIST, 조기 종료, 과잉 확신, 은닉 층 수·뉴런 수·학습률·배치 크기 |
 | [10장](ml/10_neural_nets_with_pytorch.md) | 파이토치로 신경망 구축하기 | 텐서, 하드웨어 가속(GPU), autograd, 훈련 루프, nn.Linear·nn.Sequential, 옵티마이저(SGD), DataLoader, 미니배치 경사 하강법, torchmetrics, 학습 곡선, nn.Module(와이드 & 딥·다중 입력·다중 출력), 토치비전, CrossEntropyLoss(로짓), Optuna(TPE·가지치기), state_dict, TorchScript, torch.compile |
 | [11장](ml/11_training_deep_neural_networks.md) | 심층 신경망 훈련 | 그레이디언트 소실·폭주, 글로럿·He·르쿤 초기화, LeakyReLU·ELU·SELU·GELU·Swish·Mish, 배치 정규화·층 정규화, 그레이디언트 클리핑, 전이 학습(동결·미세 튜닝), 모멘텀·네스테로프·AdaGrad·RMSProp·Adam·AdamW, 학습률 스케줄링(지수·성능 기반·웜업·코사인·1사이클), ℓ1·ℓ2 규제·가중치 감쇠, 드롭아웃, MC 드롭아웃, 맥스-노름, 조기 종료, CIFAR10 |

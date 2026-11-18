@@ -269,6 +269,7 @@ h(\mathbf{x}) = \mathbf{w}^\top \mathbf{x} + b, \qquad
 - $`\mathbf{w}`$: 픽셀별 가중치 (784개), $`b`$: 절편
 - 학습: 훈련 샘플을 하나씩 무작위로 골라 손실의 기울기 방향으로 $`\mathbf{w}, b`$를 갱신
 - 기본 손실 함수 `hinge` → 선형 SVM과 같은 모델
+  (힌지 손실과 선형 SVM은 [부록 C 5절](C_support_vector_machines.md#5-svm의-내부-동작) 참고)
 - 샘플 단위로 갱신하므로 대규모 데이터와 온라인 학습에 적합
 
 **코드**
@@ -907,6 +908,8 @@ recall_score(y_train_5, y_train_pred_forest)
 ### 4-2. SVC: 자동 OvO
 
 > 🎯 **목적** — SVC로 다중 분류를 수행하고, 결정 점수에서 예측 클래스를 얻는 방법을 확인한다.
+
+> 📎 **SVM을 처음 본다면** — 서포트 벡터 머신(마진, `C`, 커널, `gamma`)은 [부록 C](C_support_vector_machines.md)에 정리했다.
 
 **코드: 학습과 예측**
 

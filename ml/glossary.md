@@ -19,6 +19,7 @@
 - [10. 시퀀스와 RNN (13장)](#10-시퀀스와-rnn-13장) — 9개
 - [11. 자연어 처리와 어텐션 (14장)](#11-자연어-처리와-어텐션-14장) — 10개
 - [12. 트랜스포머 (15~16장)](#12-트랜스포머-1516장) — 18개
+- [13. 서포트 벡터 머신 (부록 C)](#13-서포트-벡터-머신-부록-c) — 8개
 
 
 ## 1. 기본 개념과 데이터 (1~2장)
@@ -274,6 +275,19 @@
 | **대조 학습 (CLIP)** | contrastive learning | 짝이 맞는 (이미지, 텍스트)는 가깝게, 안 맞는 쌍은 멀게 임베딩을 학습하는 방법 | [16장 2-2. CLIP: 대조 사전 훈련](16_vision_and_multimodal_transformers.md#2-2-clip-대조-사전-훈련) |
 | **제로샷 분류** | zero-shot classification | 해당 클래스로 훈련한 적 없이, 클래스 이름(텍스트)과의 유사도로 분류하는 것 | [16장 2-4. CLIP으로 제로샷 이미지 분류하기](16_vision_and_multimodal_transformers.md#2-4-clip으로-제로샷-이미지-분류하기) |
 | **멀티모달** | multimodal | 이미지·텍스트·음성 등 여러 종류의 입력을 함께 다루는 것 | [16장 2. 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md#2-멀티모달-트랜스포머-162) |
+
+## 13. 서포트 벡터 머신 (부록 C)
+
+| 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
+|---|---|---|---|
+| **서포트 벡터 머신** | support vector machine, SVM | 두 클래스 사이에 가장 넓은 '도로'를 내는 분류(·회귀) 모델 | [부록 C 1. 선형 SVM 분류](C_support_vector_machines.md#1-선형-svm-분류) |
+| **마진** | margin | 결정 경계에서 가장 가까운 샘플까지의 거리. 도로 폭의 절반 | [부록 C 1. 선형 SVM 분류](C_support_vector_machines.md#1-선형-svm-분류) |
+| **서포트 벡터** | support vector | 도로 위나 경계에 걸친 샘플. 이 샘플들만 결정 경계를 정한다 | [부록 C 1. 선형 SVM 분류](C_support_vector_machines.md#1-선형-svm-분류) |
+| **소프트 마진** | soft margin | 마진 오류를 일부 허용하며 도로 폭과의 균형을 `C`로 조절하는 SVM | [부록 C 2. 소프트 마진 분류](C_support_vector_machines.md#2-소프트-마진-분류) |
+| **힌지 손실** | hinge loss | max(0, 1 − t·s). 올바른 쪽으로 충분히 떨어진 샘플은 손실 0 | [부록 C 5. SVM의 내부 동작](C_support_vector_machines.md#5-svm의-내부-동작) |
+| **커널 트릭** | kernel trick | 고차원으로 변환한 뒤의 내적을, 변환하지 않고 원래 공간에서 바로 계산하는 기법 | [부록 C 3-2. 커널 트릭](C_support_vector_machines.md#3-2-커널-트릭) |
+| **RBF 커널** | Gaussian RBF kernel | exp(−γ‖a − b‖²). `gamma`가 클수록 각 샘플의 영향 범위가 좁아 경계가 구불구불해진다 | [부록 C 3-3. 유사도 특성과 RBF 커널](C_support_vector_machines.md#3-3-유사도-특성과-rbf-커널) |
+| **ε-둔감 손실 (SVM 회귀)** | epsilon-insensitive | 폭 2ε 도로 안의 샘플은 손실 0으로 보는 회귀 방식 | [부록 C 4. SVM 회귀](C_support_vector_machines.md#4-svm-회귀) |
 
 ---
 
