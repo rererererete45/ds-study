@@ -46,7 +46,9 @@
    ↓ RNN을 걷어 내고 어텐션만으로
 15장 자연어 처리와 챗봇을 위한 트랜스포머 ─ 위치 임베딩 · 멀티 헤드 어텐션 · 마스크 · 번역 트랜스포머 · BERT(MLM) · GPT 생성(top-p·퓨샷) · 챗봇(SFT·DPO)
    ↓ 텍스트 토큰에서 이미지 패치로
-16장~ 비전과 멀티모달 트랜스포머 (정리 예정)
+16장 비전 및 멀티모달 트랜스포머 ─ 패치 임베딩 · ViT 구현 · ViT/DeiT 미세 튜닝 · Swin · DINO 비지도 분할 · CLIP 제로샷 · Perceiver · BLIP-2 · Gemini
+   ↓ 크고 느린 트랜스포머를 빠르고 가볍게
+17장~ 트랜스포머 속도 높이기 (정리 예정)
 ```
 
 ### 장별 노트
@@ -68,6 +70,7 @@
 | [13장](ml/13_processing_sequences_using_rnns_and_cnns.md) | RNN과 CNN을 사용한 시퀀스 처리 | 순환 뉴런·메모리 셀, 시퀀스-투-시퀀스·시퀀스-투-벡터, BPTT, 시카고 승객 수 시계열, 계절성·차분, 나이브 예측, MAE·MAPE, ARIMA·SARIMA, ACF·PACF, TimeSeriesDataset, HuberLoss, ReduceLROnPlateau, nn.RNN, 심층 RNN, 다변량·다중 작업 예측, 여러 타임 스텝 예측, unfold, 시퀀스-투-시퀀스, 층 정규화, LSTM·LSTMCell, GRU·GRUCell, nn.Conv1d 다운샘플링, 인과적·팽창 합성곱, WaveNet, 죽은 ReLU 진단, 바흐 코랄 생성(온도 샘플링) |
 | [14장](ml/14_nlp_with_rnns_and_attention.md) | RNN과 어텐션을 사용한 자연어 처리 | char-RNN, CharDataset, nn.Embedding, GRU, permute(0, 2, 1), 온도 샘플링(torch.multinomial), 상태가 있는 RNN(StatefulCharDataset·detach), IMDB, tokenizers(BPE·BBPE·WordPiece·유니그램), 패딩·잘라내기·어텐션 마스크, AutoTokenizer(GPT-2·BERT·ALBERT), collate_fn, padding_idx, 패킹된 시퀀스(pack_padded_sequence), 양방향 GRU, 사전 훈련 임베딩(from_pretrained·freeze), BERT 문맥 임베딩(last_hidden_state·pooler_output), BertForSequenceClassification, Trainer·TrainingArguments, pipeline, 모델 편향, 인코더–디코더 NMT, 교사 강요, ignore_index, 탐욕적 디코딩, 빔 검색·길이 페널티, 바다나우·루옹 어텐션, 점곱 어텐션(쿼리·키·값), 어텐션 패딩 마스크 |
 | [15장](ml/15_transformers_for_nlp_and_chatbots.md) | 자연어 처리와 챗봇을 위한 트랜스포머 | Attention Is All You Need, 셀프 어텐션, 위치 임베딩(훈련형·사인/코사인), 스케일드 점곱 어텐션(√d), 멀티 헤드 어텐션(split_heads), nn.MultiheadAttention(in_proj_weight·batch_first), 인과 마스크(torch.triu·generate_square_subsequent_mask)·key_padding_mask, 잔차 연결·층 정규화(Post-LN), 위치별 피드포워드, 인코더·디코더 층·크로스 어텐션, nn.Transformer, NmtTransformer, 인코더 전용·디코더 전용·인코더–디코더, BERT(MLM 80/10/10·NSP·[CLS]), BertForMaskedLM, DataCollatorForLanguageModeling, fill-mask, Sentence Transformers(코사인 유사도), RoBERTa·DistilBERT·ALBERT·ELECTRA·DeBERTa, GPT·인과적 언어 모델, AutoModelForCausalLM(device_map·dtype), generate(do_sample·top_p), 퓨샷 프롬프트, Mistral-7B, 액세스 토큰, BobTheChatbot, SFT·RLHF·DPO, 시퀀스 로그 확률(gather), DPO 손실(참조 모델·β), TRL(SFTTrainer·DPOTrainer), Alpaca, HH-RLHF, Instruct 모델·채팅 템플릿, T5·BART, 고정 위치 인코딩(register_buffer·상대 위치) |
+| [16장](ml/16_vision_and_multimodal_transformers.md) | 비전 및 멀티모달 트랜스포머 | 귀납적 편향, 시각 어텐션 RNN, DETR(객체 쿼리·헝가리안 매칭), ViT(패치 임베딩·Conv2d=패치별 선형 층·[CLS]·위치 임베딩·Pre-LN), interpolate_pos_encoding, Oxford-IIIT Pet, AutoImageProcessor(do_convert_rgb), collate_fn, Trainer(remove_unused_columns=False), DeiT(증류 토큰·하드 증류·강한 증강), PVT(공간 축소 어텐션), Swin(윈도·이동 윈도·패치 병합), DINO(자기 증류·EMA 교사·다중 크롭·센터링·샤프닝), 어텐션 맵 비지도 분할(output_attentions·eager), BEiT·MAE·DINOv2·SAM, VideoBERT, ViLBERT(공동 어텐션), CLIP(이중 인코더·대조 손실·logit_scale 온도·제로샷 분류·프롬프트 템플릿·get_image_features), DALL·E(dVAE 토큰), Perceiver(잠재 배열·크로스 어텐션·푸리에 위치 인코딩), Perceiver IO(출력 쿼리), Flamingo(Perceiver Resampler·tanh 게이트), BLIP(CapFilt)·BLIP-2(Q-Former·쿼리 32개·float16 generate), LLaVA·GPT-4o·Whisper·ImageBind·RT-2, Gemini API(google-genai) |
 
 ### 노트 읽는 법
 
