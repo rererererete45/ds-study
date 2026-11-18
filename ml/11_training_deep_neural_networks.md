@@ -1,6 +1,6 @@
 # 11장. 심층 신경망 훈련
 
-[← 10장. 파이토치로 신경망 구축하기](10_neural_nets_with_pytorch.md) · [📚 전체 목차](../README.md) · [12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전 →](12_deep_computer_vision_with_cnns.md)
+[← 10장. 파이토치로 신경망 구축하기](10_neural_nets_with_pytorch.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전 →](12_deep_computer_vision_with_cnns.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 11장 · 노트북 `11_training_deep_neural_networks.ipynb`
 >
@@ -1470,6 +1470,8 @@ history_momentum, acc_momentum = test_optimizer(model, optimizer)
 
 ### 3-3. 네스테로프 가속 경사
 
+> 🎯 **목적** — 모멘텀을 '조금 앞을 내다본 위치'에서 계산해 더 빨리 수렴하게 하는 방법을 이해한다.
+
 **개념·원리**
 
 **네스테로프 가속 경사**(NAG): 그레이디언트를 현재 위치 $\boldsymbol{\theta}$가 아니라, 모멘텀 방향으로 **조금 앞선 위치** $\boldsymbol{\theta} + \beta\mathbf{m}$에서 잰다.
@@ -1534,6 +1536,8 @@ history_adagrad, acc_adagrad = test_optimizer(model, optimizer)
 ```
 
 ### 3-5. RMSProp
+
+> 🎯 **목적** — AdaGrad가 너무 일찍 멈추는 문제를 최근 그레이디언트만 반영해 해결하는 방법을 이해한다.
 
 **개념·원리**
 
@@ -1611,6 +1615,8 @@ history_adam, acc_adam = test_optimizer(model, optimizer)
 - 이 실험에서는 RMSProp과 마찬가지로 **실패했다** (검증 정확도 0.30). 3-8절 참고
 
 ### 3-7. Adamax, Nadam, AdamW
+
+> 🎯 **목적** — Adam의 세 가지 변형이 각각 무엇을 바꿨는지 정리한다.
 
 **개념·원리**
 
@@ -2220,6 +2226,8 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(
 > ⚠️ 노트북의 연습문제 풀이는 이 스케줄러를 `train_with_early_stopping()`에 넘기는데, 그 함수는 `scheduler.step()`을 **에포크마다 한 번**만 부른다. 보충 확인: 21,120 스텝짜리 스케줄에서 60번만 진행하면 학습률은 0.000400 → 0.000402로 **거의 변하지 않는다.** 즉 그 실험은 사실상 고정 학습률 0.0004로 훈련한 것이다 ([7-8절](#7-8-8번-7단계-1사이클-스케줄링)). 1사이클을 제대로 쓰려면 `optimizer.step()` 바로 뒤에서 배치마다 `scheduler.step()`을 불러야 한다.
 
 ### 4-7. 스케줄러 목록
+
+> 🎯 **목적** — 파이토치가 제공하는 학습률 스케줄러를 한눈에 정리한다.
 
 **코드**
 
@@ -3451,4 +3459,4 @@ Swish 0.380 → + BN 0.401 → SELU 0.456 → + 알파 드롭아웃 0.477
 > ➡️ **다음 장 — [12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전](12_deep_computer_vision_with_cnns.md)**  
 > 완전 연결 층은 픽셀 위치마다 가중치를 따로 배운다. 그래서 전이 학습에서는 같은 위치의 패턴만 재사용할 수 있었고, CIFAR10에서는 20개 층을 쌓아도 정확도가 50%를 넘지 못했다. 12장의 합성곱 층은 작은 필터 하나를 이미지 전체에 공유해 어디에서든 패턴을 찾는다. 이 장의 He 초기화·배치 정규화·옵티마이저·학습률 스케줄·드롭아웃·전이 학습이 깊은 CNN을 훈련하는 데 그대로 쓰인다.
 
-[← 10장. 파이토치로 신경망 구축하기](10_neural_nets_with_pytorch.md) · [📚 전체 목차](../README.md) · [12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전 →](12_deep_computer_vision_with_cnns.md)
+[← 10장. 파이토치로 신경망 구축하기](10_neural_nets_with_pytorch.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전 →](12_deep_computer_vision_with_cnns.md)

@@ -1,6 +1,6 @@
 # 15장. 자연어 처리와 챗봇을 위한 트랜스포머
 
-[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](../README.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)
+[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 15장 · 노트북 `15_transformers_for_nlp_and_chatbots.ipynb`
 >
@@ -870,6 +870,8 @@ class NmtTransformer(nn.Module):
 
 ### 2-3. 인과 마스크 만들기
 
+> 🎯 **목적** — 디코더가 미래 토큰을 보지 못하게 하는 마스크를 만든다.
+
 ```python
 size = [pair.tgt_token_ids.size(1)] * 2          # [L_tgt, L_tgt]
 full_mask = torch.full(size, True, device=tgt_pad_mask.device)
@@ -1173,6 +1175,8 @@ trainer_output = trainer.train()
 
 ### 3-3. fill-mask로 확인하기
 
+> 🎯 **목적** — 사전 훈련된 BERT가 가린 단어를 어떻게 채우는지 확인한다.
+
 ```python
 from transformers import pipeline
 
@@ -1311,6 +1315,8 @@ del_vars(["model", "sentences", "embeddings", "similarities"])
 > 🎯 **목적** — 트랜스포머의 **디코더만** 쌓은 GPT 계열 모델로 텍스트를 생성하고, 디코딩 전략과 프롬프트에 따라 결과가 어떻게 달라지는지 본다.
 
 ### 4-1. GPT와 인과적 언어 모델링
+
+> 🎯 **목적** — 다음 토큰을 예측하도록 훈련된 디코더 전용 모델의 원리를 이해한다.
 
 **개념·원리**
 
@@ -2570,4 +2576,4 @@ TRL : SFTTrainer("gpt2", Alpaca 1,000개 Human/Assistant) → DPOTrainer(SFT 모
 > ➡️ **다음 장 — [16장. 비전 및 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md)**  
 > 이 장의 트랜스포머는 텍스트 토큰의 시퀀스를 다뤘다. 16장은 이미지를 작은 **패치**로 잘라 토큰처럼 다루는 비전 트랜스포머(ViT)로 같은 인코더를 이미지 분류에 쓰고, 텍스트와 이미지를 함께 이해하는 **멀티모달** 모델로 나아간다.
 
-[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](../README.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)
+[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)

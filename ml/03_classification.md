@@ -1,6 +1,6 @@
 # 3장. 분류
 
-[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](../README.md) · [4장. 모델 훈련 →](04_training_linear_models.md)
+[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [4장. 모델 훈련 →](04_training_linear_models.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 3장 · 노트북 `03_classification.ipynb`
 >
@@ -90,7 +90,8 @@
    - [9-1. 전체 흐름](#9-1-전체-흐름)
    - [9-2. 개념과 코드 대응](#9-2-개념과-코드-대응)
    - [9-3. 주요 결과](#9-3-주요-결과)
-   - [9-4. 핵심 원칙](#9-4-핵심-원칙)
+   - [9-4. 자주 쓴 코드 패턴](#9-4-자주-쓴-코드-패턴)
+   - [9-5. 핵심 원칙](#9-5-핵심-원칙)
 
 ---
 
@@ -1987,7 +1988,26 @@ print(f"Recall: {recall_score(y_test, y_pred):.2%}")
 | KNN 튜닝 (테스트) | 0.9714 |
 | **KNN 튜닝 + 데이터 증강 (테스트)** | **0.9763** |
 
-### 9-4. 핵심 원칙
+### 9-4. 자주 쓴 코드 패턴
+
+| 패턴 | 용도 | 위치 |
+|---|---|---|
+| `fetch_openml("mnist_784", as_frame=False)` | MNIST 적재 | 1-1 |
+| `y_train == "5"` | 다중 클래스 레이블 → 이진 레이블 | 2-1 |
+| `cross_val_predict(model, X, y, cv=3)` | 샘플마다 "그 샘플을 안 본 모델"의 예측 | 3-3 |
+| `cross_val_predict(..., method="decision_function")` / `method="predict_proba"` | 예측 대신 점수·확률 얻기 | 3-6, 3-8 |
+| `confusion_matrix(y_true, y_pred)` | 오차 행렬 | 3-3 |
+| `precision_score`, `recall_score`, `f1_score` | 이진 분류 지표 | 3-4 |
+| `precision_recall_curve(y, scores)` → `(precisions >= 0.9).argmax()` | 목표 정밀도를 처음 만족하는 임곗값 | 3-6 |
+| `roc_curve`, `roc_auc_score` | ROC 곡선과 AUC | 3-7 |
+| `OneVsRestClassifier(SVC())` | OvR 전략 강제 | 4-3 |
+| `ConfusionMatrixDisplay.from_predictions(..., normalize="true", sample_weight=...)` | 오차 행렬 시각화·정규화·오류만 보기 | 5-1 |
+| `np.c_[레이블1, 레이블2]` + `KNeighborsClassifier` | 다중 레이블 분류 | 6-1 |
+| `f1_score(..., average="macro")` | 다중 레이블·다중 클래스의 평균 F1 | 6-2 |
+| `ClassifierChain(base, cv=3)` | 레이블 간 의존성을 쓰는 다중 레이블 | 6-3 |
+| `scipy.ndimage.shift(image, [dy, dx])` | 이미지 이동으로 데이터 증강 | 8-2 |
+
+### 9-5. 핵심 원칙
 
 1. 클래스가 불균형하면 정확도 대신 오차 행렬과 정밀도·재현율로 평가한다.
 2. 성능은 항상 기준 모델(더미 분류기)과 비교해 해석한다.
@@ -2004,4 +2024,4 @@ print(f"Recall: {recall_score(y_test, y_pred):.2%}")
 > ➡️ **다음 장 — [4장. 모델 훈련](04_training_linear_models.md)**  
 > 2·3장에서 블랙박스로 쓴 `fit()`의 **내부**를 연다 — 선형 회귀, 경사 하강법, 규제, 그리고 3장에서 쓴 `SGDClassifier`·로지스틱 회귀의 원리.
 
-[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](../README.md) · [4장. 모델 훈련 →](04_training_linear_models.md)
+[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [4장. 모델 훈련 →](04_training_linear_models.md)

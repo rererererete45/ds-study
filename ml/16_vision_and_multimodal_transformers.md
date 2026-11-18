@@ -1,6 +1,6 @@
 # 16장. 비전 및 멀티모달 트랜스포머
 
-[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · 17장. 트랜스포머 속도 높이기 (정리 예정) →
+[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 17장. 트랜스포머 속도 높이기 (정리 예정) →
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 16장 · 노트북 `16_vision_and_multimodal_transformers.ipynb`
 >
@@ -1701,6 +1701,8 @@ generated_text
 
 ### 3-1. 대표적인 멀티모달 모델
 
+> 🎯 **목적** — 이미지·텍스트·음성 등 여러 입력을 함께 다루는 대표 모델들을 정리한다.
+
 > ⚠️ 노트북에는 Gemini API 코드만 있다(3-2절). 아래 표는 교재 절 제목에 맞춰 대표적인 모델을 정리한 것이다.
 
 | 모델 | 연도·기관 | 모달리티 | 핵심 |
@@ -1993,4 +1995,4 @@ Gemini API : genai.Client → files.upload(사진) → generate_content([사진,
 > ➡️ **다음 장 — 17장. 트랜스포머 속도 높이기 (정리 예정)**  
 > 이 장의 모델은 ViT-B만 해도 8,600만, BLIP-2는 약 38억 파라미터다. 17장은 어텐션 계산을 빠르게 하는 커널(플래시 어텐션), 상대 위치 인코딩(RoPE·ALiBi) 등으로 트랜스포머를 **더 빠르고 가볍게** 만드는 방법을 다룬다.
 
-[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · 17장. 트랜스포머 속도 높이기 (정리 예정) →
+[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 17장. 트랜스포머 속도 높이기 (정리 예정) →

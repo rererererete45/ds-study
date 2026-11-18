@@ -1,6 +1,6 @@
 # 14장. RNN과 어텐션을 사용한 자연어 처리
 
-[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)
+[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 14장 · 노트북 `14_nlp_with_rnns_and_attention.ipynb`
 >
@@ -531,6 +531,8 @@ sum(p.numel() for p in model.parameters())     # 158253
 
 ### 1-4. 훈련과 결과
 
+> 🎯 **목적** — char-RNN을 훈련하고 검증 성능을 확인한다.
+
 **코드**
 
 ```python
@@ -1003,6 +1005,8 @@ desire? to him renerge
 
 ### 2-1. IMDB 데이터셋 적재
 
+> 🎯 **목적** — 감성 분석에 쓸 IMDB 리뷰 데이터를 적재하고 구조를 확인한다.
+
 **코드**
 
 ```python
@@ -1066,6 +1070,8 @@ imdb_train_set[16]["label"]
 ```
 
 ### 2-3. BPE 토크나이저 훈련
+
+> 🎯 **목적** — 자주 함께 나오는 글자 쌍을 합쳐 가며 서브워드 어휘를 만드는 BPE를 직접 훈련한다.
 
 **코드**
 
@@ -1152,6 +1158,8 @@ merge 5: 'n'+'e' (freq 6) -> {'low': 5, 'low e r': 2, 'ne w est': 6, 'w i d est'
 - 새 텍스트를 인코딩할 때는 훈련에서 배운 **병합 규칙을 같은 순서로** 적용한다. 그래서 처음 보는 단어(`lowest`)도 `low` + `est`로 자를 수 있다
 
 ### 2-5. 인코딩과 디코딩
+
+> 🎯 **목적** — 텍스트 ↔ 토큰 ID 변환과 특수 토큰을 확인한다.
 
 **코드**
 
@@ -1334,6 +1342,8 @@ for initial_alphabet in ([], alpha):
 
 ### 2-8. WordPiece
 
+> 🎯 **목적** — BERT가 쓰는 WordPiece 토큰화가 BPE와 어떻게 다른지 이해한다.
+
 **코드**
 
 ```python
@@ -1373,6 +1383,8 @@ wp_decoded.replace(" ##", "").replace(" !", "!")
 - BERT의 토크나이저가 WordPiece다 (2-10절)
 
 ### 2-9. 유니그램 언어 모델
+
+> 🎯 **목적** — 큰 어휘에서 확률이 낮은 토큰을 지워 가는 유니그램 토큰화를 이해한다.
 
 **코드**
 
@@ -2348,6 +2360,8 @@ classifier_mnli([
 
 ### 3-2. 데이터셋과 토크나이저
 
+> 🎯 **목적** — 번역용 영어–스페인어 쌍 데이터와 토크나이저를 준비한다.
+
 **코드**
 
 ```python
@@ -2410,6 +2424,8 @@ nmt_tokenizer.encode("<s> Me gusta el fútbol").ids
 
 ### 3-3. 배치 만들기와 교사 강요
 
+> 🎯 **목적** — 디코더 입력을 한 칸 밀어 넣는 교사 강요용 배치를 만든다.
+
 **코드** — 입력을 담을 자료형
 
 ```python
@@ -2466,6 +2482,8 @@ nmt_test_loader = DataLoader(nmt_test_set, batch_size=batch_size,
 
 ### 3-4. NMT 모델
 
+> 🎯 **목적** — 인코더–디코더 번역 모델을 구현한다.
+
 ```python
 class NmtModel(nn.Module):
     def __init__(self, vocab_size, embed_dim=512, pad_id=0, hidden_dim=512,
@@ -2516,6 +2534,8 @@ sum(p.numel() for p in nmt_model.parameters())          # 16553744
 
 ### 3-5. 훈련과 결과
 
+> 🎯 **목적** — 번역 모델을 훈련하고 학습 곡선을 확인한다.
+
 ```python
 n_epochs = 10
 xentropy = nn.CrossEntropyLoss(ignore_index=0)  # ignore <pad> tokens
@@ -2556,6 +2576,8 @@ torch.save(nmt_model.state_dict(), "my_nmt_model.pt")
 ```
 
 ### 3-6. 번역하기: 탐욕적 디코딩
+
+> 🎯 **목적** — 매 단계 가장 확률이 높은 토큰을 골라 문장을 생성한다.
 
 **코드**
 
@@ -2742,6 +2764,8 @@ beam_search(nmt_model, longest_text, beam_width=3)
 
 ### 4-2. 바다나우 어텐션과 루옹 어텐션
 
+> 🎯 **목적** — 두 대표 어텐션 방식의 점수 계산 차이를 정리한다.
+
 | | 바다나우 어텐션 (2014) | **루옹 어텐션** (2015) |
 |---|---|---|
 | 다른 이름 | 연결(concatenative) 어텐션, **덧셈**(additive) 어텐션 | **곱셈**(multiplicative) 어텐션, **점곱**(dot-product) 어텐션 |
@@ -2765,6 +2789,8 @@ beam_search(nmt_model, longest_text, beam_width=3)
 쿼리와 각 키의 유사도(점곱)를 소프트맥스로 가중치로 바꾸고, 그 가중치로 값을 평균 낸다. 딕셔너리는 키가 정확히 일치하는 항목 **하나**를 돌려주지만, 어텐션은 비슷한 정도에 따라 **모든 항목을 섞어** 돌려준다 → 미분 가능한 "부드러운 검색".
 
 ### 4-3. 점곱 어텐션 구현
+
+> 🎯 **목적** — 쿼리·키·값으로 어텐션을 직접 구현한다.
 
 **코드**
 
@@ -2793,6 +2819,8 @@ def attention(query, key, value):  # note: dq == dk and Lk == Lv
 - 반복문이 없다. 디코더의 **모든 스텝에 대한 어텐션을 행렬 곱 두 번으로** 계산한다 (교사 강요로 디코더 출력이 한꺼번에 있기 때문)
 
 ### 4-4. 보충 코드: 어텐션 가중치와 패딩 마스크
+
+> 🎯 **목적** — 패딩 토큰에 어텐션이 가지 않도록 마스크하는 효과를 수치로 확인한다.
 
 **보충 코드** — 형태와 가중치 확인
 
@@ -2849,6 +2877,8 @@ w_mask = torch.softmax(s, dim=-1)
 
 ### 4-5. 어텐션을 추가한 NMT 모델
 
+> 🎯 **목적** — 인코더–디코더에 어텐션을 붙여 긴 문장 번역을 개선한다.
+
 ```python
 class NmtModelWithAttention(nn.Module):
     def __init__(self, vocab_size, embed_dim=512, pad_id=0, hidden_dim=512,
@@ -2898,6 +2928,8 @@ class NmtModelWithAttention(nn.Module):
 - 점곱 어텐션 자체에는 **파라미터가 없다.** 늘어난 512만 개는 출력 층의 입력이 두 배가 됐기 때문이다
 
 ### 4-6. 훈련과 번역 결과
+
+> 🎯 **목적** — 어텐션 모델을 훈련하고 번역 품질을 비교한다.
 
 ```python
 torch.manual_seed(42)
@@ -3291,4 +3323,4 @@ cat(문맥 벡터, 디코더 출력) → Linear(1024, 10000)                    
 > ➡️ **다음 장 — [15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md)**  
 > 이 장의 모델은 어텐션을 쓰면서도 여전히 RNN이 토큰을 하나씩 차례로 처리했다. 15장은 순환 층을 모두 걷어 내고 **어텐션만으로** 인코더와 디코더를 만든 트랜스포머를 다룬다. 이 장에서 가져다 쓰기만 한 BERT(인코더)와 GPT(디코더)의 구조, 그리고 이를 바탕으로 한 챗봇을 직접 살펴본다.
 
-[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)
+[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)

@@ -1,6 +1,6 @@
 # 7장. 차원 축소
 
-[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](../README.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)
+[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 7장 · 노트북 `07_dimensionality_reduction.ipynb`
 >
@@ -141,6 +141,8 @@ for n in (2, 3, 10, 100, 1000, 10000):
 
 ### 2-1. 투영 (Projection)
 
+> 🎯 **목적** — 고차원 데이터가 실제로는 저차원 평면 근처에 몰려 있을 때, 그 평면으로 내려 차원을 줄이는 방법을 이해한다.
+
 실제 데이터는 모든 차원에 고르게 퍼져 있지 않고 **저차원 부분 공간 근처**에 몰려 있는 경우가 많다. 그 부분 공간에 수직으로 내리꽂으면 된다.
 
 먼저 실습용 3D 데이터를 만든다.
@@ -186,6 +188,8 @@ X3D_inv = pca.inverse_transform(X2D)    # 2D 좌표를 다시 3D 평면 위 위�
 - 오른쪽: 새 좌표축 $z_1$, $z_2$(화살표)로 표현한 2D 데이터. 3개였던 특성이 2개가 됐다
 
 ### 2-2. 매니폴드 학습 (Manifold Learning)
+
+> 🎯 **목적** — 투영이 실패하는 경우(말린 데이터)와, 데이터를 '펼쳐서' 차원을 줄이는 매니폴드 학습의 아이디어를 이해한다.
 
 투영이 항상 통하지는 않는다. 대표 반례가 **스위스 롤**.
 
@@ -247,6 +251,8 @@ positive_class = 2 * (t[:] - 4) > X_swiss[:, 1]  # 경계: 펼친 2D에선 직�
 
 ### 2-3. 투영이 데이터를 잘 보존하는 방향 (그림 7-7)
 
+> 🎯 **목적** — 어느 방향으로 투영해야 정보를 가장 적게 잃는지 직관을 얻는다 — PCA의 출발점.
+
 ```python
 angle = np.pi / 5
 stretch = 5
@@ -287,6 +293,8 @@ PCA(Principal Component Analysis): **데이터에 가장 가까운 초평면**�
 
 ### 3-1. 주성분 찾기 — SVD
 
+> 🎯 **목적** — 데이터의 분산이 가장 큰 축(주성분)을 특잇값 분해로 찾는다.
+
 ```python
 import numpy as np
 
@@ -320,6 +328,8 @@ assert np.allclose(X_centered, U @ Σ @ Vt)   # 원래대로 복원되는지 검
 
 ### 3-2. d차원으로 투영
 
+> 🎯 **목적** — 찾은 주성분 d개로 데이터를 투영하는 계산을 이해한다.
+
 ```python
 W2 = Vt[:2].T          # 처음 두 주성분을 열로 → shape (3, 2)
 X2D = X_centered @ W2  # (60, 3) @ (3, 2) = (60, 2)
@@ -329,6 +339,8 @@ X2D = X_centered @ W2  # (60, 3) @ (3, 2) = (60, 2)
 - 행렬 곱 한 번 = 각 샘플을 각 주성분 방향에 내적 = 그 축 위의 좌표
 
 ### 3-3. 사이킷런 사용하기
+
+> 🎯 **목적** — `PCA` 클래스로 같은 작업을 한 줄로 하고, 결과 속성을 확인한다.
 
 ```python
 from sklearn.decomposition import PCA
@@ -351,6 +363,8 @@ pca.components_
 
 ### 3-4. 설명된 분산의 비율
 
+> 🎯 **목적** — 각 주성분이 전체 분산의 몇 %를 담는지 확인한다.
+
 ```python
 pca.explained_variance_ratio_
 # array([0.82279334, 0.10821224])
@@ -365,6 +379,8 @@ pca.explained_variance_ratio_
 > ⚠️ 노트북 본문 설명은 "76%, 15%, 약 9% 손실"이라고 적혀 있지만, 실제 출력값은 82% / 11% / 6.9%. 데이터 생성 코드가 바뀐 뒤 설명이 갱신되지 않은 것으로 보인다. **출력값 기준으로 이해**하면 된다.
 
 ### 3-5. 적절한 차원 수 선택
+
+> 🎯 **목적** — 몇 차원으로 줄일지 정하는 네 가지 방법을 비교한다.
 
 **방법 1 — 누적 분산을 직접 계산**
 
@@ -470,6 +486,8 @@ grid_search.best_params_   # {'pca__n_components': 75}
 
 ### 3-6. 압축을 위한 PCA
 
+> 🎯 **목적** — PCA로 MNIST를 압축했다가 복원해 보고 재구성 오차를 이해한다.
+
 ```python
 pca = PCA(0.95)
 X_reduced = pca.fit_transform(X_train, y_train)   # y는 무시됨 (비지도)
@@ -506,6 +524,8 @@ for idx, X in enumerate((X_train[::2100], X_recovered[::2100])):  # 2,100장마�
 
 ### 3-7. 랜덤 PCA
 
+> 🎯 **목적** — 근사 알고리즘으로 PCA를 훨씬 빠르게 계산한다.
+
 ```python
 rnd_pca = PCA(n_components=154, svd_solver="randomized", random_state=42)
 X_reduced = rnd_pca.fit_transform(X_train)
@@ -521,6 +541,8 @@ X_reduced = rnd_pca.fit_transform(X_train)
 > 💡 d가 n보다 훨씬 작을 때 randomized가 압도적으로 빠르다. 결과도 거의 같다.
 
 ### 3-8. 점진적 PCA
+
+> 🎯 **목적** — 메모리에 다 안 들어가는 데이터를 미니배치로 나눠 PCA한다.
 
 전체 데이터가 메모리에 안 들어갈 때 → **미니배치로 나눠 학습**.
 
@@ -567,6 +589,8 @@ inc_pca.fit(X_mmap)
 
 ### 3-9. PCA 세 가지 비교
 
+> 🎯 **목적** — 일반·랜덤·점진적 PCA를 언제 쓰는지 정리한다.
+
 | 종류 | 언제 | 특징 |
 |---|---|---|
 | `PCA()` | 기본. 데이터가 메모리에 들어갈 때 | 정확 |
@@ -580,6 +604,8 @@ inc_pca.fit(X_mmap)
 아주 고차원(수만 이상)일 땐 PCA조차 느리다. 랜덤 투영은 **무작위 선형 투영 행렬**을 곱하기만 한다. 놀랍게도 거리 정보가 꽤 잘 보존된다.
 
 ### 4-1. 존슨–린덴슈트라우스 보조정리 — 몇 차원이 필요한가
+
+> 🎯 **목적** — 무작위 투영으로 거리를 거의 보존하려면 몇 차원이 필요한지 계산한다.
 
 ```python
 from sklearn.random_projection import johnson_lindenstrauss_min_dim
@@ -612,6 +638,8 @@ d   # 7300
 
 ### 4-2. 직접 구현
 
+> 🎯 **목적** — 무작위 행렬 하나를 곱하는 것만으로 차원 축소가 된다는 것을 넘파이로 확인한다.
+
 ```python
 n = 20_000
 rng = np.random.default_rng(seed=42)
@@ -630,6 +658,8 @@ X_reduced = X @ P.T                             # (5000, 20000) @ (20000, 7300)
 > ⚠️ 이 절은 메모리를 약 2.5 GB 쓴다. 부족하면 `m`, `n`을 줄일 것.
 
 ### 4-3. 사이킷런
+
+> 🎯 **목적** — `GaussianRandomProjection`으로 같은 작업을 하고 역변환도 해 본다.
 
 ```python
 from sklearn.random_projection import GaussianRandomProjection
@@ -652,6 +682,8 @@ X_recovered = X_reduced @ components_pinv.T
 - 계산량이 커서 몇 분 걸릴 수 있음
 
 ### 4-4. 희소 랜덤 투영
+
+> 🎯 **목적** — 대부분이 0인 무작위 행렬로 메모리와 시간을 줄인다.
 
 ```python
 from sklearn.random_projection import SparseRandomProjection
@@ -773,6 +805,8 @@ X_reduced_tsne = tsne.fit_transform(X_swiss)
 > ⚠️ **t-SNE, MDS, Isomap, LLE에는 새 데이터용 `transform`이 없거나 제한적**이다(t-SNE는 아예 없음). 학습한 데이터만 변환 가능 → 주로 시각화·탐색용.
 
 ### 6-1. 커널 PCA (Extra Material)
+
+> 🎯 **목적** — 커널 트릭으로 비선형 투영을 하는 커널 PCA와, 커널·하이퍼파라미터를 고르는 방법을 본다.
 
 ```python
 from sklearn.decomposition import KernelPCA
@@ -1136,4 +1170,4 @@ X_lda_reduced = lda.fit_transform(X_sample, y_sample)   # 레이블 사용!
 > ➡️ **다음 장 — [8장. 비지도 학습](08_unsupervised_learning.md)**  
 > 차원 축소와 함께 비지도 학습의 다른 축 — **레이블 없이 구조를 찾는 군집과 밀도 추정**.
 
-[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](../README.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)
+[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)

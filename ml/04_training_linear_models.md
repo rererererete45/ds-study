@@ -1,6 +1,6 @@
 # 4장. 모델 훈련
 
-[← 3장. 분류](03_classification.md) · [📚 전체 목차](../README.md) · [5장. 결정 트리 →](05_decision_trees.md)
+[← 3장. 분류](03_classification.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [5장. 결정 트리 →](05_decision_trees.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 4장 · 노트북 `04_training_linear_models.ipynb`
 >
@@ -82,7 +82,8 @@
    - [8-2. 개념과 코드 대응](#8-2-개념과-코드-대응)
    - [8-3. 모델 비교](#8-3-모델-비교)
    - [8-4. 주요 결과](#8-4-주요-결과)
-   - [8-5. 핵심 원칙](#8-5-핵심-원칙)
+   - [8-5. 자주 쓴 코드 패턴](#8-5-자주-쓴-코드-패턴)
+   - [8-6. 핵심 원칙](#8-6-핵심-원칙)
 
 ---
 
@@ -2421,7 +2422,23 @@ accuracy_score
 | 6-6 | 소프트맥스 `predict_proba([[5, 2]])` | [0.00, 0.04, 0.96] |
 | 7-5, 7-6 | NumPy 소프트맥스 (규제 + 조기 종료) | 403 에포크, 검증·테스트 정확도 0.967 |
 
-### 8-5. 핵심 원칙
+### 8-5. 자주 쓴 코드 패턴
+
+| 패턴 | 용도 | 위치 |
+|---|---|---|
+| `add_dummy_feature(X)` | 모든 샘플 앞에 $x_0 = 1$ 열 추가 (절편용) | 1-3 |
+| `np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y` / `np.linalg.pinv(X_b) @ y` | 정규 방정식 / 유사역행렬 | 1-3, 1-4 |
+| `theta -= eta * 2 / m * X_b.T @ (X_b @ theta - y)` | 배치 경사 하강법 한 스텝 | 2-2 |
+| `rng.integers(m)` + `X_b[i : i+1]` | SGD에서 샘플 하나를 2차원으로 꺼내기 | 2-4 |
+| `SGDRegressor(max_iter, tol, penalty, eta0)` | 사이킷런 SGD 회귀 | 2-5 |
+| `PolynomialFeatures(degree, include_bias=False)` | 다항 특성 추가 | 3-1 |
+| `learning_curve(model, X, y, train_sizes=..., cv=5)` | 학습 곡선 데이터 | 4-2 |
+| `Ridge(alpha)`, `Lasso(alpha)`, `ElasticNet(alpha, l1_ratio)` | 규제 선형 회귀 | 5-2 ~ 5-5 |
+| `sgd_reg.partial_fit(X, y)` 반복 + `deepcopy(sgd_reg)` | 에포크마다 이어서 훈련하며 검증 오차가 가장 낮은 모델 저장(조기 종료) | 5-6 |
+| `LogisticRegression(C=...)` + `predict_proba` | 로지스틱·소프트맥스 회귀 (C가 작을수록 규제 강함) | 6-3 ~ 6-6 |
+| `np.meshgrid` → `np.c_[x0.ravel(), x1.ravel()]` → `.reshape(x0.shape)` | 결정 경계·등고선용 격자 예측 | 6-5 |
+
+### 8-6. 핵심 원칙
 
 1. 특성이 적으면 닫힌 형태 해, 특성이 많거나 데이터가 크면 경사 하강법을 쓴다.
 2. 경사 하강법과 규제 모델은 반드시 특성 스케일을 맞춘다.
@@ -2436,4 +2453,4 @@ accuracy_score
 > ➡️ **다음 장 — [5장. 결정 트리](05_decision_trees.md)**  
 > 선형 모델과 전혀 다른, **질문(if-else)으로 공간을 나누는 비선형 모델** — 결정 트리. 4장의 규제·학습 곡선 개념을 그대로 적용한다.
 
-[← 3장. 분류](03_classification.md) · [📚 전체 목차](../README.md) · [5장. 결정 트리 →](05_decision_trees.md)
+[← 3장. 분류](03_classification.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [5장. 결정 트리 →](05_decision_trees.md)

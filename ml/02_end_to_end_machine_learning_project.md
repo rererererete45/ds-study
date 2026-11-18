@@ -1,6 +1,6 @@
 # 2장. 머신러닝 프로젝트 처음부터 끝까지
 
-[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](../README.md) · [3장. 분류 →](03_classification.md)
+[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [3장. 분류 →](03_classification.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 2장 · 노트북 `02_end_to_end_machine_learning_project.ipynb`
 >
@@ -90,7 +90,8 @@
    - [9-1. 전체 흐름](#9-1-전체-흐름)
    - [9-2. 개념과 코드 대응](#9-2-개념과-코드-대응)
    - [9-3. 주요 결과](#9-3-주요-결과)
-   - [9-4. 핵심 원칙](#9-4-핵심-원칙)
+   - [9-4. 자주 쓴 코드 패턴](#9-4-자주-쓴-코드-패턴)
+   - [9-5. 핵심 원칙](#9-5-핵심-원칙)
 
 ---
 
@@ -291,6 +292,8 @@ RangeIndex: 20640 entries, 0 to 20639
 
 ### 2-4. 무작위 분할
 
+> 🎯 **목적** — 가장 단순한 분할 방법과 그 한계(데이터가 갱신되면 테스트 세트가 바뀜)를 확인한다.
+
 **개념·원리**
 인덱스를 무작위로 섞은 뒤 앞쪽 일정 비율을 테스트 세트로 사용한다.
 
@@ -324,6 +327,8 @@ train_set, test_set = train_test_split(housing_full, test_size=0.2,
 데이터셋이 갱신되어 행 수가 바뀌면 순열 전체가 달라진다 → 이전 테스트 샘플이 훈련 세트로 유입된다.
 
 ### 2-5. 해시 기반 분할
+
+> 🎯 **목적** — 데이터가 추가돼도 기존 샘플의 훈련/테스트 소속이 바뀌지 않는 분할 방법을 만든다.
 
 **개념·원리**
 각 샘플의 불변 식별자(ID)를 해시 함수에 넣고, 해시값이 일정 임계값 미만이면 테스트 세트로 보낸다.
@@ -1365,6 +1370,8 @@ forest_rmse = root_mean_squared_error(housing_labels, housing_predictions)
 
 ### 5-3. 모델 비교와 진단
 
+> 🎯 **목적** — 훈련 오차와 교차 검증 오차를 나란히 놓고 과소적합·과대적합을 진단해 유망한 모델을 고른다.
+
 **개념·원리**
 
 | 훈련 오차 | 검증 오차 | 진단 | 대응 |
@@ -1648,6 +1655,8 @@ predictions = final_model_reloaded.predict(new_data)
 **실무 구성**: 사용자 정의 변환기를 별도 모듈(`.py`)로 분리 → 학습 코드와 운영 코드가 같은 모듈을 import
 
 ### 7-2. 운영 단계 작업
+
+> 🎯 **목적** — 모델을 배포한 뒤 해야 할 일(모니터링, 재훈련, 백업)을 정리한다.
 
 | 영역 | 내용 |
 |---|---|
@@ -1976,7 +1985,26 @@ assert np.all(scaler.get_feature_names_out() == ["a", "b"])
 | 랜덤 서치 최적 (CV) | 42,214 |
 | **최종 테스트** | **41,446** (95% CI: 39,521 ~ 43,702) |
 
-### 9-4. 핵심 원칙
+### 9-4. 자주 쓴 코드 패턴
+
+| 패턴 | 용도 | 위치 |
+|---|---|---|
+| `train_test_split(X, test_size=0.2, stratify=계층열, random_state=42)` | 계층 샘플링으로 테스트 세트 분리 | 2-6 |
+| `df.corr(numeric_only=True)["타깃"].sort_values(ascending=False)` | 타깃과의 상관계수 순위 | 3-2 |
+| `SimpleImputer(strategy="median")` | 결측치를 훈련 세트 중앙값으로 채우기 | 4-2 |
+| `OneHotEncoder(handle_unknown="ignore")` | 범주형 → 원-핫. 처음 보는 범주는 모두 0 | 4-3 |
+| `StandardScaler()` (`fit`은 훈련 세트로만) | 표준화 | 4-4 |
+| `FunctionTransformer(np.log, feature_names_out="one-to-one")` | 상태 없는 변환을 변환기로 | 4-7 |
+| `class 이름(BaseEstimator, TransformerMixin)` + `fit`·`transform` | 상태 있는 사용자 정의 변환기 | 4-7 |
+| `ColumnTransformer([(이름, 변환기, 열 목록), ...], remainder=...)` | 열 묶음마다 다른 전처리 | 4-8 |
+| `make_pipeline(전처리, 모델)` | 전처리 + 모델을 한 객체로 | 4-8, 5-1 |
+| `-cross_val_score(model, X, y, scoring="neg_root_mean_squared_error", cv=10)` | 교차 검증 RMSE | 5-2 |
+| `GridSearchCV` / `RandomizedSearchCV` + `"단계__파라미터"` | 파이프라인 안쪽 하이퍼파라미터 탐색 | 6-1, 6-2 |
+| `search.best_estimator_["단계"].feature_importances_` | 최종 모델의 특성 중요도 | 6-3 |
+| `scipy.stats.bootstrap([오차], 함수, confidence_level=0.95)` | 테스트 RMSE의 신뢰구간 | 6-4 |
+| `joblib.dump(model, "파일.pkl")` / `joblib.load(...)` | 모델 저장·로드 | 7-1 |
+
+### 9-5. 핵심 원칙
 
 1. 테스트 세트는 탐색 전에 분리하고, 최종 평가에서 한 번만 사용한다.
 2. 중요 특성이 있으면 계층 샘플링으로 분포를 보존한다.
@@ -1991,4 +2019,4 @@ assert np.all(scaler.get_feature_names_out() == ["a", "b"])
 > ➡️ **다음 장 — [3장. 분류](03_classification.md)**  
 > 같은 워크플로를 **회귀에서 분류로** 옮긴다. 분류에서는 모델보다 **성능을 올바르게 재는 법**이 핵심이 된다.
 
-[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](../README.md) · [3장. 분류 →](03_classification.md)
+[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [3장. 분류 →](03_classification.md)

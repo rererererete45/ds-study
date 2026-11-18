@@ -1,6 +1,6 @@
 # 5장. 결정 트리
 
-[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](../README.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)
+[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 5장 · 노트북 `05_decision_trees.ipynb`
 >
@@ -68,7 +68,8 @@
    - [13-1. 전체 흐름](#13-1-전체-흐름)
    - [13-2. 개념과 코드 대응](#13-2-개념과-코드-대응)
    - [13-3. 주요 결과](#13-3-주요-결과)
-   - [13-4. 핵심 원칙](#13-4-핵심-원칙)
+   - [13-4. 자주 쓴 코드 패턴](#13-4-자주-쓴-코드-패턴)
+   - [13-5. 핵심 원칙](#13-5-핵심-원칙)
 
 ---
 
@@ -341,6 +342,8 @@ plt.show()
 
 ### 2-3. 모델 해석 가능성
 
+> 🎯 **목적** — 결정 트리가 왜 '화이트박스' 모델로 불리는지 이해한다.
+
 **개념·원리**
 
 | 구분 | 모델 | 특징 |
@@ -473,6 +476,8 @@ best_split(X_iris[right], y[right])          # (1, 1.75, 0.1103)   깊이 1
 
 ### 4-3. 탐욕 알고리즘의 한계
 
+> 🎯 **목적** — CART가 매 단계 최선만 고르기 때문에 전체 최적 트리를 보장하지 못한다는 점을 이해한다.
+
 **개념·원리**
 - CART는 각 단계에서 **현재 비용이 최소인 분할**만 선택하고 이후 단계는 고려하지 않는 **탐욕 알고리즘**(greedy algorithm)
 - 합리적으로 좋은 해를 찾지만 **전역 최적 트리를 보장하지 않는다**
@@ -587,6 +592,8 @@ tree_ent.fit(X_iris, y_iris)
 > - 트리의 성장을 제한하는 **규제**가 필요하다
 
 ### 7-2. 규제 하이퍼파라미터 종류
+
+> 🎯 **목적** — 트리의 자유도를 제한하는 하이퍼파라미터들을 한눈에 정리한다.
 
 **개념·원리**
 
@@ -736,6 +743,8 @@ Source.from_file("my_regression_tree.dot")
 - 데이터가 무작위 생성이므로 교재 그림과 수치가 다를 수 있음
 
 ### 8-2. 회귀용 CART 비용 함수
+
+> 🎯 **목적** — 회귀 트리는 불순도 대신 무엇(MSE)을 최소화하며 분할하는지 이해한다.
 
 **개념·원리**
 
@@ -1279,7 +1288,21 @@ accuracy_score(y_test, y_pred_majority_votes.reshape([-1]))   # 0.873
 | 연습 7 | 튜닝한 단일 트리 | 테스트 0.8595 |
 | 연습 8 | 개별 트리 평균 / 다수결 | 0.806 / **0.873** |
 
-### 13-4. 핵심 원칙
+### 13-4. 자주 쓴 코드 패턴
+
+| 패턴 | 용도 | 위치 |
+|---|---|---|
+| `DecisionTreeClassifier(max_depth=2, random_state=42)` | 결정 트리 분류 | 1-1 |
+| `export_graphviz(tree, out_file=..., feature_names=..., filled=True)` | 트리 구조 그림 | 1-2 |
+| `tree.predict_proba(X)` | 리프의 클래스 비율 = 추정 확률 | 3 |
+| `max_depth`, `min_samples_leaf`, `max_leaf_nodes` | 트리 규제 | 7-2 |
+| `DecisionTreeRegressor(max_depth=...)` | 회귀 트리 | 8-1 |
+| `make_pipeline(StandardScaler(), PCA())` → 트리 | 축 방향 민감성 줄이기 | 9-2 |
+| `tree.tree_.children_left`, `.feature`, `.threshold`, `.value` | 학습된 트리 구조 직접 읽기 | 11 |
+| `GridSearchCV(DecisionTreeClassifier(), {"max_leaf_nodes": ..., "max_depth": ..., "min_samples_split": ...}, cv=3)` | 트리 하이퍼파라미터 탐색 | 12-2 |
+| `ShuffleSplit(n_splits=1000, test_size=len(X_train) - 100)` + `scipy.stats.mode(Y_pred, axis=0)` | 샘플 100개짜리 작은 트리 1,000개의 다수결 숲 | 12-3 |
+
+### 13-5. 핵심 원칙
 
 1. 결정 트리는 "특성 ≤ 임곗값" 질문으로 공간을 축 정렬 직사각형으로 나누며, 스케일링이 필요 없다.
 2. CART는 자식 불순도(회귀는 MSE)의 가중 평균을 최소화하는 분할을 탐욕적으로 고른다. 전역 최적은 보장되지 않는다.
@@ -1294,4 +1317,4 @@ accuracy_score(y_test, y_pred_majority_votes.reshape([-1]))   # 0.873
 > ➡️ **다음 장 — [6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md)**  
 > 결정 트리의 가장 큰 약점인 **높은 분산**을 여러 예측기를 모아 해결한다 — 앙상블과 랜덤 포레스트.
 
-[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](../README.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)
+[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)
