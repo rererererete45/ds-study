@@ -1,6 +1,6 @@
 # 14장. RNN과 어텐션을 사용한 자연어 처리
 
-13장. RNN과 CNN을 사용한 시퀀스 처리 (정리 예정) · [📚 전체 목차](../README.md) · 15장. 자연어 처리와 챗봇을 위한 트랜스포머 (정리 예정) →
+[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · 15장. 자연어 처리와 챗봇을 위한 트랜스포머 (정리 예정) →
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 14장 · 노트북 `14_nlp_with_rnns_and_attention.ipynb`
 >
@@ -11,7 +11,7 @@
 > - **14.3** 영어 → 스페인어 **신경망 기계 번역(NMT)**. 인코더–디코더 구조, 교사 강요, 탐욕적 디코딩과 **빔 검색**
 > - **14.4** 디코더가 매 스텝 입력 문장의 필요한 부분을 골라 보는 **어텐션 메커니즘**(루옹 어텐션)
 >
-> ⬅️ **앞에서** 13장의 순환 층(`nn.GRU`)과 "**은닉 상태**를 다음 타임 스텝으로 넘긴다"는 RNN의 기본 동작을 그대로 쓴다(처음 나올 때 한 줄씩 다시 설명한다). 훈련 루프·`torchmetrics`·`state_dict` 저장은 [10장](10_neural_nets_with_pytorch.md), [NAdam](11_training_deep_neural_networks.md#3-7-adamax-nadam-adamw)·[학습률 스케줄](11_training_deep_neural_networks.md)·[전이 학습(동결)](11_training_deep_neural_networks.md#2-5-층-재사용--동결--미세-튜닝)은 11장, 사전 훈련 모델을 가져다 쓰는 방식은 [12장 7~8절](12_deep_computer_vision_with_cnns.md#7-torchvision의-사전-훈련-모델-사용하기-127)과 같다.  
+> ⬅️ **앞에서** [13장](13_processing_sequences_using_rnns_and_cnns.md)의 순환 층(`nn.GRU`)과 "**은닉 상태**를 다음 타임 스텝으로 넘긴다"는 RNN의 기본 동작을 그대로 쓴다(처음 나올 때 한 줄씩 다시 설명한다). 훈련 루프·`torchmetrics`·`state_dict` 저장은 [10장](10_neural_nets_with_pytorch.md), [NAdam](11_training_deep_neural_networks.md#3-7-adamax-nadam-adamw)·[학습률 스케줄](11_training_deep_neural_networks.md)·[전이 학습(동결)](11_training_deep_neural_networks.md#2-5-층-재사용--동결--미세-튜닝)은 11장, 사전 훈련 모델을 가져다 쓰는 방식은 [12장 7~8절](12_deep_computer_vision_with_cnns.md#7-torchvision의-사전-훈련-모델-사용하기-127)과 같다.  
 > ➡️ **다음으로** 14.4의 어텐션은 아직 RNN에 **덧붙인** 부품이다. 15장은 RNN을 아예 걷어 내고 **어텐션만으로** 만든 트랜스포머로 넘어간다. 이 장에서 이름만 등장한 BERT·GPT-2가 바로 트랜스포머다.
 
 ## 이 장의 흐름
@@ -3291,4 +3291,4 @@ cat(문맥 벡터, 디코더 출력) → Linear(1024, 10000)                    
 > ➡️ **다음 장 — 15장. 자연어 처리와 챗봇을 위한 트랜스포머 (정리 예정)**  
 > 이 장의 모델은 어텐션을 쓰면서도 여전히 RNN이 토큰을 하나씩 차례로 처리했다. 15장은 순환 층을 모두 걷어 내고 **어텐션만으로** 인코더와 디코더를 만든 트랜스포머를 다룬다. 이 장에서 가져다 쓰기만 한 BERT(인코더)와 GPT(디코더)의 구조, 그리고 이를 바탕으로 한 챗봇을 직접 살펴본다.
 
-13장. RNN과 CNN을 사용한 시퀀스 처리 (정리 예정) · [📚 전체 목차](../README.md) · 15장. 자연어 처리와 챗봇을 위한 트랜스포머 (정리 예정) →
+[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · 15장. 자연어 처리와 챗봇을 위한 트랜스포머 (정리 예정) →

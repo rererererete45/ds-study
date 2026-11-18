@@ -40,7 +40,7 @@
    ↓ 완전 연결 층 대신 이미지 구조를 쓰는 층으로
 12장 합성곱 신경망을 사용한 심층 컴퓨터 비전 ─ 합성곱 · 풀링 · ResNet · 전이 학습 · 객체 탐지 · 분할
    ↓ 공간 구조에서 시간 구조로
-13장 RNN과 CNN을 사용한 시퀀스 처리 (정리 예정)
+13장 RNN과 CNN을 사용한 시퀀스 처리 ─ 순환 뉴런 · BPTT · 시계열 예측(나이브·SARIMA·RNN·Seq2Seq) · LSTM · GRU · 1D 합성곱 · WaveNet
    ↓ 숫자 시퀀스에서 텍스트 시퀀스로
 14장 RNN과 어텐션을 사용한 자연어 처리 ─ char-RNN · 서브워드 토큰화 · 감성 분석 · 허깅 페이스 · 인코더-디코더 · 빔 검색 · 어텐션
    ↓ RNN을 걷어 내고 어텐션만으로
@@ -63,6 +63,7 @@
 | [10장](ml/10_neural_nets_with_pytorch.md) | 파이토치로 신경망 구축하기 | 텐서, 하드웨어 가속(GPU), autograd, 훈련 루프, nn.Linear·nn.Sequential, 옵티마이저(SGD), DataLoader, 미니배치 경사 하강법, torchmetrics, 학습 곡선, nn.Module(와이드 & 딥·다중 입력·다중 출력), 토치비전, CrossEntropyLoss(로짓), Optuna(TPE·가지치기), state_dict, TorchScript, torch.compile |
 | [11장](ml/11_training_deep_neural_networks.md) | 심층 신경망 훈련 | 그레이디언트 소실·폭주, 글로럿·He·르쿤 초기화, LeakyReLU·ELU·SELU·GELU·Swish·Mish, 배치 정규화·층 정규화, 그레이디언트 클리핑, 전이 학습(동결·미세 튜닝), 모멘텀·네스테로프·AdaGrad·RMSProp·Adam·AdamW, 학습률 스케줄링(지수·성능 기반·웜업·코사인·1사이클), ℓ1·ℓ2 규제·가중치 감쇠, 드롭아웃, MC 드롭아웃, 맥스-노름, 조기 종료, CIFAR10 |
 | [12장](ml/12_deep_computer_vision_with_cnns.md) | 합성곱 신경망을 사용한 심층 컴퓨터 비전 | 국부 수용장, nn.Conv2d(필터·특성 맵·패딩·스트라이드), 메모리 요구량, 최대·평균 풀링, 깊이 방향 풀링, 전역 평균 풀링, LeNet-5·AlexNet·GoogLeNet(인셉션·1×1 병목)·VGGNet·ResNet(스킵 연결)·Xception(분리 합성곱)·SENet·EfficientNet·ConvNeXt, ResNet-34 구현, LazyLinear, 토치비전 사전 훈련 모델, 전이 학습(Flowers102), 데이터 증강, 위치 추정(BoundingBoxes·IoU), NMS, 완전 합성곱 신경망, YOLO, mAP, 객체 추적, 시맨틱 분할(FCN·전치 합성곱) |
+| [13장](ml/13_processing_sequences_using_rnns_and_cnns.md) | RNN과 CNN을 사용한 시퀀스 처리 | 순환 뉴런·메모리 셀, 시퀀스-투-시퀀스·시퀀스-투-벡터, BPTT, 시카고 승객 수 시계열, 계절성·차분, 나이브 예측, MAE·MAPE, ARIMA·SARIMA, ACF·PACF, TimeSeriesDataset, HuberLoss, ReduceLROnPlateau, nn.RNN, 심층 RNN, 다변량·다중 작업 예측, 여러 타임 스텝 예측, unfold, 시퀀스-투-시퀀스, 층 정규화, LSTM·LSTMCell, GRU·GRUCell, nn.Conv1d 다운샘플링, 인과적·팽창 합성곱, WaveNet, 죽은 ReLU 진단, 바흐 코랄 생성(온도 샘플링) |
 | [14장](ml/14_nlp_with_rnns_and_attention.md) | RNN과 어텐션을 사용한 자연어 처리 | char-RNN, CharDataset, nn.Embedding, GRU, permute(0, 2, 1), 온도 샘플링(torch.multinomial), 상태가 있는 RNN(StatefulCharDataset·detach), IMDB, tokenizers(BPE·BBPE·WordPiece·유니그램), 패딩·잘라내기·어텐션 마스크, AutoTokenizer(GPT-2·BERT·ALBERT), collate_fn, padding_idx, 패킹된 시퀀스(pack_padded_sequence), 양방향 GRU, 사전 훈련 임베딩(from_pretrained·freeze), BERT 문맥 임베딩(last_hidden_state·pooler_output), BertForSequenceClassification, Trainer·TrainingArguments, pipeline, 모델 편향, 인코더–디코더 NMT, 교사 강요, ignore_index, 탐욕적 디코딩, 빔 검색·길이 페널티, 바다나우·루옹 어텐션, 점곱 어텐션(쿼리·키·값), 어텐션 패딩 마스크 |
 
 ### 노트 읽는 법
