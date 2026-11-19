@@ -926,7 +926,7 @@ X_reduced_tsne = tsne.fit_transform(X_swiss)
 |---|---|---|
 | **LDA** (선형 판별 분석) | **레이블을 사용**. 클래스를 가장 잘 구분하는 축으로 투영. 분류 전처리로 좋음 | `LinearDiscriminantAnalysis` |
 | **랜덤 트리 임베딩** | 랜덤 트리의 리프 인덱스로 희소 표현 | `RandomTreesEmbedding` |
-| **커널 PCA** | 커널 트릭으로 비선형 투영 (아래) | `KernelPCA` |
+| **커널 PCA** | 커널 트릭<sup>[→부록 C](C_support_vector_machines.md#3-2-커널-트릭)</sup>으로 비선형 투영 (아래) | `KernelPCA` |
 | **UMAP** | t-SNE와 비슷하지만 더 빠르고 전역 구조도 꽤 보존 | 별도 패키지 `umap-learn` |
 
 > ⚠️ **t-SNE, MDS, Isomap, LLE에는 새 데이터용 `transform`이 없거나 제한적**이다(t-SNE는 아예 없음). 학습한 데이터만 변환 가능 → 주로 시각화·탐색용.

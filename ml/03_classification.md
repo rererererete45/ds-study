@@ -294,7 +294,7 @@ y_test_5 = (y_test == '5')
 
 **개념·원리**
 
-`SGDClassifier`: **확률적 경사 하강법**(Stochastic Gradient Descent)으로 학습하는 선형 분류기.
+`SGDClassifier`: **확률적 경사 하강법**<sup>[→4장](04_training_linear_models.md#2-4-확률적-경사-하강법)</sup>(Stochastic Gradient Descent)으로 학습하는 선형 분류기.
 
 결정 함수와 예측 규칙:
 
@@ -830,7 +830,7 @@ roc_auc_score(y_train_5, y_scores)
 **개념·원리**
 - `RandomForestClassifier`에는 `decision_function()`이 없다. 대신 `predict_proba()`로 **클래스별 추정 확률**을 반환한다.
 - 양성 확률을 결정 점수 대신 사용하면 같은 방법(PR 곡선, AUC)으로 비교할 수 있다.
-- 랜덤 포레스트: 결정 트리 여러 개의 예측을 모으는 앙상블 모델 (6장)
+- 랜덤 포레스트<sup>[→6장](06_ensemble_learning_and_random_forests.md#4-랜덤-포레스트-64)</sup>: 결정 트리 여러 개의 예측을 모으는 앙상블 모델 (6장)
 
 **코드: 클래스 확률**
 
@@ -955,7 +955,7 @@ recall_score(y_train_5, y_train_pred_forest)
 
 ![OvR과 OvO](images/03/extra_ovr_vs_ovo.png)
 
-(보충 그림. 클래스 3개의 가상 2D 데이터에 `LinearSVC`를 이진 분류기로 써서 각 전략의 결정 경계(점수 = 0인 선)를 그렸다.)
+(보충 그림. 클래스 3개의 가상 2D 데이터에 `LinearSVC`를 이진 분류기로 써서 각 전략의 결정 경계<sup>[→4장](04_training_linear_models.md#6-4-결정-경계-특성-1개)</sup>(점수 = 0인 선)를 그렸다.)
 
 - OvR의 각 직선은 "한 클래스 vs 나머지 전부"를 가른다 → 경계가 다른 두 클래스 사이를 지나기도 한다
 - OvO의 각 점선은 **두 클래스 사이만** 가른다 → 세 번째 클래스는 무시

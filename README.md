@@ -72,7 +72,7 @@
 | 장 | 주제 | 키워드 |
 |---|---|---|
 | [0장](ml/00_math_and_tools.md) | 시작하기 전에 — 수학과 파이썬 도구 (부록) | 넘파이 shape·axis·브로드캐스팅, 판다스, 그림 읽는 법, 내적·행렬 곱, 도함수·그레이디언트·연쇄 법칙, 정규분포·로그·소프트맥스, 기호 정리 |
-| [📖 용어집](ml/glossary.md) | 핵심 용어 202개 | 주제별 한 줄 뜻 + 처음 설명하는 곳 링크 |
+| [📖 용어집](ml/glossary.md) | 핵심 용어 217개 | 주제별 한 줄 뜻 + 처음 설명하는 곳 링크 |
 | [1장](ml/01_the_machine_learning_landscape.md) | 한눈에 보는 머신러닝 | 머신러닝 정의, 지도·비지도·준지도·자기 지도·강화 학습, 배치·온라인 학습, 사례 기반(KNN)·모델 기반(선형 회귀), fit·predict, 대표성 없는 데이터, 과대적합·과소적합, 규제(Ridge), 하이퍼파라미터, 훈련·검증·테스트 세트, 교차 검증, 데이터 불일치, 공짜 점심 없음 |
 | [2장](ml/02_end_to_end_machine_learning_project.md) | 머신러닝 프로젝트 처음부터 끝까지 | 계층 샘플링, 상관관계, SimpleImputer, OneHotEncoder, 스케일링, 사용자 정의 변환기, Pipeline·ColumnTransformer, 교차 검증, 그리드·랜덤 서치, 부트스트랩, joblib |
 | [3장](ml/03_classification.md) | 분류 | MNIST, SGDClassifier, StratifiedKFold, 오차 행렬, 정밀도·재현율·F1, 임곗값, PR·ROC 곡선, AUC, OvR·OvO, 오류 분석, 다중 레이블(ClassifierChain), 다중 출력, 데이터 증강, 타이타닉, 스팸 분류기 |

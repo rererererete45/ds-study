@@ -1128,7 +1128,7 @@ Epoch 20/20, Loss: 0.3072
 
 > 💬 **평가할 때는 모드를 바꾸고 미분을 끈다**
 >
-> 평가할 때는 `model.eval()`(드롭아웃·배치 정규화를 평가 모드로)과 `torch.no_grad()`(그래프를 안 만들어 메모리 절약)를 쓴다. 그리고 지표는 배치별 평균을 단순 평균하면 마지막 배치 크기가 달라 **조금 틀린다** → `torchmetrics`처럼 전체를 누적해 계산한다.
+> 평가할 때는 `model.eval()`(드롭아웃<sup>[→11장](11_training_deep_neural_networks.md#5-2-드롭아웃)</sup>·배치 정규화<sup>[→11장](11_training_deep_neural_networks.md#1-7-배치-정규화)</sup>를 평가 모드로)과 `torch.no_grad()`(그래프를 안 만들어 메모리 절약)를 쓴다. 그리고 지표는 배치별 평균을 단순 평균하면 마지막 배치 크기가 달라 **조금 틀린다** → `torchmetrics`처럼 전체를 누적해 계산한다.
 >
 > - **핵심 한 줄**: 훈련 루프 = `model.train()`, 평가 루프 = `model.eval()` + `no_grad()`. 이 짝을 습관으로
 

@@ -788,7 +788,7 @@ housing_tr = pd.DataFrame(X, columns=housing_num.columns,  # DataFrame 복원
 
 **설계 포인트**: 현재 결측은 한 열뿐이지만, 운영 데이터에서는 어느 열이든 결측이 생길 수 있으므로 **모든 수치형 열**에 적용한다.
 
-**참고: 이상치 탐지**
+**참고: 이상치 탐지**<sup>[→8장](08_unsupervised_learning.md#2-4-가우스-혼합으로-이상치-탐지)</sup>
 
 ```python
 from sklearn.ensemble import IsolationForest
@@ -874,14 +874,14 @@ cat_encoder.get_feature_names_out()    # ['ocean_proximity_<1H OCEAN', ..., 'oce
 
 > 📌 **정리**
 > - 명목형 → `OneHotEncoder(handle_unknown="ignore")`
-> - 범주 수가 매우 많으면 원-핫 대신 임베딩·대체 수치 특성 고려
+> - 범주 수가 매우 많으면 원-핫 대신 임베딩<sup>[→14장](14_nlp_with_rnns_and_attention.md#1-2-임베딩)</sup>·대체 수치 특성 고려
 
 ### 4-4. 특성 스케일링
 
 > 🎯 **목적** — 특성 간 값 범위 차이를 제거한다.
 
 **개념·원리**
-대부분의 알고리즘(선형 모델, 거리 기반, 경사 하강법 등)은 값 범위가 큰 특성에 지배된다. (예: 방 수 6~39,320 vs 소득 0~15) 트리 기반 모델은 영향이 적다.
+대부분의 알고리즘(선형 모델, 거리 기반, 경사 하강법<sup>[→4장](04_training_linear_models.md#2-1-경사-하강법의-원리)</sup> 등)은 값 범위가 큰 특성에 지배된다. (예: 방 수 6~39,320 vs 소득 0~15) 트리 기반 모델은 영향이 적다.
 
 **min-max 스케일링** (`feature_range=(a, b)`로 출력 범위를 [a, b]로 지정 가능)
 
@@ -1105,7 +1105,7 @@ class StandardScalerClone(BaseEstimator, TransformerMixin):
 > 🎯 **목적** — 3-1의 가설("인구 밀집 중심과의 거리")을 특성으로 구현한다.
 
 **개념·원리**
-1. `fit`: 위경도에 k-평균 군집을 적용해 군집 중심 k개를 학습
+1. `fit`: 위경도에 k-평균<sup>[→8장](08_unsupervised_learning.md#1-2-k-평균-훈련과-예측)</sup> 군집을 적용해 군집 중심 k개를 학습
 2. `transform`: 각 샘플과 각 군집 중심 사이의 RBF 유사도 계산 → k개 특성
 
 ```python
@@ -1308,7 +1308,7 @@ preprocessing.get_feature_names_out()
 
 > 💬 **훈련 오차만 보면 '0점짜리 천재'에게 속는다**
 >
-> 결정 트리의 훈련 RMSE가 0이 나왔다. 천재일까? 아니다. 시험지를 통째로 **외운** 것이다. 교차 검증으로 보면 선형 회귀보다 약간 나은 수준으로 추락한다.
+> 결정 트리<sup>[→5장](05_decision_trees.md#1-결정-트리-학습과-시각화-51)</sup>의 훈련 RMSE가 0이 나왔다. 천재일까? 아니다. 시험지를 통째로 **외운** 것이다. 교차 검증으로 보면 선형 회귀보다 약간 나은 수준으로 추락한다.
 >
 > - **핵심 한 줄**: 모델 비교는 **교차 검증 점수**로. 훈련 점수와의 **간격**이 과대적합의 크기다
 > - **헷갈림 주의**: 사이킷런 점수는 "클수록 좋음" 규칙이라 RMSE를 **음수**로 준다. `-cross_val_score(...)`의 마이너스를 빼먹지 말자
@@ -1412,7 +1412,7 @@ housing_predictions = forest_reg.predict(housing)
 forest_rmse = root_mean_squared_error(housing_labels, housing_predictions)
 ```
 
-**랜덤 포레스트**: 샘플·특성을 무작위로 추출해 학습한 결정 트리 여러 개의 예측을 평균하는 앙상블 모델 (6장).
+**랜덤 포레스트**<sup>[→6장](06_ensemble_learning_and_random_forests.md#4-랜덤-포레스트-64)</sup>: 샘플·특성을 무작위로 추출해 학습한 결정 트리 여러 개의 예측을 평균하는 앙상블 모델 (6장).
 
 **결과 해석**
 

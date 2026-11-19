@@ -7,7 +7,7 @@
 > 13장의 RNN은 숫자 시퀀스(시계열)를 다뤘다. 14장은 같은 RNN에 **텍스트**를 넣는다. 텍스트는 숫자가 아니므로 먼저 **토큰으로 자르고 → 정수 ID로 바꾸고 → 임베딩 벡터로 바꾸는** 단계가 필요하다. 그다음 RNN으로 텍스트를 **생성**하고, **분류**하고, 다른 언어로 **번역**한다. 마지막으로 RNN의 기억력 한계를 넘어서는 **어텐션 메커니즘**을 붙인다.
 >
 > - **14.1** 문자 단위 RNN(char-RNN)으로 다음 글자를 예측해 **셰익스피어 문체의 텍스트를 생성**한다. 임베딩, 온도 샘플링, 상태가 있는 RNN
-> - **14.2** IMDB 영화 리뷰 **감성 분석**. 서브워드 토큰화(BPE·BBPE·WordPiece·유니그램), 패킹된 시퀀스, 양방향 RNN, **사전 훈련된 임베딩·언어 모델(BERT) 재사용**, 허깅 페이스의 작업별 클래스·`Trainer`·`pipeline`
+> - **14.2** IMDB 영화 리뷰 **감성 분석**. 서브워드 토큰화(BPE·BBPE·WordPiece·유니그램), 패킹된 시퀀스, 양방향 RNN, **사전 훈련된 임베딩·언어 모델(BERT<sup>[→15장](15_transformers_for_nlp_and_chatbots.md#3-1-bert의-구조와-사전-훈련)</sup>) 재사용**, 허깅 페이스의 작업별 클래스·`Trainer`·`pipeline`
 > - **14.3** 영어 → 스페인어 **신경망 기계 번역(NMT)**. 인코더–디코더 구조, 교사 강요, 탐욕적 디코딩과 **빔 검색**
 > - **14.4** 디코더가 매 스텝 입력 문장의 필요한 부분을 골라 보는 **어텐션 메커니즘**(루옹 어텐션)
 >
@@ -2266,7 +2266,7 @@ classifier_imdb(train_reviews[:10])
 | 코드 | 의미 |
 |---|---|
 | `pipeline("sentiment-analysis", model=...)` | 작업 이름 + 모델 이름 → 토크나이저와 모델을 내려받아 묶는다. 작업 이름만 주면 기본 모델을 쓴다 |
-| `distilbert-base-uncased-finetuned-sst-2-english` | **DistilBERT**(BERT를 지식 증류로 약 40% 줄인 모델)를 **SST-2**(영화 리뷰 문장 감성 데이터셋)로 미세 튜닝한 모델 |
+| `distilbert-base-uncased-finetuned-sst-2-english` | **DistilBERT**(BERT를 지식 증류<sup>[→15장](15_transformers_for_nlp_and_chatbots.md#3-7-bert-이후의-인코더-모델)</sup>로 약 40% 줄인 모델)를 **SST-2**(영화 리뷰 문장 감성 데이터셋)로 미세 튜닝한 모델 |
 | `truncation=True, max_length=512` | 512토큰보다 긴 리뷰는 잘라서 오류를 피한다 |
 | 출력 | 텍스트마다 `{'label', 'score'}`. `score` = 그 레이블의 확률 |
 
@@ -3178,7 +3178,7 @@ england is to london as germany is to: germany (0.7) london (0.7) berlin (0.6) g
 
 ### 6-2. 7번 이후
 
-노트북에는 1~6번의 답만 있고, 나머지 연습문제 풀이는 "Work in progress"(준비 중)로 비어 있다. 풀이가 공개되면 이 절에 추가한다.
+노트북에는 1~6번의 답만 있고, 나머지 연습문제 풀이는 "Work in progress"(준비 중)로 비어 있다. 풀이가 공개되면 이 절에 추가한다. 그동안은 [7-7. 5분 셀프 테스트](#7-7-5분-셀프-테스트)(토큰화·패딩 마스크·교사 강요·빔 검색·어텐션)로 이 장 후반부를 점검하자.
 
 ---
 

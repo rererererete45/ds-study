@@ -7,18 +7,18 @@
 
 ## 목차
 
-- [1. 기본 개념과 데이터 (1~2장)](#1-기본-개념과-데이터-12장) — 35개
+- [1. 기본 개념과 데이터 (1~2장)](#1-기본-개념과-데이터-12장) — 36개
 - [2. 전처리와 사이킷런 (2장)](#2-전처리와-사이킷런-2장) — 13개
 - [3. 분류와 평가 지표 (3장)](#3-분류와-평가-지표-3장) — 13개
-- [4. 선형 모델과 최적화 (4장)](#4-선형-모델과-최적화-4장) — 23개
-- [5. 트리와 앙상블 (5~6장)](#5-트리와-앙상블-56장) — 16개
-- [6. 차원 축소와 비지도 학습 (7~8장)](#6-차원-축소와-비지도-학습-78장) — 19개
-- [7. 신경망 기초와 파이토치 (9~10장)](#7-신경망-기초와-파이토치-910장) — 12개
-- [8. 심층 신경망 훈련 (11장)](#8-심층-신경망-훈련-11장) — 14개
-- [9. CNN과 컴퓨터 비전 (12장)](#9-cnn과-컴퓨터-비전-12장) — 12개
-- [10. 시퀀스와 RNN (13장)](#10-시퀀스와-rnn-13장) — 9개
+- [4. 선형 모델과 최적화 (4장)](#4-선형-모델과-최적화-4장) — 24개
+- [5. 트리와 앙상블 (5~6장)](#5-트리와-앙상블-56장) — 17개
+- [6. 차원 축소와 비지도 학습 (7~8장)](#6-차원-축소와-비지도-학습-78장) — 21개
+- [7. 신경망 기초와 파이토치 (9~10장)](#7-신경망-기초와-파이토치-910장) — 14개
+- [8. 심층 신경망 훈련 (11장)](#8-심층-신경망-훈련-11장) — 16개
+- [9. CNN과 컴퓨터 비전 (12장)](#9-cnn과-컴퓨터-비전-12장) — 13개
+- [10. 시퀀스와 RNN (13장)](#10-시퀀스와-rnn-13장) — 11개
 - [11. 자연어 처리와 어텐션 (14장)](#11-자연어-처리와-어텐션-14장) — 10개
-- [12. 트랜스포머 (15~16장)](#12-트랜스포머-1516장) — 18개
+- [12. 트랜스포머 (15~16장)](#12-트랜스포머-1516장) — 21개
 - [13. 서포트 벡터 머신 (부록 C)](#13-서포트-벡터-머신-부록-c) — 8개
 
 
@@ -61,6 +61,7 @@
 | **계층 샘플링** | stratified sampling | 중요한 특성의 구간(계층)마다 비율에 맞게 뽑아 분포를 보존하는 샘플링 | [2장 2-6. 계층 샘플링](02_end_to_end_machine_learning_project.md#2-6-계층-샘플링) |
 | **데이터 스누핑 편향** | data snooping bias | 테스트 세트를 보고 모델을 고르는 바람에 성능을 낙관적으로 추정하게 되는 편향 | [2장 2-3. 테스트 세트 분리 원칙](02_end_to_end_machine_learning_project.md#2-3-테스트-세트-분리-원칙) |
 | **특성 공학** | feature engineering | 좋은 특성을 고르고(선택), 합치고(추출), 새로 만드는(생성) 작업 | [1장 5-4. 관련 없는 특성](01_the_machine_learning_landscape.md#5-4-관련-없는-특성) |
+| **k-최근접 이웃 (KNN)** | k-nearest neighbors | 새 샘플과 가장 가까운 훈련 샘플 k개의 레이블(평균 또는 다수결)로 예측하는 사례 기반 모델 | [1장 4-3. 사례 기반 학습 vs 모델 기반 학습](01_the_machine_learning_landscape.md#4-3-사례-기반-학습-vs-모델-기반-학습) |
 
 ## 2. 전처리와 사이킷런 (2장)
 
@@ -121,10 +122,11 @@
 | **로지스틱 회귀** | logistic regression | 선형 점수를 시그모이드에 통과시켜 양성 확률을 내는 이진 분류 모델 | [4장 6-1. 확률 추정](04_training_linear_models.md#6-1-확률-추정) |
 | **시그모이드** | sigmoid, logistic function | 어떤 실수든 0~1로 바꾸는 S자 함수 σ(t) = 1 / (1 + e⁻ᵗ) | [4장 6-1. 확률 추정](04_training_linear_models.md#6-1-확률-추정) |
 | **로짓** | logit | 시그모이드(또는 소프트맥스)에 넣기 전의 점수. 로그 오즈 | [4장 6-1. 확률 추정](04_training_linear_models.md#6-1-확률-추정) |
-| **교차 엔트로피** | cross entropy | 예측 확률이 정답 클래스에 낮을수록 커지는 분류용 비용 함수(로그 손실) | [4장 6-2. 훈련과 비용 함수](04_training_linear_models.md#6-2-훈련과-비용-함수) |
+| **교차 엔트로피 (크로스 엔트로피)** | cross entropy | 예측 확률이 정답 클래스에 낮을수록 커지는 분류용 비용 함수(로그 손실) | [4장 6-2. 훈련과 비용 함수](04_training_linear_models.md#6-2-훈련과-비용-함수) |
 | **결정 경계** | decision boundary | 모델이 예측 클래스를 바꾸는 경계. 로지스틱 회귀에서는 확률 50%인 곳 | [4장 6-4. 결정 경계: 특성 1개](04_training_linear_models.md#6-4-결정-경계-특성-1개) |
 | **소프트맥스 회귀** | softmax regression | 클래스마다 점수를 계산하고 소프트맥스로 확률로 바꾸는 다중 분류 모델 | [4장 6-6. 소프트맥스 회귀](04_training_linear_models.md#6-6-소프트맥스-회귀) |
 | **소프트맥스** | softmax | 점수 벡터를 합이 1인 확률 벡터로 바꾸는 함수. exp(점수) / Σexp | [4장 6-6. 소프트맥스 회귀](04_training_linear_models.md#6-6-소프트맥스-회귀) |
+| **배치 크기** | batch size | 경사 하강법 한 스텝에 쓰는 샘플 수. 크면 그레이디언트가 안정적이고 GPU 효율이 좋지만 메모리를 많이 쓴다 | [9장 3-4. 배치 크기](09_artificial_neural_networks.md#3-4-배치-크기) |
 
 ## 5. 트리와 앙상블 (5~6장)
 
@@ -146,6 +148,7 @@
 | **AdaBoost** | adaptive boosting | 앞 모델이 틀린 샘플의 가중치를 높여 다음 모델을 훈련하는 부스팅 | [6장 5-1. AdaBoost (Adaptive Boosting)](06_ensemble_learning_and_random_forests.md#5-1-adaboost-adaptive-boosting) |
 | **그레이디언트 부스팅** | gradient boosting | 앞 모델의 잔차(오차)를 다음 모델이 학습하는 부스팅 | [6장 5-2. 그레이디언트 부스팅 (Gradient Boosting)](06_ensemble_learning_and_random_forests.md#5-2-그레이디언트-부스팅-gradient-boosting) |
 | **스태킹** | stacking | 예측들을 합치는 방법 자체를 블렌더(메타 모델)로 학습하는 앙상블 | [6장 6. 스태킹](06_ensemble_learning_and_random_forests.md#6-스태킹-66) |
+| **리프 노드** | leaf node | 자식이 없는 맨 아래 노드. 예측값(다수 클래스·평균)이 여기서 나온다 | [5장 1-3. 노드 정보와 지니 불순도](05_decision_trees.md#1-3-노드-정보와-지니-불순도) |
 
 ## 6. 차원 축소와 비지도 학습 (7~8장)
 
@@ -170,6 +173,8 @@
 | **EM 알고리즘** | expectation-maximization | 샘플의 군집 소속 확률 추정(E)과 분포 파라미터 갱신(M)을 반복하는 알고리즘 | [8장 기댓값-최대화(EM) 알고리즘](08_unsupervised_learning.md#기댓값-최대화em-알고리즘) |
 | **이상치 탐지 / 특이치 탐지** | anomaly / novelty detection | 정상에서 벗어난 샘플 찾기. 특이치 탐지는 깨끗한 데이터로 훈련하고 새 샘플만 판정 | [8장 2-4. 가우스 혼합으로 이상치 탐지](08_unsupervised_learning.md#2-4-가우스-혼합으로-이상치-탐지) |
 | **BIC / AIC** | Bayesian / Akaike information criterion | 모델 적합도와 파라미터 수를 함께 고려하는 지표. 작을수록 좋다. 군집 수 선택에 쓴다 | [8장 2-5. 군집 수 선택: BIC · AIC](08_unsupervised_learning.md#2-5-군집-수-선택-bic--aic) |
+| **SVD (특잇값 분해)** | singular value decomposition | 행렬을 UΣVᵀ로 나누는 분해. V의 열이 주성분, 특잇값²이 분산에 비례 | [7장 3-1. 주성분 찾기 — SVD](07_dimensionality_reduction.md#3-1-주성분-찾기--svd) |
+| **공분산 행렬** | covariance matrix | 특성 쌍마다 함께 변하는 정도를 모은 행렬. 대각선은 각 특성의 분산. PCA·가우스 혼합의 핵심 | [7장 3-1. 주성분 찾기 — SVD](07_dimensionality_reduction.md#3-1-주성분-찾기--svd) |
 
 ## 7. 신경망 기초와 파이토치 (9~10장)
 
@@ -186,7 +191,9 @@
 | **자동 미분** | autograd | 연산 기록을 바탕으로 그레이디언트를 자동으로 계산하는 파이토치 기능 (`backward()`) | [10장 1-6. 자동 미분 autograd](10_neural_nets_with_pytorch.md#1-6-자동-미분-autograd) |
 | **옵티마이저** | optimizer | 그레이디언트로 파라미터를 갱신하는 알고리즘(SGD, Adam 등) | [10장 2-3. 고수준 API로 선형 회귀](10_neural_nets_with_pytorch.md#2-3-고수준-api로-선형-회귀) |
 | **손실 함수** | loss function | 훈련 중 최소화하는 함수. 비용 함수와 같은 뜻으로 쓴다 | [10장 1-7. autograd로 경사 하강법 구현](10_neural_nets_with_pytorch.md#1-7-autograd로-경사-하강법-구현) |
-| **DataLoader** | data loader | 데이터셋을 미니배치로 나눠(필요하면 섞어) 꺼내 주는 파이토치 객체 | [10장 4-1. Dataset과 DataLoader](10_neural_nets_with_pytorch.md#4-1-dataset과-dataloader) |
+| **DataLoader** | data loader | 데이터셋을 미니배치로 나눠(필요하면 섞어) 꺼내 주는 파이토치 객체 | [10장 4. DataLoader로 미니배치 경사 하강법 구현하기](10_neural_nets_with_pytorch.md#4-dataloader로-미니배치-경사-하강법-구현하기-104) |
+| **Optuna** | Optuna | 좋았던 영역을 더 자주 시도(TPE)하고 가망 없는 시도는 중간에 자르는(가지치기) 하이퍼파라미터 탐색 라이브러리 | [10장 8-1. 목적 함수와 스터디](10_neural_nets_with_pytorch.md#8-1-목적-함수와-스터디) |
+| **체크포인트** | checkpoint | 훈련 중간의 모델 가중치(와 옵티마이저 상태)를 저장한 파일. 최고 성능 모델 보관·훈련 재개에 쓴다 | [10장 9-2. 가중치만 저장](10_neural_nets_with_pytorch.md#9-2-가중치만-저장) |
 
 ## 8. 심층 신경망 훈련 (11장)
 
@@ -197,15 +204,17 @@
 | **배치 정규화** | batch normalization | 층 입력을 미니배치 평균·표준편차로 정규화한 뒤 학습되는 스케일·이동을 적용하는 층 | [11장 1-7. 배치 정규화](11_training_deep_neural_networks.md#1-7-배치-정규화) |
 | **층 정규화** | layer normalization | 배치가 아니라 샘플 하나의 특성들로 정규화하는 층. RNN·트랜스포머에서 쓴다 | [11장 1-8. 층 정규화](11_training_deep_neural_networks.md#1-8-층-정규화) |
 | **그레이디언트 클리핑** | gradient clipping | 그레이디언트가 일정 크기를 넘지 않게 잘라 폭주를 막는 방법 | [11장 1-9. 그레이디언트 클리핑](11_training_deep_neural_networks.md#1-9-그레이디언트-클리핑) |
-| **전이 학습** | transfer learning | 비슷한 작업에서 미리 훈련된 모델의 층을 가져와 재사용하는 방법 | [11장 2-1. 전이 학습이란](11_training_deep_neural_networks.md#2-1-전이-학습이란) |
+| **전이 학습** | transfer learning | 비슷한 작업에서 미리 훈련된 모델의 층을 가져와 재사용하는 방법 | [11장 2. 사전 훈련된 층 재사용하기](11_training_deep_neural_networks.md#2-사전-훈련된-층-재사용하기-112) |
 | **미세 튜닝** | fine-tuning | 사전 훈련된 모델을 새 작업 데이터로 (작은 학습률로) 추가 훈련하는 것 | [11장 2-5. 층 재사용 · 동결 · 미세 튜닝](11_training_deep_neural_networks.md#2-5-층-재사용--동결--미세-튜닝) |
 | **동결** | freezing | 일부 층의 가중치를 훈련 중 바뀌지 않게 고정하는 것 | [11장 2-5. 층 재사용 · 동결 · 미세 튜닝](11_training_deep_neural_networks.md#2-5-층-재사용--동결--미세-튜닝) |
 | **모멘텀** | momentum | 이전 갱신 방향을 관성처럼 누적해 경사 하강을 가속하는 방법 | [11장 3-2. 모멘텀 최적화](11_training_deep_neural_networks.md#3-2-모멘텀-최적화) |
-| **Adam** | adaptive moment estimation | 모멘텀과 파라미터별 적응형 학습률(RMSProp)을 합친 옵티마이저 | [11장 3-6. Adam](11_training_deep_neural_networks.md#3-6-adam) |
-| **학습률 스케줄링** | learning rate scheduling | 훈련 중 학습률을 바꾸는 전략(지수 감소, 코사인, 1사이클 등) | [11장 4. 학습률 스케줄링](11_training_deep_neural_networks.md#4-학습률-스케줄링-114) |
+| **Adam** | adaptive moment estimation | 모멘텀과 파라미터별 적응형 학습률(RMSProp)을 합친 옵티마이저 | [11장 3. 고속 옵티마이저](11_training_deep_neural_networks.md#3-고속-옵티마이저-113) |
+| **학습률 스케줄링 (스케줄러)** | learning rate scheduling | 훈련 중 학습률을 바꾸는 전략(지수 감소, 코사인, 1사이클 등) | [11장 4. 학습률 스케줄링](11_training_deep_neural_networks.md#4-학습률-스케줄링-114) |
 | **웜업** | warmup | 훈련 초반에 학습률을 작게 시작해 점점 올리는 것 | [11장 4-4. 웜업](11_training_deep_neural_networks.md#4-4-웜업) |
 | **드롭아웃** | dropout | 훈련 중 매 스텝 뉴런 일부를 무작위로 꺼서 과대적합을 줄이는 규제 | [11장 5-2. 드롭아웃](11_training_deep_neural_networks.md#5-2-드롭아웃) |
 | **가중치 감쇠** | weight decay | 매 스텝 가중치를 조금씩 줄이는 규제. ℓ2 규제와 비슷한 효과 | [11장 5-1. ℓ1과 ℓ2 규제](11_training_deep_neural_networks.md#5-1-ℓ1과-ℓ2-규제) |
+| **SELU** | scaled exponential linear unit | 조건(표준화 입력, 르쿤 초기화, 순차 완전 연결)을 지키면 층 출력이 평균 0·분산 1을 스스로 유지하는 활성화 함수 | [11장 1-5. ELU와 SELU](11_training_deep_neural_networks.md#1-5-elu와-selu) |
+| **GELU** | Gaussian error linear unit | ReLU를 부드럽게 만든 활성화 함수. 트랜스포머(BERT, GPT)의 기본값 | [11장 1-6. GELU, Swish, Mish와 최신 활성화 함수](11_training_deep_neural_networks.md#1-6-gelu-swish-mish와-최신-활성화-함수) |
 
 ## 9. CNN과 컴퓨터 비전 (12장)
 
@@ -217,18 +226,19 @@
 | **특성 맵** | feature map | 필터 하나를 입력 전체에 적용한 출력. 그 패턴이 어디 있는지 보여 준다 | [12장 2-2. 필터와 특성 맵](12_deep_computer_vision_with_cnns.md#2-2-필터와-특성-맵) |
 | **패딩 / 스트라이드** | padding / stride | 입력 가장자리에 0을 덧대는 것 / 필터가 한 번에 이동하는 칸 수 | [12장 2-5. 패딩과 스트라이드](12_deep_computer_vision_with_cnns.md#2-5-패딩과-스트라이드) |
 | **풀링 층** | pooling layer | 영역마다 최댓값(또는 평균)만 남겨 특성 맵을 줄이는 층 | [12장 4. 파이토치로 풀링 층 구현하기](12_deep_computer_vision_with_cnns.md#4-파이토치로-풀링-층-구현하기-124) |
-| **전역 평균 풀링** | global average pooling | 특성 맵마다 전체 평균 하나만 남기는 풀링 | [12장 4-3. 전역 평균 풀링](12_deep_computer_vision_with_cnns.md#4-3-전역-평균-풀링) |
-| **잔차 연결 (스킵 연결)** | residual / skip connection | 층의 입력을 출력에 그대로 더하는 연결. 아주 깊은 네트워크도 훈련되게 한다 (ResNet) | [12장 5-8. ResNet](12_deep_computer_vision_with_cnns.md#5-8-resnet) |
+| **전역 평균 풀링** | global average pooling | 특성 맵마다 전체 평균 하나만 남기는 풀링 | [12장 4. 파이토치로 풀링 층 구현하기](12_deep_computer_vision_with_cnns.md#4-파이토치로-풀링-층-구현하기-124) |
+| **잔차 연결 (스킵 연결)** | residual / skip connection | 층의 입력을 출력에 그대로 더하는 연결. 아주 깊은 네트워크도 훈련되게 한다 (ResNet) | [12장 5. CNN 구조](12_deep_computer_vision_with_cnns.md#5-cnn-구조-125) |
 | **IoU** | intersection over union | 예측 박스와 정답 박스의 겹친 면적 / 합친 면적 | [12장 9-2. 손실과 평가 지표: IoU](12_deep_computer_vision_with_cnns.md#9-2-손실과-평가-지표-iou) |
-| **NMS** | non-max suppression | 같은 물체를 가리키는 겹치는 박스 중 가장 확신하는 것만 남기는 후처리 | [12장 10-1. 슬라이딩 윈도와 NMS](12_deep_computer_vision_with_cnns.md#10-1-슬라이딩-윈도와-nms) |
-| **mAP** | mean average precision | 클래스별 PR 곡선 아래 면적의 평균. 객체 탐지 지표 | [12장 10-4. mAP](12_deep_computer_vision_with_cnns.md#10-4-map) |
+| **NMS** | non-max suppression | 같은 물체를 가리키는 겹치는 박스 중 가장 확신하는 것만 남기는 후처리 | [12장 10. 객체 탐지](12_deep_computer_vision_with_cnns.md#10-객체-탐지-1210) |
+| **mAP** | mean average precision | 클래스별 PR 곡선 아래 면적의 평균. 객체 탐지 지표 | [12장 10. 객체 탐지](12_deep_computer_vision_with_cnns.md#10-객체-탐지-1210) |
 | **시맨틱 분할** | semantic segmentation | 픽셀마다 클래스를 예측하는 작업 | [12장 12-1. 시맨틱 분할과 업샘플링](12_deep_computer_vision_with_cnns.md#12-1-시맨틱-분할과-업샘플링) |
+| **YOLO** | You Only Look Once | 이미지를 한 번 통과시켜 격자 칸마다 박스와 클래스를 예측하는 실시간 객체 탐지 모델 | [12장 10-3. YOLO로 객체 탐지](12_deep_computer_vision_with_cnns.md#10-3-yolo로-객체-탐지) |
 
 ## 10. 시퀀스와 RNN (13장)
 
 | 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
 |---|---|---|---|
-| **순환 뉴런** | recurrent neuron | 현재 입력과 이전 타임 스텝의 자기 출력을 함께 받는 뉴런 | [13장 1-1. 순환 뉴런](13_processing_sequences_using_rnns_and_cnns.md#1-1-순환-뉴런) |
+| **순환 뉴런** | recurrent neuron | 현재 입력과 이전 타임 스텝의 자기 출력을 함께 받는 뉴런 | [13장 1. 순환 뉴런과 순환 층](13_processing_sequences_using_rnns_and_cnns.md#1-순환-뉴런과-순환-층-131) |
 | **메모리 셀** | memory cell | 타임 스텝을 넘어 상태(기억)를 유지하는 신경망 구성 요소 | [13장 1-2. 메모리 셀](13_processing_sequences_using_rnns_and_cnns.md#1-2-메모리-셀) |
 | **BPTT** | backpropagation through time | 시간 축으로 펼친 RNN에 역전파를 적용하는 방법 | [13장 2-1. BPTT](13_processing_sequences_using_rnns_and_cnns.md#2-1-bptt) |
 | **시계열** | time series | 시간 순서로 측정한 값의 시퀀스 | [13장 3. 시계열 예측하기](13_processing_sequences_using_rnns_and_cnns.md#3-시계열-예측하기-133) |
@@ -236,7 +246,9 @@
 | **나이브 예측** | naive forecasting | "직전(또는 한 주기 전) 값이 그대로 반복된다"고 보는 기준 예측 | [13장 3-2. 주간 계절성과 나이브 예측](13_processing_sequences_using_rnns_and_cnns.md#3-2-주간-계절성과-나이브-예측) |
 | **LSTM** | long short-term memory | 게이트로 무엇을 기억·삭제·출력할지 학습해 긴 의존성을 다루는 RNN 셀 | [13장 4-2. 단기 기억 문제와 LSTM](13_processing_sequences_using_rnns_and_cnns.md#4-2-단기-기억-문제와-lstm) |
 | **GRU** | gated recurrent unit | LSTM을 단순화한 게이트 RNN 셀 | [13장 4-3. GRU](13_processing_sequences_using_rnns_and_cnns.md#4-3-gru) |
-| **인과적 합성곱 / 팽창 합성곱** | causal / dilated convolution | 미래 타임 스텝을 보지 않는 합성곱 / 입력을 건너뛰며 보는 합성곱 (WaveNet) | [13장 4-5. WaveNet](13_processing_sequences_using_rnns_and_cnns.md#4-5-wavenet) |
+| **인과적 합성곱 / 팽창 합성곱** | causal / dilated convolution | 미래 타임 스텝을 보지 않는 합성곱 / 입력을 건너뛰며 보는 합성곱 (WaveNet) | [13장 4. 긴 시퀀스 다루기](13_processing_sequences_using_rnns_and_cnns.md#4-긴-시퀀스-다루기-134) |
+| **ARIMA / SARIMA** | autoregressive integrated moving average (seasonal) | 과거 값(AR)과 과거 오차(MA)의 선형 결합으로 예측하고, 차분(I)으로 추세를, 계절 항(S)으로 계절성을 다루는 통계 시계열 모델 | [13장 3-4. ARMA 모델 계열](13_processing_sequences_using_rnns_and_cnns.md#3-4-arma-모델-계열) |
+| **시퀀스-투-시퀀스 (seq2seq)** | sequence-to-sequence | 입력 시퀀스를 받아 매 타임 스텝 출력 시퀀스를 내는 구조. 13장에서는 매 스텝 다음 14일을 예측 | [13장 3-12. 시퀀스-투-시퀀스 모델로 예측하기](13_processing_sequences_using_rnns_and_cnns.md#3-12-시퀀스-투-시퀀스-모델로-예측하기) |
 
 ## 11. 자연어 처리와 어텐션 (14장)
 
@@ -245,11 +257,11 @@
 | **토큰 / 토큰화** | token / tokenization | 텍스트를 모델이 다루는 단위(단어, 서브워드, 글자)로 자르는 것 | [14장 2-2. 토큰화의 세 가지 단위](14_nlp_with_rnns_and_attention.md#2-2-토큰화의-세-가지-단위) |
 | **서브워드 토큰화 (BPE)** | subword tokenization, byte pair encoding | 자주 붙어 나오는 글자 쌍을 합쳐 가며 단어보다 작은 단위의 어휘를 만드는 토큰화 | [14장 2-3. BPE 토크나이저 훈련](14_nlp_with_rnns_and_attention.md#2-3-bpe-토크나이저-훈련) |
 | **임베딩** | embedding | 토큰 같은 범주 값을 학습되는 밀집 벡터로 표현한 것 (`nn.Embedding`) | [14장 1-2. 임베딩](14_nlp_with_rnns_and_attention.md#1-2-임베딩) |
-| **온도** | temperature | 소프트맥스 전에 로짓을 나누는 값. 높으면 다양한, 낮으면 확실한 쪽을 고른다 | [14장 1-5. 가짜 셰익스피어 텍스트 생성하기](14_nlp_with_rnns_and_attention.md#1-5-가짜-셰익스피어-텍스트-생성하기) |
+| **온도** | temperature | 소프트맥스 전에 로짓을 나누는 값. 높으면 다양한, 낮으면 확실한 쪽을 고른다 | [14장 1. char-RNN으로 셰익스피어 문체 생성하기](14_nlp_with_rnns_and_attention.md#1-char-rnn으로-셰익스피어-문체-생성하기-141) |
 | **어텐션 마스크 (패딩 마스크)** | attention / padding mask | 패딩 토큰을 계산에서 무시하도록 표시하는 마스크 | [14장 2-6. 배치 처리: 패딩·잘라내기·어텐션 마스크](14_nlp_with_rnns_and_attention.md#2-6-배치-처리-패딩잘라내기어텐션-마스크) |
 | **인코더–디코더** | encoder–decoder | 입력 시퀀스를 표현으로 바꾸는 인코더와 그 표현으로 출력 시퀀스를 만드는 디코더 구조 | [14장 3-1. 인코더–디코더 구조](14_nlp_with_rnns_and_attention.md#3-1-인코더디코더-구조) |
 | **교사 강요** | teacher forcing | 디코더 훈련 때 이전 스텝의 예측 대신 정답 토큰을 입력으로 넣는 방법 | [14장 3-3. 배치 만들기와 교사 강요](14_nlp_with_rnns_and_attention.md#3-3-배치-만들기와-교사-강요) |
-| **빔 검색** | beam search | 가장 그럴듯한 후보 문장 k개를 유지하며 생성하는 디코딩 방법 | [14장 3-7. 빔 검색](14_nlp_with_rnns_and_attention.md#3-7-빔-검색) |
+| **빔 검색** | beam search | 가장 그럴듯한 후보 문장 k개를 유지하며 생성하는 디코딩 방법 | [14장 3. 신경망 기계 번역을 위한 인코더-디코더 네트워크](14_nlp_with_rnns_and_attention.md#3-신경망-기계-번역을-위한-인코더-디코더-네트워크-143) |
 | **어텐션** | attention | 출력을 만들 때 입력의 각 위치에 가중치를 두어 필요한 부분에 집중하는 메커니즘 | [14장 4. 어텐션 메커니즘](14_nlp_with_rnns_and_attention.md#4-어텐션-메커니즘-144) |
 | **쿼리·키·값** | query, key, value | 어텐션에서 '무엇을 찾는가(쿼리)'와 '각 위치의 색인(키)'을 비교해, 비슷한 위치의 '내용(값)'을 가중합하는 구조 | [14장 4-3. 점곱 어텐션 구현](14_nlp_with_rnns_and_attention.md#4-3-점곱-어텐션-구현) |
 
@@ -260,21 +272,24 @@
 | **트랜스포머** | transformer | RNN 없이 어텐션만으로 시퀀스를 처리하는 구조. 병렬 훈련이 가능하다 | [15장 1. Attention Is All You Need: 원본 트랜스포머 아키텍처](15_transformers_for_nlp_and_chatbots.md#1-attention-is-all-you-need-원본-트랜스포머-아키텍처-151) |
 | **셀프 어텐션** | self-attention | 한 시퀀스 안의 모든 위치가 서로에게 어텐션하는 것 | [15장 1-1. 전체 구조](15_transformers_for_nlp_and_chatbots.md#1-1-전체-구조) |
 | **멀티 헤드 어텐션** | multi-head attention | 어텐션을 여러 개(헤드) 병렬로 수행해 여러 종류의 관계를 동시에 보는 층 | [15장 1-4. 멀티 헤드 어텐션 구현](15_transformers_for_nlp_and_chatbots.md#1-4-멀티-헤드-어텐션-구현) |
-| **위치 인코딩 (위치 임베딩)** | positional encoding | 순서를 모르는 어텐션에 토큰 위치 정보를 더해 주는 벡터 | [15장 1-2. 위치 임베딩](15_transformers_for_nlp_and_chatbots.md#1-2-위치-임베딩) |
-| **인과 마스크** | causal mask | 디코더가 미래 토큰을 보지 못하게 가리는 마스크 | [15장 1-6. 두 가지 마스크](15_transformers_for_nlp_and_chatbots.md#1-6-두-가지-마스크) |
+| **위치 인코딩 (위치 임베딩)** | positional encoding | 순서를 모르는 어텐션에 토큰 위치 정보를 더해 주는 벡터 | [15장 1. Attention Is All You Need: 원본 트랜스포머 아키텍처](15_transformers_for_nlp_and_chatbots.md#1-attention-is-all-you-need-원본-트랜스포머-아키텍처-151) |
+| **인과 마스크** | causal mask | 디코더가 미래 토큰을 보지 못하게 가리는 마스크 | [15장 1. Attention Is All You Need: 원본 트랜스포머 아키텍처](15_transformers_for_nlp_and_chatbots.md#1-attention-is-all-you-need-원본-트랜스포머-아키텍처-151) |
 | **크로스 어텐션** | cross-attention | 디코더가 인코더 출력에 어텐션하는 것(쿼리는 디코더, 키·값은 인코더) | [15장 1-7. 인코더 층과 디코더 층](15_transformers_for_nlp_and_chatbots.md#1-7-인코더-층과-디코더-층) |
 | **BERT / MLM** | Bidirectional Encoder Representations from Transformers / masked language model | 가린 토큰을 양방향 문맥으로 맞히도록 사전 훈련한 인코더 전용 모델 | [15장 3-1. BERT의 구조와 사전 훈련](15_transformers_for_nlp_and_chatbots.md#3-1-bert의-구조와-사전-훈련) |
 | **GPT / 인과적 언어 모델** | causal language model | 다음 토큰을 예측하도록 훈련한 디코더 전용 모델 | [15장 4-1. GPT와 인과적 언어 모델링](15_transformers_for_nlp_and_chatbots.md#4-1-gpt와-인과적-언어-모델링) |
-| **top-p 샘플링** | nucleus sampling | 누적 확률이 p가 될 때까지의 상위 토큰들 중에서만 샘플링하는 생성 방법 | [15장 4-3. 디코딩 전략: 탐욕적·샘플링·top-p](15_transformers_for_nlp_and_chatbots.md#4-3-디코딩-전략-탐욕적샘플링top-p) |
+| **top-p 샘플링** | nucleus sampling | 누적 확률이 p가 될 때까지의 상위 토큰들 중에서만 샘플링하는 생성 방법 | [15장 4. 디코더 기반 트랜스포머](15_transformers_for_nlp_and_chatbots.md#4-디코더-기반-트랜스포머-154) |
 | **퓨샷 프롬프트** | few-shot prompting | 원하는 답 형식의 예시 몇 개를 프롬프트에 넣어 모델이 따라 하게 하는 방법 | [15장 4-4. 퓨샷 프롬프트](15_transformers_for_nlp_and_chatbots.md#4-4-퓨샷-프롬프트) |
 | **SFT** | supervised fine-tuning | (지시, 좋은 답) 쌍으로 언어 모델을 미세 튜닝하는 것 | [15장 5-4. 정렬: SFT, RLHF, DPO](15_transformers_for_nlp_and_chatbots.md#5-4-정렬-sft-rlhf-dpo) |
 | **RLHF / DPO** | reinforcement learning from human feedback / direct preference optimization | 사람이 선호한 답을 더 내도록 모델을 조정하는 방법. DPO는 보상 모델 없이 선호 쌍으로 직접 최적화 | [15장 5-4. 정렬: SFT, RLHF, DPO](15_transformers_for_nlp_and_chatbots.md#5-4-정렬-sft-rlhf-dpo) |
 | **비전 트랜스포머** | vision transformer, ViT | 이미지를 패치로 잘라 토큰처럼 트랜스포머에 넣는 모델 | [16장 1-2. 원본 ViT: 이미지는 16×16 단어의 모음](16_vision_and_multimodal_transformers.md#1-2-원본-vit-이미지는-1616-단어의-모음) |
 | **패치 임베딩** | patch embedding | 이미지 패치 하나를 벡터 하나로 바꾸는 층 | [16장 1-3. 패치 임베딩 구현](16_vision_and_multimodal_transformers.md#1-3-패치-임베딩-구현) |
-| **지식 증류** | knowledge distillation | 큰 교사 모델의 출력을 작은 학생 모델이 따라 하도록 훈련하는 방법 (DeiT) | [16장 1-9. DeiT: 데이터 효율적인 이미지 트랜스포머](16_vision_and_multimodal_transformers.md#1-9-deit-데이터-효율적인-이미지-트랜스포머) |
-| **대조 학습 (CLIP)** | contrastive learning | 짝이 맞는 (이미지, 텍스트)는 가깝게, 안 맞는 쌍은 멀게 임베딩을 학습하는 방법 | [16장 2-2. CLIP: 대조 사전 훈련](16_vision_and_multimodal_transformers.md#2-2-clip-대조-사전-훈련) |
+| **지식 증류** | knowledge distillation | 큰 교사 모델의 출력을 작은 학생 모델이 따라 하도록 훈련하는 방법 (DistilBERT, DeiT) | [15장 3-7. BERT 이후의 인코더 모델](15_transformers_for_nlp_and_chatbots.md#3-7-bert-이후의-인코더-모델) |
+| **대조 학습 (CLIP)** | contrastive learning | 짝이 맞는 (이미지, 텍스트)는 가깝게, 안 맞는 쌍은 멀게 임베딩을 학습하는 방법 | [16장 2. 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md#2-멀티모달-트랜스포머-162) |
 | **제로샷 분류** | zero-shot classification | 해당 클래스로 훈련한 적 없이, 클래스 이름(텍스트)과의 유사도로 분류하는 것 | [16장 2-4. CLIP으로 제로샷 이미지 분류하기](16_vision_and_multimodal_transformers.md#2-4-clip으로-제로샷-이미지-분류하기) |
 | **멀티모달** | multimodal | 이미지·텍스트·음성 등 여러 종류의 입력을 함께 다루는 것 | [16장 2. 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md#2-멀티모달-트랜스포머-162) |
+| **피드포워드 층** | position-wise feed-forward network | 트랜스포머 블록 안에서 토큰마다 따로 적용하는 2층 완전 연결 네트워크(어텐션 다음) | [15장 1-7. 인코더 층과 디코더 층](15_transformers_for_nlp_and_chatbots.md#1-7-인코더-층과-디코더-층) |
+| **LLM (대규모 언어 모델)** | large language model | 수십억 개 이상의 파라미터를 가진, 대량의 텍스트로 다음 토큰 예측을 사전 훈련한 언어 모델 | [15장 4-5. 더 큰 모델: Mistral-7B](15_transformers_for_nlp_and_chatbots.md#4-5-더-큰-모델-mistral-7b) |
+| **허깅 페이스** | Hugging Face | 사전 훈련 모델·데이터셋·토크나이저를 공유하는 허브와 `transformers`·`datasets`·`trl` 라이브러리 | [14장 2-1. IMDB 데이터셋 적재](14_nlp_with_rnns_and_attention.md#2-1-imdb-데이터셋-적재) |
 
 ## 13. 서포트 벡터 머신 (부록 C)
 
