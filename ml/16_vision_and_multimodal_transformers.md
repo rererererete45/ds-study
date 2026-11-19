@@ -1,6 +1,6 @@
 # 16장. 비전 및 멀티모달 트랜스포머
 
-[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 17장. 트랜스포머 속도 높이기 (정리 예정) →
+[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [17장. 트랜스포머 속도 높이기 →](17_speeding_up_transformers.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 16장 · 노트북 `16_vision_and_multimodal_transformers.ipynb`
 >
@@ -11,7 +11,7 @@
 > - **16.3** **기타 멀티모달 모델**. 대표 모델 정리, **Gemini API**로 사진에 대해 질문하기
 >
 > ⬅️ **앞에서** [15장](15_transformers_for_nlp_and_chatbots.md)의 [트랜스포머 인코더 층](15_transformers_for_nlp_and_chatbots.md#1-7-인코더-층과-디코더-층)·[훈련되는 위치 임베딩](15_transformers_for_nlp_and_chatbots.md#1-2-위치-임베딩)·[BERT의 `[CLS]` 토큰](15_transformers_for_nlp_and_chatbots.md#3-1-bert의-구조와-사전-훈련)·[문장 임베딩과 코사인 유사도](15_transformers_for_nlp_and_chatbots.md#3-6-문장-임베딩-sentence-transformers)·[`generate()`](15_transformers_for_nlp_and_chatbots.md#4-2-gpt-2로-텍스트-생성하기)를 이미지에 그대로 옮겨 쓴다. 합성곱 층·전이 학습·데이터 증강은 [12장](12_deep_computer_vision_with_cnns.md), 허깅 페이스 `Trainer`·`pipeline`은 [14장 2-17·2-18절](14_nlp_with_rnns_and_attention.md#2-17-트레이너-api)에서 봤다.  
-> ➡️ **다음으로** 이 장의 모델은 모두 크고 느리다(ViT-B 8,600만, BLIP-2 약 38억 파라미터). 17장은 트랜스포머를 **더 빠르고 가볍게** 만드는 기법(플래시 어텐션 같은 효율적인 어텐션, 상대 위치 인코딩 등)을 다룬다.
+> ➡️ **다음으로** 이 장의 모델은 모두 크고 느리다(ViT-B 8,600만, BLIP-2 약 38억 파라미터). [17장](17_speeding_up_transformers.md)은 트랜스포머를 **더 빠르고 가볍게** 만드는 기법(KV 캐시·추측 디코딩, 희소·근사·플래시 어텐션, GQA, MoE, LoRA, 병렬화 등)을 다룬다.
 
 ## 🎓 강의를 시작하며
 
@@ -2086,7 +2086,7 @@ CNN은 지역성·이동 등변성이라는 **귀납적 편향**이 구조에 �
 
 ---
 
-> ➡️ **다음 장 — 17장. 트랜스포머 속도 높이기 (정리 예정)**  
-> 이 장의 모델은 ViT-B만 해도 8,600만, BLIP-2는 약 38억 파라미터다. 17장은 어텐션 계산을 빠르게 하는 커널(플래시 어텐션), 상대 위치 인코딩(RoPE·ALiBi) 등으로 트랜스포머를 **더 빠르고 가볍게** 만드는 방법을 다룬다.
+> ➡️ **다음 장 — [17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md)**  
+> 이 장의 모델은 ViT-B만 해도 8,600만, BLIP-2는 약 38억 파라미터다. 17장은 생성을 빠르게 하는 KV 캐시·추측 디코딩, 어텐션 비용을 줄이는 희소·근사 어텐션과 플래시 어텐션, KV 캐시를 줄이는 GQA, 파라미터를 키우는 MoE, 적은 메모리로 미세 튜닝하는 LoRA 등으로 트랜스포머를 **더 빠르고 가볍게** 만드는 방법을 다룬다.
 
-[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 17장. 트랜스포머 속도 높이기 (정리 예정) →
+[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [17장. 트랜스포머 속도 높이기 →](17_speeding_up_transformers.md)

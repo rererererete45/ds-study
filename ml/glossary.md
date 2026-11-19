@@ -19,7 +19,8 @@
 - [10. 시퀀스와 RNN (13장)](#10-시퀀스와-rnn-13장) — 11개
 - [11. 자연어 처리와 어텐션 (14장)](#11-자연어-처리와-어텐션-14장) — 10개
 - [12. 트랜스포머 (15~16장)](#12-트랜스포머-1516장) — 21개
-- [13. 서포트 벡터 머신 (부록 C)](#13-서포트-벡터-머신-부록-c) — 8개
+- [13. 트랜스포머 가속 (17장)](#13-트랜스포머-가속-17장) — 17개
+- [14. 서포트 벡터 머신 (부록 C)](#14-서포트-벡터-머신-부록-c) — 8개
 
 
 ## 1. 기본 개념과 데이터 (1~2장)
@@ -291,7 +292,29 @@
 | **LLM (대규모 언어 모델)** | large language model | 수십억 개 이상의 파라미터를 가진, 대량의 텍스트로 다음 토큰 예측을 사전 훈련한 언어 모델 | [15장 4-5. 더 큰 모델: Mistral-7B](15_transformers_for_nlp_and_chatbots.md#4-5-더-큰-모델-mistral-7b) |
 | **허깅 페이스** | Hugging Face | 사전 훈련 모델·데이터셋·토크나이저를 공유하는 허브와 `transformers`·`datasets`·`trl` 라이브러리 | [14장 2-1. IMDB 데이터셋 적재](14_nlp_with_rnns_and_attention.md#2-1-imdb-데이터셋-적재) |
 
-## 13. 서포트 벡터 머신 (부록 C)
+## 13. 트랜스포머 가속 (17장)
+
+| 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
+|---|---|---|---|
+| **KV 캐시** | key/value cache | 디코딩 때 이미 계산한 토큰들의 키·값을 저장해 다시 쓰는 것. 새 토큰의 키·값만 계산한다 | [17장 1-2. 키/값 캐싱](17_speeding_up_transformers.md#1-2-키값-캐싱) |
+| **추측 디코딩** | speculative decoding | 작은 초안 모델이 토큰 여러 개를 추측하고 큰 모델이 한 번에 검증. 출력 분포는 그대로 | [17장 1-4. 추측 디코딩](17_speeding_up_transformers.md#1-4-추측-디코딩) |
+| **프리필 / 디코드** | prefill / decode | 프롬프트 전체를 한 번에 처리하는 단계(계산 바운드) / 토큰을 하나씩 만드는 단계(메모리 바운드) | [17장 1-1. 자기 회귀 디코딩은 왜 느린가](17_speeding_up_transformers.md#1-1-자기-회귀-디코딩은-왜-느린가) |
+| **희소 어텐션** | sparse attention | 정해진 패턴(이웃·전역·무작위)의 쿼리·키 쌍만 계산하는 어텐션 (Longformer, BigBird) | [17장 2-2. 희소 어텐션](17_speeding_up_transformers.md#2-2-희소-어텐션) |
+| **지역 민감 해싱 (LSH)** | locality-sensitive hashing | 비슷한 벡터가 높은 확률로 같은 버킷에 들어가도록 하는 해싱. Reformer가 비슷한 쿼리·키를 모을 때 쓴다 | [17장 2-4. 근사 어텐션: Reformer와 LSH](17_speeding_up_transformers.md#2-4-근사-어텐션-reformer와-lsh) |
+| **선형 어텐션 / 랜덤 특성** | linear attention / random features | 소프트맥스를 특성 벡터의 내적으로 근사하고 곱셈 순서를 바꿔 길이에 선형인 비용으로 계산 (Performer의 FAVOR+) | [17장 2-6. 근사 어텐션: Performer의 랜덤 특성](17_speeding_up_transformers.md#2-6-근사-어텐션-performer의-랜덤-특성) |
+| **MQA / GQA** | multi-query / grouped-query attention | 여러 쿼리 헤드가 키·값 헤드를 1개(MQA) 또는 그룹마다(GQA) 공유. KV 캐시를 줄인다 | [17장 2-9. 투영 공유: MQA와 GQA](17_speeding_up_transformers.md#2-9-투영-공유-mqa와-gqa) |
+| **MLA** | multi-head latent attention | 키·값을 작은 잠재 벡터로 압축해 그것만 캐시하는 어텐션 (DeepSeek) | [17장 2-10. MLA: 다중 헤드 잠재 어텐션](17_speeding_up_transformers.md#2-10-mla-다중-헤드-잠재-어텐션) |
+| **플래시 어텐션** | FlashAttention | 점수 행렬을 GPU 메모리에 쓰지 않고 블록 단위로 빠른 온칩 메모리에서 계산하는 정확한 어텐션 구현 | [17장 2-11. 플래시 어텐션의 원리](17_speeding_up_transformers.md#2-11-플래시-어텐션의-원리) |
+| **온라인 소프트맥스** | online softmax | 블록을 하나씩 보면서 최댓값·합을 보정해 가며 전체 소프트맥스를 계산하는 방법 | [17장 2-11. 플래시 어텐션의 원리](17_speeding_up_transformers.md#2-11-플래시-어텐션의-원리) |
+| **전문가 혼합 (MoE)** | mixture of experts | 피드포워드 층을 여러 전문가로 두고 라우터가 토큰마다 top-k개만 고르는 구조. 파라미터는 많고 토큰당 계산은 적다 | [17장 3-1. 밀집 모델과 희소 모델](17_speeding_up_transformers.md#3-1-밀집-모델과-희소-모델) |
+| **부하 균형 손실** | load-balancing loss | MoE 라우터가 전문가를 고르게 쓰도록 더하는 보조 손실 $E\sum f_i P_i$ | [17장 3-3. 부하 균형](17_speeding_up_transformers.md#3-3-부하-균형) |
+| **PEFT / LoRA** | parameter-efficient fine-tuning / low-rank adaptation | 원래 가중치는 동결하고 소수의 파라미터만 훈련하는 미세 튜닝. LoRA는 가중치 변화를 저랭크 $BA$로 표현 | [17장 4-1. PEFT와 LoRA](17_speeding_up_transformers.md#4-1-peft와-lora) |
+| **활성화 체크포인팅** | activation (gradient) checkpointing | 역전파용 중간값을 버렸다가 역전파 때 순전파를 다시 해 되살리는 방법. 메모리 ↔ 계산 교환 | [17장 4-4. 활성화 체크포인팅](17_speeding_up_transformers.md#4-4-활성화-체크포인팅) |
+| **시퀀스 패킹 / 버키팅** | sequence packing / bucketing | 시퀀스를 이어 붙여 고정 길이로 자르기 / 비슷한 길이끼리 배치로 묶기. 패딩 낭비를 줄인다 | [17장 4-5. 시퀀스 패킹과 버키팅](17_speeding_up_transformers.md#4-5-시퀀스-패킹과-버키팅) |
+| **그레이디언트 누적** | gradient accumulation | 여러 미니배치의 그레이디언트를 더한 뒤 한 번 업데이트해 큰 배치를 흉내 내는 방법 | [17장 4-6. 그레이디언트 누적](17_speeding_up_transformers.md#4-6-그레이디언트-누적) |
+| **데이터·텐서·파이프라인 병렬화 / FSDP** | data / tensor / pipeline parallelism, fully sharded data parallel | 배치 / 층 안의 행렬 / 층 묶음을 GPU들에 나누는 방법. FSDP(ZeRO-3)는 파라미터·그레이디언트·옵티마이저 상태까지 쪼개 저장 | [17장 4-7. 병렬화 기법](17_speeding_up_transformers.md#4-7-병렬화-기법) |
+
+## 14. 서포트 벡터 머신 (부록 C)
 
 | 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
 |---|---|---|---|
