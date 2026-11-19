@@ -1,6 +1,6 @@
 # 14장. RNN과 어텐션을 사용한 자연어 처리
 
-[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)
+[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 14장 · 노트북 `14_nlp_with_rnns_and_attention.ipynb`
 >
@@ -3427,4 +3427,4 @@ cat(문맥 벡터, 디코더 출력) → Linear(1024, 10000)                    
 > ➡️ **다음 장 — [15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md)**  
 > 이 장의 모델은 어텐션을 쓰면서도 여전히 RNN이 토큰을 하나씩 차례로 처리했다. 15장은 순환 층을 모두 걷어 내고 **어텐션만으로** 인코더와 디코더를 만든 트랜스포머를 다룬다. 이 장에서 가져다 쓰기만 한 BERT(인코더)와 GPT(디코더)의 구조, 그리고 이를 바탕으로 한 챗봇을 직접 살펴본다.
 
-[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)
+[← 13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [15장. 자연어 처리와 챗봇을 위한 트랜스포머 →](15_transformers_for_nlp_and_chatbots.md)

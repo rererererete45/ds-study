@@ -1,6 +1,6 @@
 # 7장. 차원 축소
 
-[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)
+[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 7장 · 노트북 `07_dimensionality_reduction.ipynb`
 >
@@ -1349,4 +1349,4 @@ X_lda_reduced = lda.fit_transform(X_sample, y_sample)   # 레이블 사용!
 > ➡️ **다음 장 — [8장. 비지도 학습](08_unsupervised_learning.md)**  
 > 차원 축소와 함께 비지도 학습의 다른 축 — **레이블 없이 구조를 찾는 군집과 밀도 추정**.
 
-[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)
+[← 6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [8장. 비지도 학습 →](08_unsupervised_learning.md)

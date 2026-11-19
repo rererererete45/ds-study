@@ -1,6 +1,6 @@
 # 12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전
 
-[← 11장. 심층 신경망 훈련](11_training_deep_neural_networks.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [13장. RNN과 CNN을 사용한 시퀀스 처리 →](13_processing_sequences_using_rnns_and_cnns.md)
+[← 11장. 심층 신경망 훈련](11_training_deep_neural_networks.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [13장. RNN과 CNN을 사용한 시퀀스 처리 →](13_processing_sequences_using_rnns_and_cnns.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 12장 · 노트북 `12_deep_computer_vision_with_cnns.ipynb`
 >
@@ -3758,4 +3758,4 @@ fcn_resnet50(weights=...)(batch)["out"].softmax(dim=1) → [1, 21, H, W] → mas
 > ➡️ **다음 장 — [13장. RNN과 CNN을 사용한 시퀀스 처리](13_processing_sequences_using_rnns_and_cnns.md)**  
 > 이 장의 입력은 한 장의 이미지였다. 주가·승객 수·센서 값처럼 **시간 순서**가 있는 데이터는 "앞에서 본 것"을 기억하며 처리해야 한다. 13장에서 순환 신경망(RNN)으로 시계열을 예측하고, 긴 시퀀스에서 생기는 문제를 LSTM·GRU와 1차원 합성곱 층으로 다룬다.
 
-[← 11장. 심층 신경망 훈련](11_training_deep_neural_networks.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [13장. RNN과 CNN을 사용한 시퀀스 처리 →](13_processing_sequences_using_rnns_and_cnns.md)
+[← 11장. 심층 신경망 훈련](11_training_deep_neural_networks.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [13장. RNN과 CNN을 사용한 시퀀스 처리 →](13_processing_sequences_using_rnns_and_cnns.md)

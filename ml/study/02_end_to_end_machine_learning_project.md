@@ -1,6 +1,6 @@
 # 2장. 머신러닝 프로젝트 처음부터 끝까지
 
-[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [3장. 분류 →](03_classification.md)
+[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [3장. 분류 →](03_classification.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 2장 · 노트북 `02_end_to_end_machine_learning_project.ipynb`
 >
@@ -2142,4 +2142,4 @@ assert np.all(scaler.get_feature_names_out() == ["a", "b"])
 > ➡️ **다음 장 — [3장. 분류](03_classification.md)**  
 > 같은 워크플로를 **회귀에서 분류로** 옮긴다. 분류에서는 모델보다 **성능을 올바르게 재는 법**이 핵심이 된다.
 
-[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [3장. 분류 →](03_classification.md)
+[← 1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [3장. 분류 →](03_classification.md)

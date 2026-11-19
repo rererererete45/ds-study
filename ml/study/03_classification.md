@@ -1,6 +1,6 @@
 # 3장. 분류
 
-[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [4장. 모델 훈련 →](04_training_linear_models.md)
+[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [4장. 모델 훈련 →](04_training_linear_models.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 3장 · 노트북 `03_classification.ipynb`
 >
@@ -2157,4 +2157,4 @@ print(f"Recall: {recall_score(y_test, y_pred):.2%}")
 > ➡️ **다음 장 — [4장. 모델 훈련](04_training_linear_models.md)**  
 > 2·3장에서 블랙박스로 쓴 `fit()`의 **내부**를 연다 — 선형 회귀, 경사 하강법, 규제, 그리고 3장에서 쓴 `SGDClassifier`·로지스틱 회귀의 원리.
 
-[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [4장. 모델 훈련 →](04_training_linear_models.md)
+[← 2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [4장. 모델 훈련 →](04_training_linear_models.md)

@@ -1,6 +1,6 @@
 # 18장. 오토인코더, GAN 그리고 확산 모델
 
-[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [19장. 강화 학습 →](19_reinforcement_learning.md)
+[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [19장. 강화 학습 →](19_reinforcement_learning.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 18장 · 노트북 `18_autoencoders_gans_and_diffusion_models.ipynb`
 >
@@ -3299,4 +3299,4 @@ DDIM: **샘플러**만 바꾼다 — $\hat{x}_0$을 추정해 시점을 건너�
 > ➡️ **다음 장 — [19장. 강화 학습](19_reinforcement_learning.md)**  
 > 지금까지는 정답(레이블)이나 데이터 자체(재구성·잡음)를 보고 배웠다. 19장은 정답 없이 **보상**만 보고 행동을 배우는 강화 학습(정책 그레이디언트, 마르코프 결정 과정, Q-러닝, DQN)을 다룬다. 이 장의 "두 네트워크가 서로를 타깃으로 쓰는" GAN 훈련처럼, DQN도 움직이는 타깃 때문에 생기는 불안정을 다루는 요령이 핵심이다.
 
-[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [19장. 강화 학습 →](19_reinforcement_learning.md)
+[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [19장. 강화 학습 →](19_reinforcement_learning.md)

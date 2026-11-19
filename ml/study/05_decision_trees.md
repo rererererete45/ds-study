@@ -1,6 +1,6 @@
 # 5장. 결정 트리
 
-[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)
+[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 5장 · 노트북 `05_decision_trees.ipynb`
 >
@@ -1456,4 +1456,4 @@ accuracy_score(y_test, y_pred_majority_votes.reshape([-1]))   # 0.873
 > ➡️ **다음 장 — [6장. 앙상블 학습과 랜덤 포레스트](06_ensemble_learning_and_random_forests.md)**  
 > 결정 트리의 가장 큰 약점인 **높은 분산**을 여러 예측기를 모아 해결한다 — 앙상블과 랜덤 포레스트.
 
-[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)
+[← 4장. 모델 훈련](04_training_linear_models.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [6장. 앙상블 학습과 랜덤 포레스트 →](06_ensemble_learning_and_random_forests.md)

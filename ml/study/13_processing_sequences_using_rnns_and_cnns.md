@@ -1,6 +1,6 @@
 # 13장. RNN과 CNN을 사용한 시퀀스 처리
 
-[← 12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전](12_deep_computer_vision_with_cnns.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [14장. RNN과 어텐션을 사용한 자연어 처리 →](14_nlp_with_rnns_and_attention.md)
+[← 12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전](12_deep_computer_vision_with_cnns.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [14장. RNN과 어텐션을 사용한 자연어 처리 →](14_nlp_with_rnns_and_attention.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 13장 · 노트북 `13_processing_sequences_using_rnns_and_cnns.ipynb`
 >
@@ -3096,4 +3096,4 @@ WaveNet : CausalConv1d(k=2, dilation 1·2·4·8 ×2) + ReLU,  수용장 31
 > ➡️ **다음 장 — [14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md)**  
 > 이 장의 시퀀스는 승객 수와 음표 번호였다. 14장은 같은 순환 층에 **텍스트**를 넣는다. 텍스트를 토큰 → ID → 임베딩으로 바꾸고, 바흐 코랄처럼 다음 글자를 예측해 셰익스피어 문체를 생성하고(char-RNN), 감성을 분류하고, 이 장에서 이름만 나온 **인코더–디코더**로 번역한 뒤, RNN의 짧은 기억을 넘어서는 **어텐션**을 붙인다.
 
-[← 12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전](12_deep_computer_vision_with_cnns.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [14장. RNN과 어텐션을 사용한 자연어 처리 →](14_nlp_with_rnns_and_attention.md)
+[← 12장. 합성곱 신경망을 사용한 심층 컴퓨터 비전](12_deep_computer_vision_with_cnns.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [14장. RNN과 어텐션을 사용한 자연어 처리 →](14_nlp_with_rnns_and_attention.md)

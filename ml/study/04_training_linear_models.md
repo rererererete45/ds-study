@@ -1,6 +1,6 @@
 # 4장. 모델 훈련
 
-[← 3장. 분류](03_classification.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [5장. 결정 트리 →](05_decision_trees.md)
+[← 3장. 분류](03_classification.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [5장. 결정 트리 →](05_decision_trees.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 4장 · 노트북 `04_training_linear_models.ipynb`
 >
@@ -2621,4 +2621,4 @@ accuracy_score
 > ➡️ **다음 장 — [5장. 결정 트리](05_decision_trees.md)**  
 > 선형 모델과 전혀 다른, **질문(if-else)으로 공간을 나누는 비선형 모델** — 결정 트리. 4장의 규제·학습 곡선 개념을 그대로 적용한다.
 
-[← 3장. 분류](03_classification.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [5장. 결정 트리 →](05_decision_trees.md)
+[← 3장. 분류](03_classification.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [5장. 결정 트리 →](05_decision_trees.md)

@@ -1,6 +1,6 @@
 # 19장. 강화 학습
 
-[← 18장. 오토인코더, GAN 그리고 확산 모델](18_autoencoders_gans_and_diffusion_models.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 🏁 본문 마지막 장
+[← 18장. 오토인코더, GAN 그리고 확산 모델](18_autoencoders_gans_and_diffusion_models.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · 🏁 본문 마지막 장
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 19장 · 노트북 `19_reinforcement_learning.ipynb`
 >
@@ -2529,6 +2529,6 @@ PPO는 확률 비율 $r = \pi_\theta(a \mid s) / \pi_{\text{old}}(a \mid s)$를 
 ---
 
 > 🏁 **본문 마지막 장**  
-> 1장의 "머신러닝 지도"에서 출발해 사이킷런 모델(2 ~ 8장), 신경망과 파이토치(9 ~ 11장), 비전·시퀀스·트랜스포머(12 ~ 17장), 생성 모델(18장)을 거쳐, 보상으로 행동을 배우는 강화 학습(19장)까지 왔다. 복습은 [📚 전체 목차](../README.md)의 학습 로드맵과 [📖 용어집](glossary.md)으로, 각 장 끝의 **5분 셀프 테스트**를 다시 풀어 보는 것으로 시작하면 좋다. 아직 읽지 않았다면 [부록 C. 서포트 벡터 머신](C_support_vector_machines.md)도 있다.
+> 1장의 "머신러닝 지도"에서 출발해 사이킷런 모델(2 ~ 8장), 신경망과 파이토치(9 ~ 11장), 비전·시퀀스·트랜스포머(12 ~ 17장), 생성 모델(18장)을 거쳐, 보상으로 행동을 배우는 강화 학습(19장)까지 왔다. 복습은 [📚 전체 목차](README.md)의 학습 로드맵과 [📖 용어집](glossary.md)으로, 각 장 끝의 **5분 셀프 테스트**를 다시 풀어 보는 것으로 시작하면 좋다. 아직 읽지 않았다면 [부록 C. 서포트 벡터 머신](C_support_vector_machines.md)도 있다.
 
-[← 18장. 오토인코더, GAN 그리고 확산 모델](18_autoencoders_gans_and_diffusion_models.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 🏁 본문 마지막 장
+[← 18장. 오토인코더, GAN 그리고 확산 모델](18_autoencoders_gans_and_diffusion_models.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · 🏁 본문 마지막 장

@@ -1,6 +1,6 @@
 # 0장. 시작하기 전에 — 수학과 파이썬 도구 최소 지식
 
-[📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [1장. 한눈에 보는 머신러닝 →](01_the_machine_learning_landscape.md)
+[📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [1장. 한눈에 보는 머신러닝 →](01_the_machine_learning_landscape.md)
 
 > 📘 이 장은 교재에 없는 **부록**이다. 1~16장 노트는 넘파이·판다스·맷플롯립 코드와 몇 가지 수식을 설명 없이 쓰는 곳이 있다. 그때 필요한 최소한만 여기 모았다.
 >
@@ -318,4 +318,4 @@ y = f(g(x)) \;\Rightarrow\; \frac{dy}{dx} = \frac{dy}{dg} \cdot \frac{dg}{dx}
 
 > ➡️ **다음 장 — [1장. 한눈에 보는 머신러닝](01_the_machine_learning_landscape.md)**
 
-[📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [1장. 한눈에 보는 머신러닝 →](01_the_machine_learning_landscape.md)
+[📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [1장. 한눈에 보는 머신러닝 →](01_the_machine_learning_landscape.md)

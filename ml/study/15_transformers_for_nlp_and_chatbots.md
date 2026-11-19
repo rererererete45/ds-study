@@ -1,6 +1,6 @@
 # 15장. 자연어 처리와 챗봇을 위한 트랜스포머
 
-[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)
+[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 15장 · 노트북 `15_transformers_for_nlp_and_chatbots.ipynb`
 >
@@ -2700,4 +2700,4 @@ SFT: (지시, 모범 답) 쌍으로 **지시를 따르는 형식**. DPO: (선호
 > ➡️ **다음 장 — [16장. 비전 및 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md)**  
 > 이 장의 트랜스포머는 텍스트 토큰의 시퀀스를 다뤘다. 16장은 이미지를 작은 **패치**로 잘라 토큰처럼 다루는 비전 트랜스포머(ViT)로 같은 인코더를 이미지 분류에 쓰고, 텍스트와 이미지를 함께 이해하는 **멀티모달** 모델로 나아간다.
 
-[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)
+[← 14장. RNN과 어텐션을 사용한 자연어 처리](14_nlp_with_rnns_and_attention.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [16장. 비전 및 멀티모달 트랜스포머 →](16_vision_and_multimodal_transformers.md)

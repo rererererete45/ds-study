@@ -1,6 +1,6 @@
 # 6장. 앙상블 학습과 랜덤 포레스트
 
-[← 5장. 결정 트리](05_decision_trees.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [7장. 차원 축소 →](07_dimensionality_reduction.md)
+[← 5장. 결정 트리](05_decision_trees.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [7장. 차원 축소 →](07_dimensionality_reduction.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 6장 · 노트북 `06_ensemble_learning_and_random_forests.ipynb`
 >
@@ -1525,4 +1525,4 @@ m개에서 중복 허용으로 m개를 뽑으면 특정 샘플이 한 번도 안
 > ➡️ **다음 장 — [7장. 차원 축소](07_dimensionality_reduction.md)**  
 > 모델을 바꾸는 대신 **데이터의 특성 수를 줄이는** 쪽으로 — 차원 축소. 5장의 PCA 축 정렬, 6장의 특성 중요도·랜덤 서브스페이스와 이어진다.
 
-[← 5장. 결정 트리](05_decision_trees.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [7장. 차원 축소 →](07_dimensionality_reduction.md)
+[← 5장. 결정 트리](05_decision_trees.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [7장. 차원 축소 →](07_dimensionality_reduction.md)

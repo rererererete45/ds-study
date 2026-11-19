@@ -1,6 +1,6 @@
 # 부록 C. 서포트 벡터 머신
 
-[📚 전체 목차](../README.md) · [📖 용어집](glossary.md)
+[📚 전체 목차](README.md) · [📖 용어집](glossary.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 부록 C · 노트북 `Appendix_C_support_vector_machines.ipynb`
 >
@@ -390,4 +390,4 @@ SVM의 쌍대 문제와 예측식에 샘플이 **내적 형태로만** 나타나
 
 ---
 
-[📚 전체 목차](../README.md) · [📖 용어집](glossary.md)
+[📚 전체 목차](README.md) · [📖 용어집](glossary.md)

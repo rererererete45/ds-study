@@ -1,6 +1,6 @@
 # 10장. 파이토치로 신경망 구축하기
 
-[← 9장. 인공 신경망 소개](09_artificial_neural_networks.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [11장. 심층 신경망 훈련 →](11_training_deep_neural_networks.md)
+[← 9장. 인공 신경망 소개](09_artificial_neural_networks.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [11장. 심층 신경망 훈련 →](11_training_deep_neural_networks.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 10장 · 노트북 `10_neural_nets_with_pytorch.ipynb`
 >
@@ -3362,4 +3362,4 @@ torch.compile(model)                                                (파이썬 �
 > ➡️ **다음 장 — [11장. 심층 신경망 훈련](11_training_deep_neural_networks.md)**  
 > 이 장의 MLP는 은닉 층이 2~3개뿐이었다. 층을 수십 개로 늘리면 그레이디언트가 사라지거나 폭주하고, 훈련이 느려지고, 과대적합이 심해진다. 11장에서 가중치 초기화(카이밍 등), 더 나은 활성화 함수, 배치 정규화, Adam 같은 옵티마이저, 학습률 스케줄, 드롭아웃 같은 규제로 이 문제들을 다룬다.
 
-[← 9장. 인공 신경망 소개](09_artificial_neural_networks.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [11장. 심층 신경망 훈련 →](11_training_deep_neural_networks.md)
+[← 9장. 인공 신경망 소개](09_artificial_neural_networks.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [11장. 심층 신경망 훈련 →](11_training_deep_neural_networks.md)

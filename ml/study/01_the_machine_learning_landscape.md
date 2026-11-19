@@ -1,6 +1,6 @@
 # 1장. 한눈에 보는 머신러닝
 
-[← 0장. 수학과 도구](00_math_and_tools.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [2장. 머신러닝 프로젝트 처음부터 끝까지 →](02_end_to_end_machine_learning_project.md)
+[← 0장. 수학과 도구](00_math_and_tools.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [2장. 머신러닝 프로젝트 처음부터 끝까지 →](02_end_to_end_machine_learning_project.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 1장 · 노트북 `01_the_machine_learning_landscape.ipynb`
 >
@@ -1236,4 +1236,4 @@ root_mean_squared_error(y_test, best.predict(X_test))   # 0.565
 > ➡️ **다음 장 — [2장. 머신러닝 프로젝트 처음부터 끝까지](02_end_to_end_machine_learning_project.md)**  
 > 여기서 그린 지도를 **실제 데이터(캘리포니아 주택 가격)로 처음부터 끝까지** 따라가 본다.
 
-[← 0장. 수학과 도구](00_math_and_tools.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [2장. 머신러닝 프로젝트 처음부터 끝까지 →](02_end_to_end_machine_learning_project.md)
+[← 0장. 수학과 도구](00_math_and_tools.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [2장. 머신러닝 프로젝트 처음부터 끝까지 →](02_end_to_end_machine_learning_project.md)

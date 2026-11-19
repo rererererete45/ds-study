@@ -1,6 +1,6 @@
 # 16장. 비전 및 멀티모달 트랜스포머
 
-[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [17장. 트랜스포머 속도 높이기 →](17_speeding_up_transformers.md)
+[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [17장. 트랜스포머 속도 높이기 →](17_speeding_up_transformers.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 16장 · 노트북 `16_vision_and_multimodal_transformers.ipynb`
 >
@@ -2089,4 +2089,4 @@ CNN은 지역성·이동 등변성이라는 **귀납적 편향**이 구조에 �
 > ➡️ **다음 장 — [17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md)**  
 > 이 장의 모델은 ViT-B만 해도 8,600만, BLIP-2는 약 38억 파라미터다. 17장은 생성을 빠르게 하는 KV 캐시·추측 디코딩, 어텐션 비용을 줄이는 희소·근사 어텐션과 플래시 어텐션, KV 캐시를 줄이는 GQA, 파라미터를 키우는 MoE, 적은 메모리로 미세 튜닝하는 LoRA 등으로 트랜스포머를 **더 빠르고 가볍게** 만드는 방법을 다룬다.
 
-[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [17장. 트랜스포머 속도 높이기 →](17_speeding_up_transformers.md)
+[← 15장. 자연어 처리와 챗봇을 위한 트랜스포머](15_transformers_for_nlp_and_chatbots.md) · [📚 전체 목차](README.md) · [📖 용어집](glossary.md) · [17장. 트랜스포머 속도 높이기 →](17_speeding_up_transformers.md)
