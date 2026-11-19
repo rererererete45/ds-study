@@ -1,6 +1,6 @@
 # 17장. 트랜스포머 속도 높이기
 
-[← 16장. 비전 및 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 18장. 오토인코더, GAN, 확산 모델 (정리 예정) →
+[← 16장. 비전 및 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [18장. 오토인코더, GAN 그리고 확산 모델 →](18_autoencoders_gans_and_diffusion_models.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 17장 · 노트북 `17_speeding_up_transformers.ipynb`
 >
@@ -12,7 +12,7 @@
 > - **17.4** **훈련 속도 높이기**. 일부 파라미터만 훈련하는 **PEFT·LoRA**, **활성화 체크포인팅**, **시퀀스 패킹·버키팅**, **그레이디언트 누적**, 데이터·텐서·파이프라인 **병렬화**와 ZeRO·FSDP
 >
 > ⬅️ **앞에서** [15장](15_transformers_for_nlp_and_chatbots.md)의 [스케일드 점곱 어텐션](15_transformers_for_nlp_and_chatbots.md#1-3-스케일드-점곱-어텐션)·[멀티 헤드 어텐션](15_transformers_for_nlp_and_chatbots.md#1-4-멀티-헤드-어텐션-구현)·[인과 마스크](15_transformers_for_nlp_and_chatbots.md#1-6-두-가지-마스크)·[`generate()`](15_transformers_for_nlp_and_chatbots.md#4-2-gpt-2로-텍스트-생성하기)·[디코딩 전략](15_transformers_for_nlp_and_chatbots.md#4-3-디코딩-전략-탐욕적샘플링top-p)이 이 장의 출발점이다. 15장 [2-6절의 ⚠️](15_transformers_for_nlp_and_chatbots.md#2-6-번역하기)에서 "매번 처음부터 다시 계산한다"고 미뤄 둔 **KV 캐시**와 [4-5절](15_transformers_for_nlp_and_chatbots.md#4-5-더-큰-모델-mistral-7b)의 Mistral-7B가 쓴 **GQA**를 여기서 다룬다. 허깅 페이스 `Trainer`는 [14장 2-17절](14_nlp_with_rnns_and_attention.md#2-17-트레이너-api), 옵티마이저 상태(Adam)는 [11장 3-6절](11_training_deep_neural_networks.md#3-6-adam)에서 봤다.  
-> ➡️ **다음으로** 18장은 트랜스포머에서 잠시 벗어나 데이터를 **만들어 내는** 생성 모델(오토인코더, GAN, 확산 모델)을 다룬다. 이 장의 기법(플래시 어텐션, LoRA, 그레이디언트 누적)은 확산 모델의 트랜스포머(DiT)를 훈련하고 미세 튜닝할 때도 그대로 쓰인다.
+> ➡️ **다음으로** [18장](18_autoencoders_gans_and_diffusion_models.md)은 트랜스포머에서 잠시 벗어나 데이터를 **만들어 내는** 생성 모델(오토인코더, GAN, 확산 모델)을 다룬다. 이 장의 기법(플래시 어텐션, LoRA, 그레이디언트 누적)은 확산 모델의 트랜스포머(DiT)를 훈련하고 미세 튜닝할 때도 그대로 쓰인다.
 
 ## 🎓 강의를 시작하며
 
@@ -2132,7 +2132,7 @@ LoRA     : W 동결 + (α/r)·BA, B = 0 초기화, 병합 시 추론 비용 0
 
 ---
 
-> ➡️ **다음 장 — 18장. 오토인코더, GAN, 확산 모델 (정리 예정)**  
+> ➡️ **다음 장 — [18장. 오토인코더, GAN 그리고 확산 모델](18_autoencoders_gans_and_diffusion_models.md)**  
 > 지금까지는 입력을 **이해하고 분류하거나 이어 쓰는** 모델이었다. 18장은 데이터의 분포를 배워 새 샘플을 **만들어 내는** 생성 모델(오토인코더·변이형 오토인코더, GAN, 확산 모델)을 다룬다. 확산 모델의 잡음 제거 신경망에도 이 장의 어텐션 가속·LoRA·그레이디언트 누적이 그대로 쓰인다.
 
-[← 16장. 비전 및 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 18장. 오토인코더, GAN, 확산 모델 (정리 예정) →
+[← 16장. 비전 및 멀티모달 트랜스포머](16_vision_and_multimodal_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [18장. 오토인코더, GAN 그리고 확산 모델 →](18_autoencoders_gans_and_diffusion_models.md)

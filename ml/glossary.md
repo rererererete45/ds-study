@@ -20,7 +20,8 @@
 - [11. 자연어 처리와 어텐션 (14장)](#11-자연어-처리와-어텐션-14장) — 10개
 - [12. 트랜스포머 (15~16장)](#12-트랜스포머-1516장) — 21개
 - [13. 트랜스포머 가속 (17장)](#13-트랜스포머-가속-17장) — 17개
-- [14. 서포트 벡터 머신 (부록 C)](#14-서포트-벡터-머신-부록-c) — 8개
+- [14. 생성 모델 (18장)](#14-생성-모델-18장) — 25개
+- [15. 서포트 벡터 머신 (부록 C)](#15-서포트-벡터-머신-부록-c) — 8개
 
 
 ## 1. 기본 개념과 데이터 (1~2장)
@@ -314,7 +315,37 @@
 | **그레이디언트 누적** | gradient accumulation | 여러 미니배치의 그레이디언트를 더한 뒤 한 번 업데이트해 큰 배치를 흉내 내는 방법 | [17장 4-6. 그레이디언트 누적](17_speeding_up_transformers.md#4-6-그레이디언트-누적) |
 | **데이터·텐서·파이프라인 병렬화 / FSDP** | data / tensor / pipeline parallelism, fully sharded data parallel | 배치 / 층 안의 행렬 / 층 묶음을 GPU들에 나누는 방법. FSDP(ZeRO-3)는 파라미터·그레이디언트·옵티마이저 상태까지 쪼개 저장 | [17장 4-7. 병렬화 기법](17_speeding_up_transformers.md#4-7-병렬화-기법) |
 
-## 14. 서포트 벡터 머신 (부록 C)
+## 14. 생성 모델 (18장)
+
+| 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
+|---|---|---|---|
+| **오토인코더** | autoencoder | 입력을 작은 코딩으로 압축(인코더)했다가 되살리도록(디코더) 훈련하는 신경망. 입력이 곧 타깃이라 레이블이 필요 없다 | [18장 1-2. 오토인코더의 구조](18_autoencoders_gans_and_diffusion_models.md#1-2-오토인코더의-구조) |
+| **코딩 (잠재 표현)** | coding, latent representation | 인코더가 만든 압축된 표현. 오토인코더에서 실제로 쓰고 싶은 것 | [18장 1-2. 오토인코더의 구조](18_autoencoders_gans_and_diffusion_models.md#1-2-오토인코더의-구조) |
+| **과소완전 / 과대완전** | undercomplete / overcomplete | 코딩 차원이 입력보다 작은 / 크거나 같은 오토인코더. 과대완전은 잡음·희소성 같은 제약이 필요하다 | [18장 1-2. 오토인코더의 구조](18_autoencoders_gans_and_diffusion_models.md#1-2-오토인코더의-구조) |
+| **적층 오토인코더** | stacked (deep) autoencoder | 은닉 층을 여러 개 쌓은 대칭 모래시계 모양 오토인코더 | [18장 3. 적층 오토인코더 (18.3)](18_autoencoders_gans_and_diffusion_models.md#3-적층-오토인코더-183) |
+| **가중치 묶기** | tying weights | 디코더 가중치를 인코더 가중치의 전치로 공유. 파라미터가 절반이 되고 규제 효과가 있다 | [18장 3-7. 가중치 묶기](18_autoencoders_gans_and_diffusion_models.md#3-7-가중치-묶기) |
+| **전치 합성곱** | transposed convolution | 입력 사이를 띄워 출력 공간 크기를 키우는 합성곱(`ConvTranspose2d`). 디코더·생성자의 업샘플링에 쓴다 | [18장 4-1. 합성곱 인코더와 전치 합성곱 디코더](18_autoencoders_gans_and_diffusion_models.md#4-1-합성곱-인코더와-전치-합성곱-디코더) |
+| **잡음 제거 오토인코더** | denoising autoencoder | 입력을 드롭아웃·가우스 잡음으로 손상시키고 깨끗한 원본을 복원하도록 훈련한 오토인코더 | [18장 5. 잡음 제거 오토인코더 (18.5)](18_autoencoders_gans_and_diffusion_models.md#5-잡음-제거-오토인코더-185) |
+| **희소 오토인코더** | sparse autoencoder | 코딩 유닛 대부분이 꺼지도록(평균 활성화 ≈ 목표 희소도) 손실을 더한 오토인코더. 유닛이 해석 가능한 경우가 많다 | [18장 6. 희소 오토인코더 (18.6)](18_autoencoders_gans_and_diffusion_models.md#6-희소-오토인코더-186) |
+| **KL 발산** | Kullback–Leibler divergence | 두 확률 분포가 얼마나 다른지 재는 값(0 이상, 같으면 0). 희소성 손실과 VAE 잠재 손실에 쓴다 | [18장 6-1. 희소성 손실: KL 발산](18_autoencoders_gans_and_diffusion_models.md#6-1-희소성-손실-kl-발산) |
+| **변분 오토인코더 (VAE)** | variational autoencoder | 인코더가 평균·분산을 출력하고 그 분포에서 샘플링한 코딩을 디코딩하는 확률적·생성적 오토인코더 | [18장 7-1. VAE의 원리](18_autoencoders_gans_and_diffusion_models.md#7-1-vae의-원리) |
+| **재매개변수화 트릭** | reparameterization trick | 샘플링을 $z = \mu + \sigma \odot \varepsilon$로 바꿔 μ, σ로 그레이디언트가 흐르게 하는 방법 | [18장 7-1. VAE의 원리](18_autoencoders_gans_and_diffusion_models.md#7-1-vae의-원리) |
+| **잠재 손실** | latent loss | VAE에서 코딩 분포와 $\mathcal{N}(0, I)$의 KL 발산. 잠재 공간을 원점 근처에 빈틈없이 모은다 | [18장 7-3. VAE 손실 함수](18_autoencoders_gans_and_diffusion_models.md#7-3-vae-손실-함수) |
+| **시맨틱 보간** | semantic interpolation | 잠재 공간의 두 코딩 사이를 보간해 디코딩하면 의미 있게 서서히 바뀌는 이미지가 나오는 것 | [18장 7-6. 시맨틱 보간](18_autoencoders_gans_and_diffusion_models.md#7-6-시맨틱-보간) |
+| **Gumbel-softmax / 이산 VAE** | Gumbel-softmax / discrete VAE | 범주 샘플링을 온도 있는 softmax로 근사해 미분 가능하게 만드는 방법 / 이를 써서 코딩을 코드 번호 시퀀스로 만든 VAE(dVAE) | [18장 7-8. 이산 VAE와 Gumbel-softmax](18_autoencoders_gans_and_diffusion_models.md#7-8-이산-vae와-gumbel-softmax) |
+| **생성적 적대 신경망 (GAN)** | generative adversarial network | 잡음으로 가짜를 만드는 생성자와 진짜·가짜를 구별하는 판별자를 경쟁시켜 훈련하는 생성 모델 | [18장 8-1. GAN의 구조와 두 단계 훈련](18_autoencoders_gans_and_diffusion_models.md#8-1-gan의-구조와-두-단계-훈련) |
+| **모드 붕괴** | mode collapse | GAN 생성자가 다양성을 잃고 몇 가지(극단적으로 한 점)만 만드는 현상 | [18장 8-4. GAN 훈련의 어려움](18_autoencoders_gans_and_diffusion_models.md#8-4-gan-훈련의-어려움) |
+| **DCGAN** | deep convolutional GAN | 스트라이드·전치 합성곱, 배치 정규화 등의 규칙으로 안정시킨 합성곱 GAN | [18장 8-6. 심층 합성곱 GAN](18_autoencoders_gans_and_diffusion_models.md#8-6-심층-합성곱-gan) |
+| **StyleGAN** | StyleGAN | 매핑 네트워크로 만든 스타일 벡터를 층마다 AdaIN으로 주입하는 고해상도 GAN(ProGAN의 점진적 성장을 계승) | [18장 8-7. ProGAN과 StyleGAN](18_autoencoders_gans_and_diffusion_models.md#8-7-progan과-stylegan) |
+| **확산 모델 / DDPM** | diffusion model / denoising diffusion probabilistic model | 이미지에 잡음을 조금씩 더하는 과정을 거꾸로, 즉 잡음을 예측해 빼는 법을 배워 순수한 잡음에서 이미지를 만드는 생성 모델 | [18장 9-1. 확산 모델의 아이디어](18_autoencoders_gans_and_diffusion_models.md#9-1-확산-모델의-아이디어) |
+| **분산 스케줄** | variance schedule | 시점별로 더할 잡음의 분산 $\beta_t$(와 남은 신호 $\bar\alpha_t$)를 정한 표. 선형·코사인 | [18장 9-2. 분산 스케줄](18_autoencoders_gans_and_diffusion_models.md#9-2-분산-스케줄) |
+| **U-Net** | U-Net | 해상도를 줄였다가 키우며 같은 해상도끼리 스킵 연결로 잇는 합성곱 구조. 확산 모델의 잡음 예측기·분할에 쓴다 | [18장 9-6. U-Net 잡음 예측 모델](18_autoencoders_gans_and_diffusion_models.md#9-6-u-net-잡음-예측-모델) |
+| **DDIM** | denoising diffusion implicit model | 같은 확산 모델로 원본을 추정하며 시점을 건너뛰는 빠른 샘플러. η = 0이면 결정적 | [18장 9-9. DDIM으로 더 빠르게 생성하기](18_autoencoders_gans_and_diffusion_models.md#9-9-ddim으로-더-빠르게-생성하기) |
+| **잠재 확산 / 스테이블 디퓨전** | latent diffusion / Stable Diffusion | VAE 잠재 공간에서 확산하고 텍스트를 크로스 어텐션으로 넣는 텍스트–이미지 모델 | [18장 9-10. 잠재 확산과 스테이블 디퓨전](18_autoencoders_gans_and_diffusion_models.md#9-10-잠재-확산과-스테이블-디퓨전) |
+| **분류기 없는 가이던스 (CFG)** | classifier-free guidance | 조건(텍스트) 있는 예측과 없는 예측의 차이를 키워 프롬프트를 더 강하게 따르게 하는 기법(`guidance_scale`) | [18장 9-10. 잠재 확산과 스테이블 디퓨전](18_autoencoders_gans_and_diffusion_models.md#9-10-잠재-확산과-스테이블-디퓨전) |
+| **플로 매칭** | flow matching | 잡음과 데이터를 직선으로 잇는 경로 위의 속도를 학습하고, 미분 방정식을 적분해 생성하는 방법 | [18장 9-11. 보충 자료: 플로 매칭](18_autoencoders_gans_and_diffusion_models.md#9-11-보충-자료-플로-매칭) |
+
+## 15. 서포트 벡터 머신 (부록 C)
 
 | 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
 |---|---|---|---|
