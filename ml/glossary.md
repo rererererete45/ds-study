@@ -21,7 +21,8 @@
 - [12. 트랜스포머 (15~16장)](#12-트랜스포머-1516장) — 21개
 - [13. 트랜스포머 가속 (17장)](#13-트랜스포머-가속-17장) — 17개
 - [14. 생성 모델 (18장)](#14-생성-모델-18장) — 25개
-- [15. 서포트 벡터 머신 (부록 C)](#15-서포트-벡터-머신-부록-c) — 8개
+- [15. 강화 학습 (19장)](#15-강화-학습-19장) — 27개
+- [16. 서포트 벡터 머신 (부록 C)](#16-서포트-벡터-머신-부록-c) — 8개
 
 
 ## 1. 기본 개념과 데이터 (1~2장)
@@ -345,7 +346,39 @@
 | **분류기 없는 가이던스 (CFG)** | classifier-free guidance | 조건(텍스트) 있는 예측과 없는 예측의 차이를 키워 프롬프트를 더 강하게 따르게 하는 기법(`guidance_scale`) | [18장 9-10. 잠재 확산과 스테이블 디퓨전](18_autoencoders_gans_and_diffusion_models.md#9-10-잠재-확산과-스테이블-디퓨전) |
 | **플로 매칭** | flow matching | 잡음과 데이터를 직선으로 잇는 경로 위의 속도를 학습하고, 미분 방정식을 적분해 생성하는 방법 | [18장 9-11. 보충 자료: 플로 매칭](18_autoencoders_gans_and_diffusion_models.md#9-11-보충-자료-플로-매칭) |
 
-## 15. 서포트 벡터 머신 (부록 C)
+## 15. 강화 학습 (19장)
+
+| 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
+|---|---|---|---|
+| **강화 학습 에이전트 / 환경** | agent / environment | 환경을 관측하고 행동해 보상을 받는 주체 / 에이전트가 상호작용하는 세계(시뮬레이터·게임·실제 시스템) | [19장 1-1. 보상을 최대화하도록 배우기](19_reinforcement_learning.md#1-1-보상을-최대화하도록-배우기) |
+| **보상** | reward | 행동 뒤 환경이 주는 수치 신호(양수 = 칭찬, 음수 = 벌칙). 정답이 아니라 결과의 평가다 | [19장 1-1. 보상을 최대화하도록 배우기](19_reinforcement_learning.md#1-1-보상을-최대화하도록-배우기) |
+| **정책** | policy | 관측(상태)을 받아 행동을 고르는 규칙·신경망. 결정적이거나 확률적($\pi(a \mid s)$)이다 | [19장 1-2. 정책과 정책 탐색](19_reinforcement_learning.md#1-2-정책과-정책-탐색) |
+| **정책 탐색** | policy search | 좋은 정책의 파라미터를 찾는 일. 무작위·격자 탐색, 유전 알고리즘, 정책 그레이디언트 | [19장 1-2. 정책과 정책 탐색](19_reinforcement_learning.md#1-2-정책과-정책-탐색) |
+| **에피소드 / 종료 · 잘림** | episode / terminated · truncated | 시작부터 끝까지의 한 판 / 실패·성공으로 끝남(`done`) · 시간 제한으로 끊김(`truncated`) | [19장 2-1. Gymnasium 소개](19_reinforcement_learning.md#2-1-gymnasium-소개) |
+| **Gymnasium** | Gymnasium | OpenAI Gym을 이은 강화 학습 환경 라이브러리. `make`·`reset`·`step`·`render` API | [19장 2-1. Gymnasium 소개](19_reinforcement_learning.md#2-1-gymnasium-소개) |
+| **신용 할당 문제** | credit assignment problem | 늦게 온 보상이 이전의 어떤 행동 덕분인지 알기 어려운 문제 | [19장 2-4. 행동 평가: 신용 할당 문제](19_reinforcement_learning.md#2-4-행동-평가-신용-할당-문제) |
+| **감가율 / 반환값** | discount factor / return | 미래 보상을 스텝마다 γ배씩 깎는 값 / 그 뒤로 받은 할인된 보상의 합 $G_t = r + \gamma G_{t+1}$ | [19장 2-4. 행동 평가: 신용 할당 문제](19_reinforcement_learning.md#2-4-행동-평가-신용-할당-문제) |
+| **행동 이득** | action advantage | 그 행동이 평균(기대)보다 얼마나 좋았는가. 정규화한 반환값·TD 오차·GAE로 추정 | [19장 2-4. 행동 평가: 신용 할당 문제](19_reinforcement_learning.md#2-4-행동-평가-신용-할당-문제) |
+| **정책 그레이디언트 / REINFORCE** | policy gradient / REINFORCE | 보상의 그레이디언트로 정책을 직접 개선 / 손실 $-\log\pi(a \mid s)\cdot\hat{A}$로 좋았던 행동의 확률을 키우는 몬테카를로 알고리즘 | [19장 2-5. REINFORCE 알고리즘](19_reinforcement_learning.md#2-5-reinforce-알고리즘) |
+| **마르코프 결정 과정 (MDP)** | Markov decision process | 전이 확률 $T(s,a,s')$와 보상 $R(s,a,s')$로 정의되는 의사 결정 문제. 다음 상태는 현재 상태·행동에만 의존 | [19장 3-2. 마르코프 결정 과정과 벨만 방정식](19_reinforcement_learning.md#3-2-마르코프-결정-과정과-벨만-방정식) |
+| **벨만 최적 방정식** | Bellman optimality equation | $V^*(s) = \max_a \sum T[R + \gamma V^*(s')]$. 최적 가치를 재귀적으로 정의 | [19장 3-2. 마르코프 결정 과정과 벨만 방정식](19_reinforcement_learning.md#3-2-마르코프-결정-과정과-벨만-방정식) |
+| **Q-가치 / Q-가치 반복** | Q-value / Q-value iteration | 상태에서 그 행동을 하고 이후 최적으로 행동할 때의 기대 할인 보상 / 모델을 알 때 벨만 식으로 반복 계산 | [19장 3-3. Q-가치 반복](19_reinforcement_learning.md#3-3-q-가치-반복) |
+| **시간차 학습 (TD 학습) / TD 오차** | temporal difference learning / TD error | 겪은 한 스텝(보상 + 다음 상태 추정 가치)으로 가치를 고치는 학습 / $\delta = r + \gamma V(s') - V(s)$ | [19장 3-5. 시간차 학습](19_reinforcement_learning.md#3-5-시간차-학습) |
+| **Q-러닝** | Q-learning | $Q \leftarrow (1-\alpha)Q + \alpha(r + \gamma\max Q(s'))$. 모델 없이 경험으로 최적 Q-가치를 배우는 오프-폴리시 알고리즘 | [19장 3-6. Q-러닝](19_reinforcement_learning.md#3-6-q-러닝) |
+| **온-폴리시 / 오프-폴리시** | on-policy / off-policy | 지금 실행하는 정책의 가치를 배움 / 다른 정책(탐험·과거)의 경험으로 최적 정책을 배움 | [19장 3-8. 보충 코드: SARSA vs Q-러닝](19_reinforcement_learning.md#3-8-보충-코드-sarsa-vs-q-러닝-온-폴리시-vs-오프-폴리시) |
+| **ε-그리디 정책 / 탐험 vs 활용** | ε-greedy / exploration vs exploitation | 확률 ε로 무작위, 나머지는 최선의 행동 / 새로 시도할지 아는 최선을 쓸지의 균형 | [19장 3-7. 탐험 정책](19_reinforcement_learning.md#3-7-탐험-정책) |
+| **심층 Q-네트워크 (DQN)** | deep Q-network | 상태를 받아 행동별 Q-가치를 출력하는 신경망. 타깃 $r + \gamma\max Q(s')$에 회귀 | [19장 3-9. 근사 Q-러닝과 심층 Q-러닝](19_reinforcement_learning.md#3-9-근사-q-러닝과-심층-q-러닝) |
+| **재생 버퍼** | replay buffer | 과거 경험 (s, a, r, s', done)을 쌓아 두고 무작위로 뽑아 훈련. 상관을 줄이고 경험을 재사용 | [19장 3-10. DQN 구현](19_reinforcement_learning.md#3-10-dqn-구현-네트워크와-재생-버퍼) |
+| **치명적 망각** | catastrophic forgetting | 환경의 한 부분에서 배운 것이 다른 부분의 지식을 망가뜨려 성능이 갑자기 무너지는 현상 | [19장 3-11. DQN 훈련](19_reinforcement_learning.md#3-11-dqn-훈련) |
+| **목표 네트워크 / 더블 DQN** | target network / double DQN | 타깃만 계산하며 주기적으로 복사되는 고정 모델 / 온라인 모델이 고르고 목표 모델이 평가해 과대평가를 줄인 DQN | [19장 3-12. DQN 변형](19_reinforcement_learning.md#3-12-dqn-변형) |
+| **우선 순위 경험 재생 / 듀얼링 DQN** | prioritized experience replay / dueling DQN | TD 오차가 큰 경험을 자주 뽑는 재생 버퍼 / $Q = V + A - \max A$로 상태 가치와 이득을 따로 추정 | [19장 3-12. DQN 변형](19_reinforcement_learning.md#3-12-dqn-변형) |
+| **액터-크리틱** | actor-critic | 행동을 고르는 정책(액터)과 상태 가치를 추정하는 크리틱을 함께 훈련. TD 오차를 이득으로 쓴다 | [19장 4-1. 액터와 크리틱](19_reinforcement_learning.md#4-1-액터와-크리틱) |
+| **PPO / 클리핑된 목적 함수** | proximal policy optimization | 확률 비율 $\pi/\pi_{old}$를 1 ± ε로 잘라 정책이 한 번에 크게 바뀌지 않게 한 액터-크리틱. 실전 표준 | [19장 5-1. PPO 알고리즘](19_reinforcement_learning.md#5-1-ppo-알고리즘) |
+| **GAE** | generalized advantage estimation | TD 오차를 $(\gamma\lambda)^l$로 가중합한 이득 추정. λ로 편향과 분산을 조절 | [19장 5-1. PPO 알고리즘](19_reinforcement_learning.md#5-1-ppo-알고리즘) |
+| **프레임 쌓기** | frame stacking | 최근 프레임 몇 장을 채널로 이어 붙여 한 관측으로 쓰는 것. 속도·방향 정보를 준다 | [19장 5-3. 프레임 쌓기](19_reinforcement_learning.md#5-3-프레임-쌓기) |
+| **모델 기반 강화 학습** | model-based RL | 환경의 동역학 모델로 미래를 시뮬레이션하며 계획(AlphaZero·MuZero·Dreamer) | [19장 6-2. 모델 기반 강화 학습](19_reinforcement_learning.md#6-2-모델-기반-강화-학습-alphago에서-muzero까지) |
+
+## 16. 서포트 벡터 머신 (부록 C)
 
 | 용어 | 영어 | 뜻 | 처음 설명하는 곳 |
 |---|---|---|---|

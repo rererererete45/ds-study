@@ -68,7 +68,7 @@
    ↓ 이해하는 모델에서 만들어 내는 모델로
 18장 오토인코더, GAN 그리고 확산 모델 ─ 선형 AE = PCA · 적층·합성곱 AE · 이상치 탐지 · 가중치 묶기 · 잡음 제거 · 희소(KL) · VAE(재매개변수화·시맨틱 보간) · 이산 VAE(Gumbel-softmax) · GAN·모드 붕괴 · DCGAN · StyleGAN · 확산(DDPM·DDIM·U-Net) · 스테이블 디퓨전 · 플로 매칭
    ↓ 데이터를 흉내 내는 모델에서 보상으로 행동을 배우는 모델로
-19장~ 강화 학습 (정리 예정)
+19장 강화 학습 ─ 에이전트·보상·정책 · Gymnasium(CartPole) · 신경망 정책 · 신용 할당(감가율·반환값) · REINFORCE · MDP·벨만 방정식 · Q-가치 반복 · TD 학습 · Q-러닝 · ε-그리디 · DQN(재생 버퍼) · 목표 네트워크·더블·PER·듀얼링 · 액터-크리틱 · PPO(클리핑·GAE) · 아타리 브레이크아웃(SB3) · AlphaZero·SAC·RLHF
 ```
 
 ### 장별 노트
@@ -76,7 +76,7 @@
 | 장 | 주제 | 키워드 |
 |---|---|---|
 | [0장](ml/00_math_and_tools.md) | 시작하기 전에 — 수학과 파이썬 도구 (부록) | 넘파이 shape·axis·브로드캐스팅, 판다스, 그림 읽는 법, 내적·행렬 곱, 도함수·그레이디언트·연쇄 법칙, 정규분포·로그·소프트맥스, 기호 정리 |
-| [📖 용어집](ml/glossary.md) | 핵심 용어 259개 | 주제별 한 줄 뜻 + 처음 설명하는 곳 링크 |
+| [📖 용어집](ml/glossary.md) | 핵심 용어 286개 | 주제별 한 줄 뜻 + 처음 설명하는 곳 링크 |
 | [1장](ml/01_the_machine_learning_landscape.md) | 한눈에 보는 머신러닝 | 머신러닝 정의, 지도·비지도·준지도·자기 지도·강화 학습, 배치·온라인 학습, 사례 기반(KNN)·모델 기반(선형 회귀), fit·predict, 대표성 없는 데이터, 과대적합·과소적합, 규제(Ridge), 하이퍼파라미터, 훈련·검증·테스트 세트, 교차 검증, 데이터 불일치, 공짜 점심 없음 |
 | [2장](ml/02_end_to_end_machine_learning_project.md) | 머신러닝 프로젝트 처음부터 끝까지 | 계층 샘플링, 상관관계, SimpleImputer, OneHotEncoder, 스케일링, 사용자 정의 변환기, Pipeline·ColumnTransformer, 교차 검증, 그리드·랜덤 서치, 부트스트랩, joblib |
 | [3장](ml/03_classification.md) | 분류 | MNIST, SGDClassifier, StratifiedKFold, 오차 행렬, 정밀도·재현율·F1, 임곗값, PR·ROC 곡선, AUC, OvR·OvO, 오류 분석, 다중 레이블(ClassifierChain), 다중 출력, 데이터 증강, 타이타닉, 스팸 분류기 |
@@ -96,6 +96,7 @@
 | [16장](ml/16_vision_and_multimodal_transformers.md) | 비전 및 멀티모달 트랜스포머 | 귀납적 편향, 시각 어텐션 RNN, DETR(객체 쿼리·헝가리안 매칭), ViT(패치 임베딩·Conv2d=패치별 선형 층·[CLS]·위치 임베딩·Pre-LN), interpolate_pos_encoding, Oxford-IIIT Pet, AutoImageProcessor(do_convert_rgb), collate_fn, Trainer(remove_unused_columns=False), DeiT(증류 토큰·하드 증류·강한 증강), PVT(공간 축소 어텐션), Swin(윈도·이동 윈도·패치 병합), DINO(자기 증류·EMA 교사·다중 크롭·센터링·샤프닝), 어텐션 맵 비지도 분할(output_attentions·eager), BEiT·MAE·DINOv2·SAM, VideoBERT, ViLBERT(공동 어텐션), CLIP(이중 인코더·대조 손실·logit_scale 온도·제로샷 분류·프롬프트 템플릿·get_image_features), DALL·E(dVAE 토큰), Perceiver(잠재 배열·크로스 어텐션·푸리에 위치 인코딩), Perceiver IO(출력 쿼리), Flamingo(Perceiver Resampler·tanh 게이트), BLIP(CapFilt)·BLIP-2(Q-Former·쿼리 32개·float16 generate), LLaVA·GPT-4o·Whisper·ImageBind·RT-2, Gemini API(google-genai) |
 | [17장](ml/17_speeding_up_transformers.md) | 트랜스포머 속도 높이기 | 프리필·디코드(메모리 바운드), KV 캐시(use_cache·DynamicCache·past_key_values), 캐시 크기 계산, 추측 디코딩(assistant_model·수락 min(1, p/q)·잔여 분포·기대 토큰 수), 프롬프트 룩업·연속 배칭·페이지드 어텐션, 어텐션의 L² 비용, 희소 어텐션(Sparse Transformer·Longformer·BigBird·Routing Transformer), BigBird fill-mask(block_sparse → original_full), Reformer(각도 LSH·버킷), Linformer, Performer(양의 랜덤 특성 φ·직교화(QR)·FAVOR+·선형 어텐션), MQA·GQA(enable_gqa), MLA(잠재 캐시·흡수), 플래시 어텐션(HBM·SRAM·타일링·온라인 소프트맥스), SDPA 백엔드·attn_implementation, MoE(라우터·top-k·부하 균형 보조 손실·용량 계수·Mixtral·DeepSeek-V3), PEFT·LoRA(LoraConfig·get_peft_model·병합)·QLoRA, 활성화 체크포인팅(checkpoint), 버키팅·패킹(group_by_length), 그레이디언트 누적(토큰 수 정규화), 데이터·텐서·파이프라인 병렬(버블)·ZeRO·FSDP |
 | [18장](ml/18_autoencoders_gans_and_diffusion_models.md) | 오토인코더, GAN 그리고 확산 모델 | 인코더·코딩·디코더, 재구성 손실, 과소완전·과대완전, 선형 오토인코더 = PCA(부분 공간), 적층 오토인코더, AutoencoderDataset, 재구성 오차 이상치 탐지(MNIST vs 패션 MNIST), t-SNE 시각화, 가중치 묶기(F.linear·weight.t()), 비지도 사전 훈련, 합성곱 오토인코더(ConvTranspose2d·output_padding), 순환 오토인코더(LSTM), 잡음 제거(Dropout·GaussianNoise·self.training), 희소 오토인코더(KL 발산·목표 희소도·namedtuple 출력), VAE(μ·log σ²·재매개변수화 트릭·잠재 손실·ELBO), 이미지 생성·시맨틱 보간(torch.lerp), 이산 VAE(Gumbel-softmax·hard=True·온도 어닐링), GAN(생성자·판별자·두 단계 훈련·BCELoss·detach·requires_grad), 모드 붕괴·내시 균형·경험 재생·미니배치 판별, DCGAN, ProGAN·StyleGAN(매핑 네트워크·AdaIN), 확산 모델(순방향·역방향·코사인 분산 스케줄·지름길 공식), DiffusionSample·DiffusionDataset, 시간 인코딩, U-Net(분리 합성곱·교차 스킵), DDPM·DDIM 샘플링, 잠재 확산·CFG, diffusers(sd-turbo·적대적 확산 증류), 플로 매칭(직선 경로·속도·오일러) |
+| [19장](ml/19_reinforcement_learning.md) | 강화 학습 | 에이전트·환경·관측·행동·보상, 정책·정책 탐색(보상 지형), Gymnasium(make·reset·step·render·registry), CartPole, done·truncated, 하드코딩 정책, 신경망 정책(Bernoulli·log_prob·샘플링), 신용 할당 문제, 감가율·반환값(compute_returns)·행동 이득(정규화), REINFORCE(정책 그레이디언트 정리), 마르코프 연쇄(흡수 기대 스텝), MDP(전이 확률·보상), 벨만 최적 방정식, 가치 반복·Q-가치 반복, 감가율과 최적 정책, TD 학습(TD 타깃·TD 오차·부트스트래핑), Q-러닝(학습률 감소·오프-폴리시), ε-그리디·탐험 함수, SARSA vs Q-러닝(CliffWalking), 근사 Q-러닝·DQN, 재생 버퍼(deque·원형 버퍼), gather·inference_mode, 치명적 망각, 고정 Q-가치 타깃·더블 DQN(최대화 편향)·우선 순위 경험 재생·듀얼링 DQN·Rainbow, 시드 민감도, 액터-크리틱(공유 몸통·TD 오차·detach)·A2C·A3C, PPO(확률 비율·클리핑·GAE·엔트로피 보너스), ale_py·make_atari_env(AtariWrapper 전처리·VecEnv), VecFrameStack, CnnPolicy(NatureCNN), 텐서보드 지표, CheckpointCallback, PPO.load·predict, EpisodicLifeEnv와 게임 점수, AlphaGo·AlphaZero·MuZero·Dreamer, DDPG·TD3·SAC, 호기심·POET, 모방 학습·오프라인 RL·결정 트랜스포머·RLHF |
 
 ### 노트 읽는 법
 

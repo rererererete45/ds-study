@@ -1,6 +1,6 @@
 # 18장. 오토인코더, GAN 그리고 확산 모델
 
-[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 19장. 강화 학습 (정리 예정) →
+[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [19장. 강화 학습 →](19_reinforcement_learning.md)
 
 > 📘 **교재** 『핸즈온 머신러닝 with 사이킷런, 파이토치』 18장 · 노트북 `18_autoencoders_gans_and_diffusion_models.ipynb`
 >
@@ -17,7 +17,7 @@
 > - **18.9** **확산 모델**. 잡음을 조금씩 더하는 순방향 과정과 잡음을 예측해 빼는 역방향 과정, 코사인 분산 스케줄, U-Net, **DDPM**·**DDIM** 샘플링, 스테이블 디퓨전(SD-Turbo) (보충: **플로 매칭**)
 >
 > ⬅️ **앞에서** [7장](07_dimensionality_reduction.md)의 [PCA](07_dimensionality_reduction.md#3-주성분-분석-73)·[t-SNE](07_dimensionality_reduction.md#6-다른-차원-축소-기법-76)와 [8장](08_unsupervised_learning.md)의 [재구성 오차로 이상치 찾기](08_unsupervised_learning.md#3-5-13번--pca-재구성-오차로-이상치-탐지)를 신경망으로 확장한다. 모델은 [10장](10_neural_nets_with_pytorch.md)의 `nn.Module`·`train()` 함수, [11장](11_training_deep_neural_networks.md)의 드롭아웃·배치 정규화·NAdam, [12장](12_deep_computer_vision_with_cnns.md)의 합성곱·풀링·[전치 합성곱](12_deep_computer_vision_with_cnns.md#12-1-시맨틱-분할과-업샘플링)·[분리 합성곱](12_deep_computer_vision_with_cnns.md#5-9-xception)으로 만든다. 확산 모델의 시간 인코딩은 [15장의 사인/코사인 위치 인코딩](15_transformers_for_nlp_and_chatbots.md#1-2-위치-임베딩)과 같고, 이산 VAE는 [16장 DALL·E](16_vision_and_multimodal_transformers.md#2-7-dalle-텍스트로-이미지-생성하기)의 이미지 토크나이저(dVAE)다.  
-> ➡️ **다음으로** 19장은 정답 데이터 대신 **보상**으로 배우는 강화 학습을 다룬다. 생성 모델이 "데이터 분포를 흉내 내는" 법을 배웠다면, 강화 학습은 "환경 속에서 행동하는" 법을 배운다.
+> ➡️ **다음으로** [19장](19_reinforcement_learning.md)은 정답 데이터 대신 **보상**으로 배우는 강화 학습을 다룬다. 생성 모델이 "데이터 분포를 흉내 내는" 법을 배웠다면, 강화 학습은 "환경 속에서 행동하는" 법을 배운다.
 
 ## 🎓 강의를 시작하며
 
@@ -3296,7 +3296,7 @@ DDIM: **샘플러**만 바꾼다 — $\hat{x}_0$을 추정해 시점을 건너�
 
 ---
 
-> ➡️ **다음 장 — 19장. 강화 학습 (정리 예정)**  
+> ➡️ **다음 장 — [19장. 강화 학습](19_reinforcement_learning.md)**  
 > 지금까지는 정답(레이블)이나 데이터 자체(재구성·잡음)를 보고 배웠다. 19장은 정답 없이 **보상**만 보고 행동을 배우는 강화 학습(정책 그레이디언트, 마르코프 결정 과정, Q-러닝, DQN)을 다룬다. 이 장의 "두 네트워크가 서로를 타깃으로 쓰는" GAN 훈련처럼, DQN도 움직이는 타깃 때문에 생기는 불안정을 다루는 요령이 핵심이다.
 
-[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · 19장. 강화 학습 (정리 예정) →
+[← 17장. 트랜스포머 속도 높이기](17_speeding_up_transformers.md) · [📚 전체 목차](../README.md) · [📖 용어집](glossary.md) · [19장. 강화 학습 →](19_reinforcement_learning.md)
