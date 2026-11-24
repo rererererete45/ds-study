@@ -1993,7 +1993,7 @@ s_k(\mathbf{x}) = \left(\boldsymbol{\theta}^{(k)}\right)^\top\mathbf{x}
 3. 가장 높은 확률의 클래스 선택:
 
 ```math
-\hat{y} = \underset{k}{\operatorname{argmax}}\ \hat{p}_k
+\hat{y} = \underset{k}{\arg\max}\ \hat{p}_k
 ```
 
 비용 함수 (**크로스 엔트로피**):
