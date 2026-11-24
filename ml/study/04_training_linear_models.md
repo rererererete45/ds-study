@@ -1999,7 +1999,9 @@ s_k(\mathbf{x}) = \left(\boldsymbol{\theta}^{(k)}\right)^\top\mathbf{x}
 비용 함수 (**크로스 엔트로피**):
 
 ```math
-J(\boldsymbol{\Theta}) = -\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}y_k^{(i)}\log\left(\hat{p}_k^{(i)}\right)
+J(\mathbf{\Theta}) = -\frac{1}{m}
+\sum_{i=1}^{m}\sum_{k=1}^{K}
+y_k^{(i)}\log(\hat{p}_k^{(i)})
 ```
 
 그레이디언트:
