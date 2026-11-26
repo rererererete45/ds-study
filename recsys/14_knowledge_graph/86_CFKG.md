@@ -5,6 +5,8 @@
 > 📌 **분류** 지식 그래프 추천 · **블록** B14 지식 그래프 · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [CFKG](https://recbole.io/docs/user_guide/model/knowledge/cfkg.html) · **소스** `recbole/model/knowledge_aware_recommender/cfkg.py`
+>
+> 🗂️ **추천 데이터** `ml-1m(+KG)`
 
 ## 요약
 
@@ -20,7 +22,7 @@ run_recbole(model='CFKG', dataset='ml-1m')
 
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
-| ml-1m |  |  |  |  |  |
+| ml-1m(+KG) |  |  |  |  |  |
 
 ## 메모
 

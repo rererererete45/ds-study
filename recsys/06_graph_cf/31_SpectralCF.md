@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B6 그래프 CF · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [SpectralCF](https://recbole.io/docs/user_guide/model/general/spectralcf.html) · **소스** `recbole/model/general_recommender/spectralcf.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [Pop](https://recbole.io/docs/user_guide/model/general/pop.html) · **소스** `recbole/model/general_recommender/pop.py`
 >
+> 🗂️ **추천 데이터** `ml-1m`
+>
 > 💡 인기도 베이스라인
 
 ## 요약

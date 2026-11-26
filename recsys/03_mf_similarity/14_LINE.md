@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B3 행렬 분해·유사도 · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [LINE](https://recbole.io/docs/user_guide/model/general/line.html) · **소스** `recbole/model/general_recommender/line.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

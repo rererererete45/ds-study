@@ -5,6 +5,8 @@
 > 📌 **분류** 컨텍스트(CTR) 추천 · **블록** B11 CTR 기초 · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [FNN](https://recbole.io/docs/user_guide/model/context/fnn.html) · **소스** `recbole/model/context_aware_recommender/fnn.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

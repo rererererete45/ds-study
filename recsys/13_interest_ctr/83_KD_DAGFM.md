@@ -5,6 +5,8 @@
 > 📌 **분류** 컨텍스트(CTR) 추천 · **블록** B13 관심사·최신 CTR · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [KD_DAGFM](https://recbole.io/docs/user_guide/model/context/kd_dagfm.html) · **소스** `recbole/model/context_aware_recommender/kd_dagfm.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

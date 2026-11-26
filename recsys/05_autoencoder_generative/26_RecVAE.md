@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B5 오토인코더·생성 · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [RecVAE](https://recbole.io/docs/user_guide/model/general/recvae.html) · **소스** `recbole/model/general_recommender/recvae.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Netflix(샘플)`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='RecVAE', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Netflix(샘플) |  |  |  |  |  |
 
 ## 4. 회고
 

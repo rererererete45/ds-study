@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [GRU4Rec](https://recbole.io/docs/user_guide/model/sequential/gru4rec.html) · **소스** `recbole/model/sequential_recommender/gru4rec.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `YOOCHOOSE(1/64)` · `DIGINETICA`
+>
 > 💡 RNN 기반 세션 추천
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='GRU4Rec', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| YOOCHOOSE(1/64) |  |  |  |  |  |
+| DIGINETICA |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

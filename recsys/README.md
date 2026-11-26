@@ -163,9 +163,36 @@ source .venv/bin/activate
 uv pip install recbole==1.2.1
 ```
 
-- 기본 데이터: MovieLens-1M (`ml-1m`, RecBole이 자동으로 내려받는다)
-- CTR 블록은 Criteo·Avazu 샘플, 지식 그래프 블록은 ML-1M + KG 링크 파일로도 비교한다
 - 평가: 일반·순차 추천은 Recall@10 · NDCG@10 · MRR@10 · Hit@10, CTR은 AUC · LogLoss
+
+## 데이터셋
+
+[RecBole 데이터셋 목록](https://recbole.io/dataset_list.html)에서 모델마다 1~3개를 골라 각 노트 머리말(🗂️ 추천 데이터)과 실험 표에 넣어 두었다.
+
+- **공통 비교용**: 모든 모델이 `ml-1m`(MovieLens-1M)을 돌린다. [결과 비교표](results/README.md)는 이 데이터 기준이다. 지식 그래프 모델은 KG 링크 파일이 붙은 `ml-1m(+KG)`를 쓴다.
+- **모델 특성용**: 원 논문 실험이나 데이터 성격에 맞는 데이터를 더한다. 깊이 A는 2개, B는 1개, C는 `ml-1m`만.
+- 원래 크기가 큰 데이터(Netflix, YOOCHOOSE, LFM-1b, Criteo, Avazu)는 샘플링해서 쓴다. YOOCHOOSE는 세션 추천 논문들처럼 최근 1/64만 쓴다.
+- RecBole의 `dataset=` 이름은 내려받은 atomic 파일 폴더 이름을 따른다. `ml-1m` 말고는 처음 쓸 때 이름을 확인한다.
+
+| 데이터 | 도메인 | 성격 | 주로 쓰는 블록 |
+|---|---|---|---|
+| ml-1m | 영화 | 조밀한 평점·시간 정보. 공통 비교용 | 전체 |
+| Amazon-Books | 쇼핑(도서) | 크고 희소한 암묵 피드백, KG 연결 가능 | 일반 CF · 그래프 · 생성 · 지식 그래프 |
+| Amazon-Beauty | 쇼핑(뷰티) | 짧은 순차, 아이템 카테고리 피처 | 트랜스포머 · 피처 결합 순차 |
+| Amazon-Electronics | 쇼핑(전자) | 사용자 행동 이력 + 카테고리 | 관심사 CTR (DIN·DIEN) |
+| Yelp2018 · Yelp2022 | 지역 상점 | 희소한 리뷰 기반 상호작용 | 일반 CF · 그래프 · 자기지도 |
+| Netflix | 영화 | 매우 큰 평점 행렬 (샘플링) | 유사도·선형 · 오토인코더 |
+| Pinterest | 이미지 | 암묵 피드백 | 신경망 CF · FISM·NAIS |
+| Gowalla | 체크인 | 그래프 추천 표준 벤치마크 | 그래프 CF |
+| Foursquare | 체크인 | 위치 이동 순서 | CNN 순차 (Caser) |
+| Ta Feng | 식료품 | 장바구니 거래 | FPMC |
+| YOOCHOOSE · DIGINETICA | 쇼핑 세션 | 익명 세션 클릭 로그 | 세션 추천 (GRU4Rec·NARM·SR-GNN 등) |
+| LFM-1b | 음악 | 대규모 청취 로그 (일부만) | 음악 순차·반복 소비 |
+| Steam | 게임 | 긴 사용자 이력 | 트랜스포머 순차 |
+| Criteo · Avazu | 광고 | 클릭 로그, 범주형 피처 다수 (샘플링) | CTR 전체 |
+| iPinYou · AliEC | 광고 | 실제 광고 입찰·노출 로그 | PNN · DIN |
+| MIND | 뉴스 | 노출·클릭 로그, 텍스트 | DSSM(투 타워) |
+| Lastfm-track | 음악 | KG 연결 | 지식 그래프 |
 
 ### 설치 메모
 

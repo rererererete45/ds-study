@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B3 행렬 분해·유사도 · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [SLIMElastic](https://recbole.io/docs/user_guide/model/general/slimelastic.html) · **소스** `recbole/model/general_recommender/slimelastic.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Books`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='SLIMElastic', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 ## 4. 회고
 

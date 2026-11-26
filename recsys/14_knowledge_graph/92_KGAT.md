@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [KGAT](https://recbole.io/docs/user_guide/model/knowledge/kgat.html) · **소스** `recbole/model/knowledge_aware_recommender/kgat.py`
 >
+> 🗂️ **추천 데이터** `ml-1m(+KG)` · `Amazon-Books(+KG)` · `Lastfm-track(+KG)`
+>
 > 💡 지식 그래프 추천의 대표 모델
 
 ## 0. 한눈에 보기
@@ -50,7 +52,9 @@ run_recbole(model='KGAT', dataset='ml-1m')
 
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
-| ml-1m |  |  |  |  |  |
+| ml-1m(+KG) |  |  |  |  |  |
+| Amazon-Books(+KG) |  |  |  |  |  |
+| Lastfm-track(+KG) |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

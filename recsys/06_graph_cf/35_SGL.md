@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [SGL](https://recbole.io/docs/user_guide/model/general/sgl.html) · **소스** `recbole/model/general_recommender/sgl.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Yelp2018` · `Amazon-Books`
+>
 > 💡 그래프 + 대조 학습(자기지도)
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='SGL', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Yelp2018 |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

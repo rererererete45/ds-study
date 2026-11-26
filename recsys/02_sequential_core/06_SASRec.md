@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [SASRec](https://recbole.io/docs/user_guide/model/sequential/sasrec.html) · **소스** `recbole/model/sequential_recommender/sasrec.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Beauty` · `Steam`
+>
 > 💡 셀프 어텐션 순차 추천의 기본
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='SASRec', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Beauty |  |  |  |  |  |
+| Steam |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

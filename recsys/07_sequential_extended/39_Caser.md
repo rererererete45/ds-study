@@ -5,6 +5,8 @@
 > 📌 **분류** 순차 추천 · **블록** B7 순차 확장 · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [Caser](https://recbole.io/docs/user_guide/model/sequential/caser.html) · **소스** `recbole/model/sequential_recommender/caser.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Foursquare`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='Caser', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Foursquare |  |  |  |  |  |
 
 ## 4. 회고
 

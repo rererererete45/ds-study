@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [NeuMF](https://recbole.io/docs/user_guide/model/general/neumf.html) · **소스** `recbole/model/general_recommender/neumf.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Pinterest` · `Amazon-Books`
+>
 > 💡 신경망 협업 필터링의 기본
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='NeuMF', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Pinterest |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

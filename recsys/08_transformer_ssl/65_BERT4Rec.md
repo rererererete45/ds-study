@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [BERT4Rec](https://recbole.io/docs/user_guide/model/sequential/bert4rec.html) · **소스** `recbole/model/sequential_recommender/bert4rec.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Beauty` · `Steam`
+>
 > 💡 양방향 트랜스포머. SASRec과 비교하며 정리
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='BERT4Rec', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Beauty |  |  |  |  |  |
+| Steam |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

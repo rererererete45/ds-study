@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [S3Rec](https://recbole.io/docs/user_guide/model/sequential/s3rec.html) · **소스** `recbole/model/sequential_recommender/s3rec.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Beauty` · `Yelp2022`
+>
 > 💡 순차 추천 + 자기지도 사전학습
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='S3Rec', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Beauty |  |  |  |  |  |
+| Yelp2022 |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

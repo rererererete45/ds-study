@@ -5,6 +5,8 @@
 > 📌 **분류** 순차 추천 · **블록** B10 피처 결합 순차 · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [GRU4RecF](https://recbole.io/docs/user_guide/model/sequential/gru4recf.html) · **소스** `recbole/model/sequential_recommender/gru4recf.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

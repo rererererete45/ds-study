@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [DIN](https://recbole.io/docs/user_guide/model/context/din.html) · **소스** `recbole/model/context_aware_recommender/din.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Electronics` · `AliEC`
+>
 > 💡 사용자 관심 어텐션. 커머스 추천 표준
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='DIN', dataset='ml-1m')
 | 데이터 | AUC | LogLoss | 학습 시간 | 비고 |
 |---|---|---|---|---|
 | ml-1m |  |  |  |  |
+| Amazon-Electronics |  |  |  |  |
+| AliEC |  |  |  |  |
 
 - 앞선 모델과 비교:
 

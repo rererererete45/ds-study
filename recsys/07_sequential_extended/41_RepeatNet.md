@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [RepeatNet](https://recbole.io/docs/user_guide/model/sequential/repeatnet.html) · **소스** `recbole/model/sequential_recommender/repeatnet.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `LFM-1b(일부)`
+>
 > 💡 반복 소비(재청취·재구매) 모델링
 
 ## 0. 한눈에 보기
@@ -40,6 +42,7 @@ run_recbole(model='RepeatNet', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| LFM-1b(일부) |  |  |  |  |  |
 
 ## 4. 회고
 

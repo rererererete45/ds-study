@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [BPR](https://recbole.io/docs/user_guide/model/general/bpr.html) · **소스** `recbole/model/general_recommender/bpr.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Books` · `Yelp2022`
+>
 > 💡 랭킹 손실(BPR)의 기본. 뒤의 모델 대부분이 이 손실을 씀
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='BPR', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
+| Yelp2022 |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

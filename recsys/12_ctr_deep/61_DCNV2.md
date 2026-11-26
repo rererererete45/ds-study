@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [DCN V2](https://recbole.io/docs/user_guide/model/context/dcnv2.html) · **소스** `recbole/model/context_aware_recommender/dcnv2.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Criteo(샘플)` · `Avazu(샘플)`
+>
 > 💡 DCN과 비교하며 정리
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='DCNV2', dataset='ml-1m')
 | 데이터 | AUC | LogLoss | 학습 시간 | 비고 |
 |---|---|---|---|---|
 | ml-1m |  |  |  |  |
+| Criteo(샘플) |  |  |  |  |
+| Avazu(샘플) |  |  |  |  |
 
 - 앞선 모델과 비교:
 

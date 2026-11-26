@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [NAIS](https://recbole.io/docs/user_guide/model/general/nais.html) · **소스** `recbole/model/general_recommender/nais.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Pinterest`
+>
 > 💡 FISM에 어텐션을 더한 모델
 
 ## 0. 한눈에 보기
@@ -40,6 +42,7 @@ run_recbole(model='NAIS', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Pinterest |  |  |  |  |  |
 
 ## 4. 회고
 

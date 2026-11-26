@@ -5,6 +5,8 @@
 > 📌 **분류** 순차 추천 · **블록** B7 순차 확장 · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [HGN](https://recbole.io/docs/user_guide/model/sequential/hgn.html) · **소스** `recbole/model/sequential_recommender/hgn.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

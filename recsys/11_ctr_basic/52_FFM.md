@@ -5,6 +5,8 @@
 > 📌 **분류** 컨텍스트(CTR) 추천 · **블록** B11 CTR 기초 · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [FFM](https://recbole.io/docs/user_guide/model/context/ffm.html) · **소스** `recbole/model/context_aware_recommender/ffm.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Criteo(샘플)`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='FFM', dataset='ml-1m')
 | 데이터 | AUC | LogLoss | 학습 시간 | 비고 |
 |---|---|---|---|---|
 | ml-1m |  |  |  |  |
+| Criteo(샘플) |  |  |  |  |
 
 ## 4. 회고
 
