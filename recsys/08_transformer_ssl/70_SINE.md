@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [SINE](https://recbole.io/docs/user_guide/model/sequential/sine.html) · **소스** `recbole/model/sequential_recommender/sine.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Books`
+>
 > 💡 다중 관심사 순차 추천
 
 ## 0. 한눈에 보기
@@ -40,6 +42,7 @@ run_recbole(model='SINE', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 ## 4. 회고
 

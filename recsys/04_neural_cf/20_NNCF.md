@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B4 신경망 CF · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [NNCF](https://recbole.io/docs/user_guide/model/general/nncf.html) · **소스** `recbole/model/general_recommender/nncf.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

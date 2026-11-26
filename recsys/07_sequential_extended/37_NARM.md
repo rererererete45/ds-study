@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [NARM](https://recbole.io/docs/user_guide/model/sequential/narm.html) · **소스** `recbole/model/sequential_recommender/narm.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `DIGINETICA`
+>
 > 💡 세션 추천 + 어텐션
 
 ## 0. 한눈에 보기
@@ -40,6 +42,7 @@ run_recbole(model='NARM', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| DIGINETICA |  |  |  |  |  |
 
 ## 4. 회고
 

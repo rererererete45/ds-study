@@ -5,6 +5,8 @@
 > 📌 **분류** 컨텍스트(CTR) 추천 · **블록** B13 관심사·최신 CTR · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [DIEN](https://recbole.io/docs/user_guide/model/context/dien.html) · **소스** `recbole/model/context_aware_recommender/dien.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Electronics`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='DIEN', dataset='ml-1m')
 | 데이터 | AUC | LogLoss | 학습 시간 | 비고 |
 |---|---|---|---|---|
 | ml-1m |  |  |  |  |
+| Amazon-Electronics |  |  |  |  |
 
 ## 4. 회고
 

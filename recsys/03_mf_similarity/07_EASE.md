@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [EASE](https://recbole.io/docs/user_guide/model/general/ease.html) · **소스** `recbole/model/general_recommender/ease.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Netflix(샘플)` · `Amazon-Books`
+>
 > 💡 닫힌 형태 해를 갖는 강한 선형 모델
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='EASE', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Netflix(샘플) |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

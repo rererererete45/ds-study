@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [Random](https://recbole.io/docs/user_guide/model/general/random.html) · **소스** `recbole/model/general_recommender/random.py`
 >
+> 🗂️ **추천 데이터** `ml-1m`
+>
 > 💡 성능 하한선. 평가 지표와 RecBole 실행 흐름 익히기
 
 ## 요약

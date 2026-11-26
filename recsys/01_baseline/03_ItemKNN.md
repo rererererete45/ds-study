@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [ItemKNN](https://recbole.io/docs/user_guide/model/general/itemknn.html) · **소스** `recbole/model/general_recommender/itemknn.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Books`
+>
 > 💡 아이템 유사도 베이스라인
 
 ## 0. 한눈에 보기
@@ -40,6 +42,7 @@ run_recbole(model='ItemKNN', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 ## 4. 회고
 

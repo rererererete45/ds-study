@@ -5,6 +5,8 @@
 > 📌 **분류** 컨텍스트(CTR) 추천 · **블록** B12 CTR 딥러닝 · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [NFM](https://recbole.io/docs/user_guide/model/context/nfm.html) · **소스** `recbole/model/context_aware_recommender/nfm.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Avazu(샘플)`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='NFM', dataset='ml-1m')
 | 데이터 | AUC | LogLoss | 학습 시간 | 비고 |
 |---|---|---|---|---|
 | ml-1m |  |  |  |  |
+| Avazu(샘플) |  |  |  |  |
 
 ## 4. 회고
 

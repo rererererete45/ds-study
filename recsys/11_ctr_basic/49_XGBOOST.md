@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [XGBOOST](https://recbole.io/docs/user_guide/model/context/xgboost.html) · **소스** `recbole/model/exlib_recommender/xgboost.py`
 >
+> 🗂️ **추천 데이터** `ml-1m`
+>
 > 💡 외부 라이브러리(XGBoost). 트리 모델 비교 기준. 실행 이름·설정은 RecBole 문서 확인
 
 ## 요약

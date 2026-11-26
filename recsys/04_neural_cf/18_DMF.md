@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B4 신경망 CF · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [DMF](https://recbole.io/docs/user_guide/model/general/dmf.html) · **소스** `recbole/model/general_recommender/dmf.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Amazon-Books`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='DMF', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 ## 4. 회고
 

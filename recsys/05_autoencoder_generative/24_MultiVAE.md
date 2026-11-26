@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [MultiVAE](https://recbole.io/docs/user_guide/model/general/multivae.html) · **소스** `recbole/model/general_recommender/multivae.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Netflix(샘플)` · `Amazon-Books`
+>
 > 💡 변분 오토인코더 추천의 기본
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='MultiVAE', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Netflix(샘플) |  |  |  |  |  |
+| Amazon-Books |  |  |  |  |  |
 
 - 앞선 모델과 비교:
 

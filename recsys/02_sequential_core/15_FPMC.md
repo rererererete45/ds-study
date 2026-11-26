@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [FPMC](https://recbole.io/docs/user_guide/model/sequential/fpmc.html) · **소스** `recbole/model/sequential_recommender/fpmc.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Ta Feng`
+>
 > 💡 마르코프 체인 + 행렬 분해, 순차 추천의 출발점
 
 ## 0. 한눈에 보기
@@ -40,6 +42,7 @@ run_recbole(model='FPMC', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Ta Feng |  |  |  |  |  |
 
 ## 4. 회고
 

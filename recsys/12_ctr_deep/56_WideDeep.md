@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [WideDeep](https://recbole.io/docs/user_guide/model/context/widedeep.html) · **소스** `recbole/model/context_aware_recommender/widedeep.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `Criteo(샘플)` · `Avazu(샘플)`
+>
 > 💡 기억(Wide) + 일반화(Deep) 구조
 
 ## 0. 한눈에 보기
@@ -51,6 +53,8 @@ run_recbole(model='WideDeep', dataset='ml-1m')
 | 데이터 | AUC | LogLoss | 학습 시간 | 비고 |
 |---|---|---|---|---|
 | ml-1m |  |  |  |  |
+| Criteo(샘플) |  |  |  |  |
+| Avazu(샘플) |  |  |  |  |
 
 - 앞선 모델과 비교:
 

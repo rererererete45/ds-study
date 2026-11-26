@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B6 그래프 CF · **깊이** B 보통 (1주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [NGCF](https://recbole.io/docs/user_guide/model/general/ngcf.html) · **소스** `recbole/model/general_recommender/ngcf.py`
+>
+> 🗂️ **추천 데이터** `ml-1m` · `Gowalla`
 
 ## 0. 한눈에 보기
 
@@ -38,6 +40,7 @@ run_recbole(model='NGCF', dataset='ml-1m')
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
 | ml-1m |  |  |  |  |  |
+| Gowalla |  |  |  |  |  |
 
 ## 4. 회고
 

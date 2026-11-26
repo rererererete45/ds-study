@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [DSSM](https://recbole.io/docs/user_guide/model/context/dssm.html) · **소스** `recbole/model/context_aware_recommender/dssm.py`
 >
+> 🗂️ **추천 데이터** `ml-1m` · `MIND`
+>
 > 💡 투 타워 구조. 후보 생성 단계의 기본
 
 ## 0. 한눈에 보기
@@ -40,6 +42,7 @@ run_recbole(model='DSSM', dataset='ml-1m')
 | 데이터 | AUC | LogLoss | 학습 시간 | 비고 |
 |---|---|---|---|---|
 | ml-1m |  |  |  |  |
+| MIND |  |  |  |  |
 
 ## 4. 회고
 

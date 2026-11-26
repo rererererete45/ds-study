@@ -5,6 +5,8 @@
 > 📌 **분류** 일반 추천 · **블록** B5 오토인코더·생성 · **깊이** C 가볍게 (0.5주) · **상태** ⬜ 예정
 >
 > 📄 **RecBole 문서** [RaCT](https://recbole.io/docs/user_guide/model/general/ract.html) · **소스** `recbole/model/general_recommender/ract.py`
+>
+> 🗂️ **추천 데이터** `ml-1m`
 
 ## 요약
 

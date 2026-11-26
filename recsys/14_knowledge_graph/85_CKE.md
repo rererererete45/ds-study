@@ -6,6 +6,8 @@
 >
 > 📄 **RecBole 문서** [CKE](https://recbole.io/docs/user_guide/model/knowledge/cke.html) · **소스** `recbole/model/knowledge_aware_recommender/cke.py`
 >
+> 🗂️ **추천 데이터** `ml-1m(+KG)` · `Amazon-Books(+KG)`
+>
 > 💡 MovieLens-1M + KG 링크 파일 사용
 
 ## 0. 한눈에 보기
@@ -39,7 +41,8 @@ run_recbole(model='CKE', dataset='ml-1m')
 
 | 데이터 | Recall@10 | NDCG@10 | MRR@10 | Hit@10 | 학습 시간 |
 |---|---|---|---|---|---|
-| ml-1m |  |  |  |  |  |
+| ml-1m(+KG) |  |  |  |  |  |
+| Amazon-Books(+KG) |  |  |  |  |  |
 
 ## 4. 회고
 
